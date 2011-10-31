@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tech | Bitwise Evolution]]></title>
+  <link href="http://creswick.github.com/blog/categories/tech/atom.xml" rel="self"/>
+  <link href="http://creswick.github.com/"/>
+  <updated>2011-10-31T13:14:58-07:00</updated>
+  <id>http://creswick.github.com/</id>
+  <author>
+    <name><![CDATA[Rogan Creswick]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Blogging with Octopress]]></title>
+    <link href="http://creswick.github.com/blog/2011/10/31/blogging-with-octopress/"/>
+    <updated>2011-10-31T12:14:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2011/10/31/blogging-with-octopress</id>
+    <content type="html"><![CDATA[<p>I heard about <a href="octopress.org">Octopress</a> today, so I'm giving it a
+shot.  It uses github pages to provide a blogging platform, which I've wanted for a while.</p>
+
+<p>This post is just testing to see how Octopress works (I'm putting it through it's paces.)</p>
+
+<p>``` bash Testing bash syntax highlighting http://www.haller.ws/logs/view.cgi/WhatAreShellsGoodFor haller's tips.</p>
+
+<h1>Works much like xargs, but don't forget the flexibility of inserting</h1>
+
+<h1>{} in the ensuing expression for the $line location.</h1>
+
+<p>#</p>
+
+<h1>Examples: http://www.haller.ws/logs/view.cgi/LearnToShootWithBash</h1>
+
+<p>each() {</p>
+
+<pre><code>local line="" 
+while read line; do # sub {} with $line and run it 
+</code></pre>
+
+<h1>eval "${@/{}/${line}}"</h1>
+
+<pre><code>    eval "${@/\{\}/\"${line}\"}" # $@ =~ s/ {} / $line /
+done 
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Here's another code block, using Haskell:</p>
+
+<p>``` haskell Does it understand Haskell?</p>
+
+<p>-- Some random code from Newt:
+import Test.HUnit      ( (@=?) )
+import Test.Framework.Providers.HUnit
+import Test.Framework ( testGroup, Test )</p>
+
+<p>-- | Create a Test from a function, a description, an input, and an oracle:
+genTest :: (Show a, Show b, Eq b) => (a -> b) -> (String, a, b) -> Test
+genTest fn (descr, input, oracle) =</p>
+
+<pre><code>testCase (descr++" input: "++show input) assert
+    where assert = oracle @=? fn input
+</code></pre>
+
+<p>genTestIO :: (Show a, Show b, Eq b) => (a -> IO b) -> (String, a, b) -> Test
+genTestIO fn (descr, input, oracle) =</p>
+
+<pre><code>testCase (descr++" input: " ++show input) $ do
+    res &lt;- fn input
+    oracle @=? res
+</code></pre>
+
+<p>```</p>
+
+<p>There are more examples of including code here: http://octopress.org/docs/blogging/code/</p>
+]]></content>
+  </entry>
+  
+</feed>

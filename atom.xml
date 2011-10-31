@@ -1,16 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[Bitwise Evolution]]></title>
   <link href="http://creswick.github.com/atom.xml" rel="self"/>
   <link href="http://creswick.github.com/"/>
-  <updated>2011-10-31T12:01:32-07:00</updated>
+  <updated>2011-10-31T13:14:58-07:00</updated>
   <id>http://creswick.github.com/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Rogan Creswick]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Blogging with Octopress]]></title>
+    <link href="http://creswick.github.com/blog/2011/10/31/blogging-with-octopress/"/>
+    <updated>2011-10-31T12:14:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2011/10/31/blogging-with-octopress</id>
+    <content type="html"><![CDATA[<p>I heard about <a href="octopress.org">Octopress</a> today, so I&#8217;m giving it a
+shot.  It uses github pages to provide a blogging platform, which I&#8217;ve wanted for a while.</p>
+
+<p>This post is just testing to see how Octopress works (I&#8217;m putting it through it&#8217;s paces.)</p>
+
+<figure class='code'><figcaption><span>Testing bash syntax highlighting </span><a href='http://www.haller.ws/logs/view.cgi/WhatAreShellsGoodFor'>haller&#8217;s tips.</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#  Works much like xargs, but don&#39;t forget the flexibility of inserting</span>
+</span><span class='line'><span class="c">#  {} in the ensuing expression for the $line location.</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># Examples: http://www.haller.ws/logs/view.cgi/LearnToShootWithBash</span>
+</span><span class='line'>each<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="nb">local </span><span class="nv">line</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span><span class='line'>  <span class="k">while </span><span class="nb">read </span>line; <span class="k">do</span> <span class="c"># sub {} with $line and run it </span>
+</span><span class='line'><span class="c">#     eval &quot;${@/\{\}/${line}}&quot; </span>
+</span><span class='line'>      <span class="nb">eval</span> <span class="s2">&quot;${@/\{\}/\&quot;${line}\&quot;}&quot;</span> <span class="c"># $@ =~ s/ {} / $line /</span>
+</span><span class='line'>  <span class="k">done</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&#8217;s another code block, using Haskell:</p>
+
+<figure class='code'><figcaption><span>Does it understand Haskell?</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="c1">-- Some random code from Newt:</span>
+</span><span class='line'><span class="kr">import</span> <span class="nn">Test.HUnit</span>      <span class="p">(</span> <span class="p">(</span><span class="o">@=?</span><span class="p">)</span> <span class="p">)</span>
+</span><span class='line'><span class="kr">import</span> <span class="nn">Test.Framework.Providers.HUnit</span>
+</span><span class='line'><span class="kr">import</span> <span class="nn">Test.Framework</span> <span class="p">(</span> <span class="nf">testGroup</span><span class="p">,</span> <span class="kt">Test</span> <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">-- | Create a Test from a function, a description, an input, and an oracle:</span>
+</span><span class='line'><span class="nf">genTest</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Show</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Show</span> <span class="n">b</span><span class="p">,</span> <span class="kt">Eq</span> <span class="n">b</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="kt">Test</span>
+</span><span class='line'><span class="nf">genTest</span> <span class="n">fn</span> <span class="p">(</span><span class="n">descr</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="n">oracle</span><span class="p">)</span> <span class="ow">=</span>
+</span><span class='line'>    <span class="n">testCase</span> <span class="p">(</span><span class="n">descr</span><span class="o">++</span><span class="s">&quot; input: &quot;</span><span class="o">++</span><span class="n">show</span> <span class="n">input</span><span class="p">)</span> <span class="n">assert</span>
+</span><span class='line'>        <span class="kr">where</span> <span class="n">assert</span> <span class="ow">=</span> <span class="n">oracle</span> <span class="o">@=?</span> <span class="n">fn</span> <span class="n">input</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">genTestIO</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Show</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Show</span> <span class="n">b</span><span class="p">,</span> <span class="kt">Eq</span> <span class="n">b</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">IO</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="kt">Test</span>
+</span><span class='line'><span class="nf">genTestIO</span> <span class="n">fn</span> <span class="p">(</span><span class="n">descr</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="n">oracle</span><span class="p">)</span> <span class="ow">=</span>
+</span><span class='line'>    <span class="n">testCase</span> <span class="p">(</span><span class="n">descr</span><span class="o">++</span><span class="s">&quot; input: &quot;</span> <span class="o">++</span><span class="n">show</span> <span class="n">input</span><span class="p">)</span> <span class="o">$</span> <span class="kr">do</span>
+</span><span class='line'>        <span class="n">res</span> <span class="ow">&lt;-</span> <span class="n">fn</span> <span class="n">input</span>
+</span><span class='line'>        <span class="n">oracle</span> <span class="o">@=?</span> <span class="n">res</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are more examples of including code here: http://octopress.org/docs/blogging/code/</p>
+]]></content>
+  </entry>
   
 </feed>
