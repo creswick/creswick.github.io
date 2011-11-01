@@ -1,0 +1,19 @@
+--- 
+layout: post
+title: Traveling to Patras
+categories: greece
+---
+<a href="http://blog.ciscavate.org/wp-content/uploads/2008/07/seatac-small.jpg" style="float:left; padding-right: 1em;"><img alt="Coffe and clouds in Seattle." src="http://blog.ciscavate.org/wp-content/uploads/2008/07/seatac-small.thumbnail.jpg" /></a>
+
+A groggy morning in Seattle started with the typical regional sunshine forcing its presence through heavy cloud cover--the first overcast day in nearly a week of clear, scorching weather.
+
+<a style="float:right; padding-right: 1em;" href="http://blog.ciscavate.org/wp-content/uploads/2008/07/patrasHills1-small.jpg"><img alt="The hills across the Gulf of Patras (looking North)" src="http://blog.ciscavate.org/wp-content/uploads/2008/07/patrasHills1-small.thumbnail.jpg" /></a>
+
+Seattle to Newark, hustle off the plane, bad coffee, hustle to the next gate, and then encamp for the next 9 hours of travel across the Atlantic.  This leg was on a relatively empty 767, but I still can't really sleep on planes.  I have become an overnight advocate for noise-canceling headphones though--they make the difference between muffling a sound and turning it off.  I found the Athens airport to be considerably less hyper than most US airports (with the exception of Syracuse, which is not much of a surprise), although I think it is universal that no one is particularly happy when at an airport, and that feeling seems to be contagious.  It's unfortunate that it is so difficult to visit a place without first visiting an airport there.
+
+<a style="float:left; padding-right: 1em;" href="http://blog.ciscavate.org/wp-content/uploads/2008/07/moonAndBoats-small.jpg"><img alt="The morning view from the balcony" src="http://blog.ciscavate.org/wp-content/uploads/2008/07/moonAndBoats-small.thumbnail.jpg" /></a>
+
+I few hours later I hopped on a tour bus to take everyone from the recent batch of flights off to our hotels in Patras--a wild 4-5 hour ride along the shoulders of "one of the worst roads in Greece" as some one here put it.  The careening along coastal roads was punctuated by hairpin turns in seaside villages with roads small enough to make any driver feel claustrophobic, and we were riding in a bus that would seat 30-40, with luggage.  It was much like watching a game of <a href="http://en.wikipedia.org/wiki/N-puzzle">Fifteen Puzzle</a>, with a key twist: every tile (car) was self-aware and initially greedy.
+
+We did eventually make it to the <a href="http://www.hoteltzaki.gr/">Hotel Tzaki</a> almost exactly 24 hours after leaving Seattle.
+

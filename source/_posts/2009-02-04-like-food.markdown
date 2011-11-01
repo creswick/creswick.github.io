@@ -1,0 +1,9 @@
+--- 
+layout: post
+title: Like food?
+categories: random
+---
+<a href="http://blog.ciscavate.org/wp-content/2009/02/imperial_stout.jpg"><img src="http://blog.ciscavate.org/wp-content/2009/02/imperial_stout-184x300.jpg" alt="" title="imperial_stout" height="100" class="alignright size-medium wp-image-89" /></a>
+I started writing for another blog this week: 
+
+<a href="http://bbcas.blogspot.com">Brewed, Bottled, Cultured and Sweetened</a> is a blog about beer, coffee, wine, cheese, chocolate, etc... that I'm writing with an old friend from <a href="http://codersbase.com">Dagit.o</a>

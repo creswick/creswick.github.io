@@ -1,0 +1,22 @@
+--- 
+layout: post
+title: 2005 in cities
+categories: random
+---
+Copying an idea seen on Join-The-Dots:
+<ul>
+	<li>Portland, OR</li>
+	<li>Corvallis, OR</li>
+	<li>Seattle, WA</li>
+	<li>Los Angeles, CA</li>
+	<li>San Diego, CA</li>
+	<li>Twin Falls, ID</li>
+	<li>Jackson Hole, WY</li>
+	<li>Lincoln, NE</li>
+	<li>Chicago, IL</li>
+	<li>DeBois, PA</li>
+	<li>New York, NY</li>
+	<li>Toledo, OH</li>
+	<li>Ogden, UT</li>
+</ul>
+One or more nights in each city.  Now, if only I had some ground-breaking reason for being in Ogden, UT and DeBois, PA :).
