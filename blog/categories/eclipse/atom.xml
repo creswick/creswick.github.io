@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: eclipse | Bitwise Evolution]]></title>
+  <link href="http://creswick.github.com/blog/categories/eclipse/atom.xml" rel="self"/>
+  <link href="http://creswick.github.com/"/>
+  <updated>2011-11-01T08:42:50-07:00</updated>
+  <id>http://creswick.github.com/</id>
+  <author>
+    <name><![CDATA[Rogan Creswick]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Auto-documenting OSGi CommandProviders]]></title>
+    <link href="http://creswick.github.com/blog/2008/10/21/auto-documenting-osgi-commandproviders/"/>
+    <updated>2008-10-21T00:00:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2008/10/21/auto-documenting-osgi-commandproviders</id>
+    <content type="html"><![CDATA[<p>(<strong>Edit:</strong> If you're reading this after OSGi R4.2, then there is almost certainly a better way to accomplish the same thing)</p>
+
+<p>I've been digging into OSGi a bit over the last week or so inorder to
+create some Eclipse plugins that will automatically discover
+eachother, and I've been generally impressed with the framework on the
+whole.  The documentation is a bit lacking, but there are some good
+blog posts about it.  (Specifically <a href="http://neilbartlett.name/blog/osgi-articles/&lt;u">Neil Bartlett's introduction to
+OSGi</a>.)</p>
+
+<p>One thing that bugged me is the repetition needed when you implement
+the CommandProvider interface to add commands to the OSGi console.
+CommandProvider defines one method you must supply:</p>
+
+<p>[cc lang="java"]</p>
+
+<pre><code>public String getHelp()
+</code></pre>
+
+<p>[/cc]</p>
+
+<p>OSGi then uses reflection to extract each of the methods that starts
+with an underscore, and supplies those methods to the command environment as
+new commands.  (The underscore is trimmed, and the name of the method becomes
+the command name.)  General practice is to include the name of the
+method in the return value of <code>getHelp()</code>, along with a description of
+what the method does, eg:</p>
+
+<p>[cc lang="java"]
+public class SampleCommandProvider implements CommandProvider {</p>
+
+<p>   public synchronized void _run(CommandInterpreter ci) {</p>
+
+<pre><code>  // do stuff.
+</code></pre>
+
+<p>   }</p>
+
+<p>   public String getHelp() {</p>
+
+<pre><code>  return "\trun - execute a Runnable service";
+</code></pre>
+
+<p>   }
+}[/cc]</p>
+
+<p>This seems like a pain to maintain, so I took a quick look at
+annotations, and propose a new syntax:</p>
+
+<p>[cc lang="java"]
+public class SampleCommandProvider extends
+   DescriptiveCommandProvider {</p>
+
+<p>   @CmdDescr(description="execute a Runnable service")
+   public synchronized void _run(CommandInterpreter ci) {</p>
+
+<pre><code>  // do stuff.
+</code></pre>
+
+<p>   }
+}[/cc]</p>
+
+<p>Here we've extracted the <code>getHelp()</code> method into a new superclass, so
+our SampleCommandProvider now extends an abstract class instead of
+implementing an interface.  It also makes use of an Annotation, which
+we need to define:</p>
+
+<p>[cc lang="java"]
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;</p>
+
+<p>@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface CmdDescr {
+   String description();
+}[/cc]</p>
+
+<p>Finally, we just need to define the superclass that implements
+<code>getHelp()</code>:</p>
+
+<p>[cc lang="java"]
+import java.lang.reflect.Method;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;</p>
+
+<p>import org.eclipse.osgi.framework.console.CommandProvider;</p>
+
+<p>public abstract class DescriptiveCommandProvider implements CommandProvider {</p>
+
+<p>   private static final Pattern CMD_PATTERN = Pattern.compile("<sup>_(.*)");</sup>
+   private String help = null;</p>
+
+<p>   public String getHelp() {</p>
+
+<pre><code>  if (null == help){
+     help = buildHelp();
+  }
+  return help;
+</code></pre>
+
+<p>   }</p>
+
+<p>   private String buildHelp() {</p>
+
+<pre><code>  StringBuilder helpBuff = new StringBuilder();
+
+  for (Method m : this.getClass().getMethods()){
+     if (methodIsCmd(m)){         
+        if (0 != helpBuff.length()){
+           helpBuff.append("\n");
+        }
+        helpBuff.append(getDocumentation(m));            
+     }
+  }
+  return helpBuff.toString();
+</code></pre>
+
+<p>   }</p>
+
+<p>   private boolean methodIsCmd(Method m) {</p>
+
+<pre><code>  return CMD_PATTERN.matcher(m.getName()).matches();
+</code></pre>
+
+<p>   }</p>
+
+<p>   private String getDocumentation(Method m) {</p>
+
+<pre><code>  StringBuilder methodHelp = new StringBuilder();
+
+  Matcher matcher = CMD_PATTERN.matcher(m.getName());
+  if(matcher.matches()){
+     methodHelp.append("\t"+matcher.group(1));
+
+     CmdDescr description = m.getAnnotation(CmdDescr.class);
+
+     if (null != description){
+        methodHelp.append(" - "+description.description());
+     }
+  }
+  return methodHelp.toString();
+</code></pre>
+
+<p>   }
+}
+[/cc]</p>
+
+<p>Note that the actual reflection on the class only happens once -- all
+subsequent calls to <code>getHelp()</code> use a cached copy of the documentation.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: photography | Bitwise Evolution]]></title>
+  <link href="http://creswick.github.com/blog/categories/photography/atom.xml" rel="self"/>
+  <link href="http://creswick.github.com/"/>
+  <updated>2011-11-01T08:42:50-07:00</updated>
+  <id>http://creswick.github.com/</id>
+  <author>
+    <name><![CDATA[Rogan Creswick]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The US in Pictures]]></title>
+    <link href="http://creswick.github.com/blog/2005/08/15/the-us-in-pictures/"/>
+    <updated>2005-08-15T00:00:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2005/08/15/the-us-in-pictures</id>
+    <content type="html"><![CDATA[<p>I've posted photos from my drive across the US this spring, along with a host of other shots that I've been meaning to share for ages. I realized the other day that when driving through the midwest, despite being in awe of the scenery, and miles upon miles of picturesque fields, I never took any pictures. I do believe I was waiting for a high point to take them from, to get a full sweeping view of the surrounding area, but alas, I was in the Midwest.</p>
+
+<p><a href="http://www.minnen.org/rogan/photos/">http://www.minnen.org/rogan/photos/</a></p>
+]]></content>
+  </entry>
+  
+</feed>

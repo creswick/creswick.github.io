@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>At the Top of the Stack... - Bitwise Evolution</title>
+  <meta name="author" content="Rogan Creswick">
+
+  
+  <meta name="description" content="As is the case with many geek-endeavors, the things I&#8217;m currently working on have nothing to do with the goal I set out to achieve. At the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://creswick.github.com/blog/2006/10/07/at-the-top-of-the-stack">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Bitwise Evolution" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Bitwise Evolution</a></h1>
+  
+    <h2>Musings of a Portland-area hacker bent on improving digital lifestyles.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:creswick.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">At the Top of the Stack...</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2006-10-07T00:00:00-07:00" pubdate>Oct 7<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>As is the case with many geek-endeavors, the things I&#8217;m currently working on have nothing to do with the goal I set out to achieve.  At the moment I&#8217;m trying to find a way to convert xhtml into <a href="http://www.mwolson.org/projects/MuseMode.html">muse markup</a>.</p>
+
+<p>Why? Because your average Java programmer Just Doesn&#8217;t Get It when it comes to building a UI with Swing.  Obviously.</p>
+
+<p>Frustration with Swing UIs led to the idea that I should throw together a tutorial on building a GUI with swing while paying attention to separation of concerns re: layout, manipulation, threading and data.  Blogging seemed like a prime medium to present such a tutorial, since each post could be tagged with a meaningful tag (eg: swing_tutorial) and I could post in sections.</p>
+
+<p>This, of course, necessitates a blog (which I have, obviously) but which does emphatically <strong>not</strong> have any input mechanisms worth using for an extended period of time.  The wordpress on-line editors are, in a word, pathetic.  They may work great if you just want to stream your consciousness out to the world where it can pollute everyone&#8217;s Google results with poor spelling and meaningless chatter, but the editors available simply can&#8217;t handle source code.</p>
+
+<p>It <strong>is</strong> possible to feed the blog pure html, which is (unfortunately) a step up from the rich editor, but which also isn&#8217;t going to cut it, because it could be so much better.</p>
+
+<p>Seriously, look at Mediawiki, or twiki, or any of the millions of wiki engines out there.  They <strong>ALL</strong> support better input mechanisms than wordpress.  So why am I using wordpress at all? Because for everything else &#8211; user support, rss feeds, tags, data-base backed storage, plugins etc&#8230; it works great (as far as I know, come back in a week when I&#8217;ve resolved the editor issue to hear what else sucks. That should be enough time for me to find it.).</p>
+
+<h3>Solutions</h3>
+
+<p>I hope to get around this pain-in-the-ass that is the wordpress editor by using emacs to post content via worpress&#8217;s xml-rpc support. Therefore I need to find / enable or create support in emacs for the following things:</p>
+
+<pre><code>&lt;li&gt;wiki-like markup, with support for code tags that can be interpreted by the geshi plugin on wordpress.&lt;/li&gt;
+&lt;li&gt;a translator that converts wiki-like markup to xhtml, and back&lt;/li&gt;
+&lt;li&gt;xml-rpc support, and the ability to retrieve and submit blog posts.&lt;/li&gt;
+&lt;li&gt;Multiple Major Mode support for the wiki-like text mode, so that the aforementioned code tags use the correct font-lock mode&lt;/li&gt;
+&lt;li&gt;A preview capability, so the blog posts can be converted, fed to a w3-el buffer and viewed, then edited again prior to posting and publishing.&lt;/li&gt;
+</code></pre>
+
+<p>Most of these are possible in some fashion or another, but currently I&#8217;m stuck on the &#8220;translator for xhtml to wiki-like markup&#8221;. Stay tuned for improvements, and news as I pop things off the stack.</p>
+
+<p>Someday maybe I&#8217;ll get around to talking about java.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Rogan Creswick</span></span>
+
+      
+
+
+
+
+  
+
+<time datetime="2006-10-07T00:00:00-07:00" pubdate>Oct 7<span>th</span>, 2006</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://creswick.github.com/blog/2006/10/07/at-the-top-of-the-stack/" data-via="autoorator" data-counturl="http://creswick.github.com/blog/2006/10/07/at-the-top-of-the-stack/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2006/10/06/blogging-with-emacs-mtel/" title="Previous Post: Blogging with emacs + mt.el">&laquo; Blogging with emacs + mt.el</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2006/10/30/in-agreement-at-last/" title="next Post: In agreement at last..">In agreement at last.. &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/31/blogging-with-octopress/">Blogging with Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/">Hacking your kitchen: making a sous vide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/">cabal-dev: sandboxing your Haskell development (and now with ghci!)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/06/prezi-scalable-navigable-presentations/">Prezi: scalable, navigable presentations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/26/recovered-puzzles/">Recovered Puzzles</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("autoorator", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/autoorator" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @autoorator</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/creswick?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Rogan Creswick -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

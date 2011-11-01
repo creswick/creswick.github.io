@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Hacking your kitchen: making a sous vide - Bitwise Evolution</title>
+  <meta name="author" content="Rogan Creswick">
+
+  
+  <meta name="description" content="I recently found the cookbook &#8220;Cooking for Geeks&#8221; , and it inspired me to build a sous vide (the section on making a sous vide at home &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://creswick.github.com/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Bitwise Evolution" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Bitwise Evolution</a></h1>
+  
+    <h2>Musings of a Portland-area hacker bent on improving digital lifestyles.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:creswick.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Hacking Your Kitchen: Making a Sous Vide</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2010-12-24T00:00:00-08:00" pubdate>Dec 24<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://blog.ciscavate.org/wp-content/2010/12/crockpot.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/crockpot.jpg" alt="The sous vide." title="crockpot" width="200" class="size-full wp-image-170" /></a></p>
+
+<p>I recently found the cookbook <a href="http://www.cookingforgeeks.com">&#8220;Cooking for Geeks&#8221;</a> , and it inspired me to build a <a href="http://en.wikipedia.org/wiki/Sous-vide">sous vide</a> (the section on making a sous vide at home is also covered in a blog post by the author <a href="http://www.cookingforgeeks.com/blog/posts/diy-sous-vide/">here</a>).  If you&#8217;re not familiar with the term, sous vide lets you very carefully control the temperature you&#8217;re cooking at, so you <em>can&#8217;t</em> over heat foods.</p>
+
+<p>Sous vide is similar to using a crockpot, but it requires <em>much</em> more control over the temperature than a typical crockpot provides.  If cooking with a crockpot is like sketching dinner, then sous vide is analogous to using finely-tuned drafting instruments.</p>
+
+<p>Jeff Potter (Author of Cooking for Geeks) provided part numbers for a suitable thermocouple (a probe thermometer) and a corresponding temp switch (a switch that controls a gate based on the temperature it sees from the attached thermocouple).  I would have had some trouble getting the right set-up without that guidance, but still ended up diverging a bit on accident.  I ordered an AC version of the temp switch instead of a DC version, but in the end I think it worked better this way.</p>
+
+<p>The biggest problem I have with Jeff&#8217;s suggestions is that the book and blog show the temp switch and wiring sitting un-enclosed on the counter, with everything hard-wired together.  I&#8217;m not comfortable with 115vac running around on my kitchen counter, so I needed some sort of enclosure.  I also wanted to be able to detach the thermocouple to easily clean it, and I didn&#8217;t want to modify my crockpot much at all.  (I really don&#8217;t want <em>another</em> appliance, and I still want a functional crockpot.)</p>
+
+<h1>Parts</h1>
+
+<p><a href="http://blog.ciscavate.org/wp-content/2010/12/L1020357.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020357.jpg" alt="Sous vide controller - top" title="Sous vide controller - top" width="200" class="size-full wp-image-175" /></a></p>
+
+<p>Given that I don&#8217;t have access to a fab. plant (or a maker bot!) I opted to go with a simple locking tupperware container for a housing.  They lock shut, have a gasket for a tight seal, and the plastic is very easy to modify to hold all the ports that the sous vide control needs.</p>
+
+<p>At this point it&#8217;s probably reasonable to think of the control as a temperature-controlled power outlet, rather than something specific to a sous vide, since the purpose is really irrelevant for now.</p>
+
+<p>I&#8217;m not going to go into great detail about the specific parts (although I&#8217;ll talk about the connections somewhat), but you can see the full parts list <a href="http://bit.ly/fBbj4M">here</a>.</p>
+
+<h2>Housing</h2>
+
+<p>The pictures show the housing fairly well.  We started by cutting out holes for all the components with a hot exacto knife (heated in a blow torch &#8211; as Mike put it, it cut through plastic like hot butter through a knife ;).  Pretty much all the parts had some sort of template we could go by:
+ - temp switch: we used the wire cover to draw out the opening
+ - power outlet: I had a cover plate that I was intending to use, instead, we just used the cover plate to mark out the large round plug hole and the two screw holes, then used the cover plate screws to hold the plug in.
+ - thermocouple jack: just drilled it out with a drill.
+ - AC input: traced around a pc-style power cord, then cut to the outside of the sharpie line, then drilled out the screw holes (marked after we had the main hole in, and could test-fit the plug).</p>
+
+<p><a href="http://blog.ciscavate.org/wp-content/2010/12/L1020355.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020355.jpg" alt="Digital temperature display." title="Font view" width="500" class="size-full wp-image-182" /></a></p>
+
+<br/>
+
+
+<h2>Thermocouple connections</h2>
+
+<p>The temp probe arrived with a bare pair of wires on one end, which wasn&#8217;t going to work that well, so we (I was working with a friend who has a soldering iron :) attached a 1/8&#8221; headphone plug to the cables, then soldered a corresponding jack to some 22-gauge wire that eventually went to the temp switch inputs (ports 7 &amp; 8 on the TCS-4010).</p>
+
+<h2>AC input</h2>
+
+<p>I was initially going to use a standard pigtail power cable to hook this up to the wall, but when shopping for parts I found a PC-style (D-shaped) power plug, which works beautifully, and it was cheap!</p>
+
+<p><a href="http://blog.ciscavate.org/wp-content/2010/12/L1020360.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020360.jpg" alt="the rear view of the controller" title="random-tomato" width="500" class="size-full wp-image-176" /></a></p>
+
+<br/>
+
+
+<h2>Power outlet</h2>
+
+<p>Locating a cheap power plug that would fit in a small container, and only had one plug was actually pretty difficult.  The outlets I found with a flange were more expensive than I could justify ($15-20), and everything else had two + plugs, or a plug and a switch, or so on.  Eventually, I settled on a 20-amp single-outlet plug, designed for a standard outlet box.  In the future, I think I&#8217;ll go with a dual-outlet 15amp plug, or look more.  The 20-amp outlet is very hard to plug things into, and I&#8217;m not entirely sure why.  It works just fine once you get everything plugged in, though.</p>
+
+<h2>Wires</h2>
+
+<p>I went with 12-gauge solid copper, in three colors, for the internal wiring.  It was quite difficult to form to the right shape, though, and we needed to solder it in place.  The wire was so stiff that we ended up re-soldering quite a bit: we&#8217;d solder a connection, then bend the wire to make the next connection, and the solder would break.  Eventually, we wired it all together and did the soldering in one go.  This worked, but it meant we couldn&#8217;t easily cover some of the connections with heat-shrink tubing.  In particular, the three connections to the AC input were bare, so we covered those with hot glue to keep fingers and other potential conductors from shorting it out (and delivering quite a shock).</p>
+
+<p>We were able to heat-shrink most of the connections, however, and everything is soldered in place, so I think it will hold up :).</p>
+
+<p><a href="http://blog.ciscavate.org/wp-content/2010/12/L1020356.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020356.jpg" alt="showing the AC-output" title="side view" width="500" class="size-full wp-image-183" /></a></p>
+
+<br/>
+
+
+<h2>Calibration</h2>
+
+<p>I did a test run with eggs to see how this worked, with multiple thermometers to compare readings (you can see one of the other thermometers in the first picture). I did a quick calibration based on those readings, but the controller was still off by about 5 degrees (that initial calibration was pretty drastic, there was a difference of over 10 degrees!). That became evident when I cracked the eggs and they were a bit under-cooked&#8212;the book suggested flash-boiling them anyway, so I had boiling water handy and re-calibrated based on that.  Don&#8217;t do what I did, or if you do, cook something cheap in the first run :)</p>
+
+<h2>Next time&#8230;</h2>
+
+<ol>
+<li>Use stranded 12-gauge wire.  It should be more flexible, and hold solder better.</li>
+<li>Use a 15-amp power plug, so it&#8217;s easier to plug/unplug appliances.</li>
+<li>Be careful about the locking tabs on the tupperware housing:  These are really, really, close to interfering with the plug and temp switch.</li>
+<li>I actually wanted to have the switch upside down, but because of the wire flexibility, we had to cut things to be very short.  That meant that we couldn&#8217;t reach the screws to mount the temp switch, since the bottom of the housing would have been in the way.  I&#8217;d try and do this differently next time &#8211; using stranded cable may work, or attach the temp switch first, then insert it, and finally solder the power input/output in place.</li>
+<li>Add an LED to the power supply that leads directly to the device.  It would be very nice to know when the appliance is actually getting power.</li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Rogan Creswick</span></span>
+
+      
+
+
+
+
+  
+
+<time datetime="2010-12-24T00:00:00-08:00" pubdate>Dec 24<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/cooking/'>cooking</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://creswick.github.com/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/" data-via="autoorator" data-counturl="http://creswick.github.com/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/" title="Previous Post: cabal-dev: sandboxing your Haskell development (and now with ghci!)">&laquo; cabal-dev: sandboxing your Haskell development (and now with ghci!)</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/10/31/blogging-with-octopress/" title="next Post: Blogging with Octopress">Blogging with Octopress &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/31/blogging-with-octopress/">Blogging with Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/">Hacking your kitchen: making a sous vide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/">cabal-dev: sandboxing your Haskell development (and now with ghci!)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/06/prezi-scalable-navigable-presentations/">Prezi: scalable, navigable presentations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/26/recovered-puzzles/">Recovered Puzzles</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("autoorator", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/autoorator" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @autoorator</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/creswick?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Rogan Creswick -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

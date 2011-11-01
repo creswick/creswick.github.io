@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: emacs | Bitwise Evolution]]></title>
+  <link href="http://creswick.github.com/blog/categories/emacs/atom.xml" rel="self"/>
+  <link href="http://creswick.github.com/"/>
+  <updated>2011-11-01T08:42:50-07:00</updated>
+  <id>http://creswick.github.com/</id>
+  <author>
+    <name><![CDATA[Rogan Creswick]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[(not (fill-paragraph))]]></title>
+    <link href="http://creswick.github.com/blog/2007/05/18/not-fill-paragraph/"/>
+    <updated>2007-05-18T00:00:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2007/05/18/not-fill-paragraph</id>
+    <content type="html"><![CDATA[<p>I use emacs as much as possible, today being no exception.  Currently,
+I'm doing a fair bit of writing at work, and unfortunately that means
+Word (or Open Office at best, depending on what OS I'm in).  Neither
+program supports much in the way of emacs compatibility modes, so if
+I'm generating new content (as opposed to editing an existing doc.) I
+tend to write in Emacs, and paste into Word when I'm finished.  This
+works pretty well, considering.</p>
+
+<p>There is one very annoying issue though: when in emacs, I use
+<code>auto-fill-mode</code> to keep the content on screen as I type.  The problem
+is that <code>auto-fill-mode</code> breaks lines with literal newline characters,
+while the word wrapping in Word / OpenOffice just wraps the content
+without additional characters.  As a result each line ends up as its
+own paragraph when I paste content from emacs into Word. The solution,
+of course, is to extend emacs with a simple function to undo
+<code>auto-fill</code>.</p>
+
+<h2>Merging lines</h2>
+
+<p>The first problem, as I saw it, was to find a function that would
+merge two adjacent lines, and leave them separated by a single space.
+Unfortunately, such a thing doesn't seem to exist.  No problem, we
+need to go to the end of the current line (<code>end-of-line</code>), search
+backwards for the first non-whitespace character (<code>[^ \t]</code>), erase
+the rest of the line, including the end line (<code>kill-line</code>), and insert
+a space (<code>(insert " ")</code>).</p>
+
+<pre>
+    (defun mergelines(&amp;optional backward)
+      "Merges the following line with this line, or merges this line
+      with the previous line if a prefix argument is provided.
+      Removes any whitespace between lines, replacing it with a
+      single space."
+      (interactive "P")
+      (if backward 
+          (previous-line))
+      (end-of-line)
+      (re-search-backward "[^ \t]")
+      (forward-char)
+      (kill-line)
+      (insert " "))
+</pre>
+
+
+<p>To make it more useful, I added a parameter that determines if the
+line below, or line above should be merged.  This made the rest of the
+<code>unfill</code> function much easier to write.</p>
+
+<h2>Un-filling a region</h2>
+
+<p>Now that we can merge lines, lets address the problem of unfilling a
+<em>bunch</em> of lines.  Since I know there is a function <code>mark-paragraph</code>
+already, lets just deal with arbitrary regions for now.</p>
+
+<pre>
+    (defun unfill-region(rstart rend)
+      (interactive "r")
+      ;; get to the end of the region:
+      (goto-char rend) 
+      ;; if the region ends on the first char. of a line, move up a line.
+      ;; this makes it easier to select a paragraph and apply the function.
+      (if (= (point) (line-beginning-position))
+          (previous-line))
+       ;; loop while the point isn't on the starting line:
+      (while (not (= (line-number-at-pos (point))
+             (line-number-at-pos rstart)))
+        ;; merge with previous line.
+        (mergelines t)))
+</pre>
+
+
+<p>I've tried to comment well, so it should be relatively straight
+forward, but here's an overview of the algorithm anyway:</p>
+
+<ol>
+<li><code>(interactive "r")</code> just means that the current region's start and
+end locations are stored in the parameters <code>rstart</code> and <code>rend</code>.</li>
+<li>We need to merge from the bottom up, because if we merge from the
+top down we need to keep track of the lines merged, and things
+generally become more complex (we might end up merging to many lines
+if we loose count.).  Because of this, we first move to the end of the
+region.</li>
+<li>Since you (well, I) generally select from the first column, and
+move one line past the last line I need (try it if you don't
+understand what I mean), I needed a special case to keep from merging
+the empty line between paragraphs.</li>
+<li>Now, we merge each line with the line above, which moves the point
+up a line too. When the point is on the same line as the start of the
+region, we stop.</li>
+</ol>
+
+
+<p>I haven't merged it with <code>mark-paragraph</code> yet, but it would be trivial
+to do so.  More importantly, I want to make it skip blank lines, so it
+will be possible to mark an entire document, and call <code>unfill-region</code>
+(and therefore, write <code>unfill-buffer</code>).  As it is now, if you do that
+the entire document ends up on one line, which is not usually ideal :)</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Licensed to invent? - Bitwise Evolution</title>
+  <meta name="author" content="Rogan Creswick">
+
+  
+  <meta name="description" content="My background in software development was built up on a strong belief that software should be freely available. This belief led me to start using GNU &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://creswick.github.com/blog/2006/05/24/licensed-to-invent">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Bitwise Evolution" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Bitwise Evolution</a></h1>
+  
+    <h2>Musings of a Portland-area hacker bent on improving digital lifestyles.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:creswick.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Licensed to Invent?</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2006-05-24T00:00:00-07:00" pubdate>May 24<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>My background in software development was built up on a strong belief that software should be freely available.  This belief led me to start using GNU/Linux and various GPL&#8217;d projects as an undergrad at Oregon State University.  Changing from the norm was painful - I had previously been on a window-only operating system diet, and while I could use Emacs, I was not yet zealous about it.   Numerous times I tried to go back to Windows, but the 2-4 week reinstall cycle that I had convinced myself was required (and may have been&#8230; this was in the early Win 98 days) drove me back to open solutions.</p>
+
+<p>I eventually came to love the ability to customize <em>everything</em>.  I have always been a &#8220;power user&#8221;, and I spent many hours crawling through the NT registry when I was in High school.  Linux, with the countless window managers and themeing sites drew me in like WinHack never could.  As I became more skilled in software development, I began customizing apps to my liking, hacking out bug fixes and adding features as I wanted them.  (Find a new game that looks cool, but can&#8217;t stand playing it with the keyboard? Add joystick support!) All of this was  made possible, or at least heavily benefitted from, open source licenses (Particularly the GPL).</p>
+
+<p>The intricacies of the various licenses were generally opaque to me, but I understood the gist of it:</p>
+
+<ul>
+    <li>The GPL let you release source code that was free but could not be made non-free by anyone but the author.</li>
+    <li>BSD-like licenses were less restrictive.</li>
+</ul>
+
+
+<p>That was about all I knew, or cared.  I was happy with the GPL, and I&#8217;ve scoffed at the complaint that <a title="Viral Licenses" href="http://en.wikipedia.org/wiki/Viral_license">Viral licenses</a> are evil.
+Recently, I started developing an application to assist with photograph management (back to the: <em>customize everything</em> point above&#8230; there are now to many applications to find exactly what I want, so I&#8217;m building my own&#8211;great solution, right?).  I settled on Java for the programming language, and intended to use the <a title="SWT" href="http://www.eclipse.org/swt/">SWT</a> (released under the <a title="Eclipse Public License" href="http://www.eclipse.org/org/documents/epl-v10.php">Eclipse Public License</a>) as the widget toolkit, since it is a visually attractive cross-platform solution.  However, I also want to make use of some <a title="GPL" href="http://www.gnu.org/copyleft/gpl.html">GPL</a> libraries.  If you&#8217;ve read through the mentioned licenses, you probably see the problem already.  It is not at all clear whether or not the SWT can be used with GPL applications.  <a href="http://azureus.sourceforge.net/">Azureus</a> seems to be doing this, and releasing their code under the GPL.  However, no one I&#8217;ve talked to can clearly state whether this is ok or not, and reference the relevant portions of legalese to support the claim.
+All this confusion has meant that the only &#8220;safe&#8221; route to either not release my program at all (I consider this unacceptable), or to settle on one of the two licenses above and only use compatible code, which means the GPL, simply because there is more GPL&#8217;d content available than EPL&#8217;d content.  The depressing end is that the viral nature of the GPL is the reason there was a conflict, because the SWT cannot be re-released under an SWT-incompatible license (and it is not clear that I can do this and meet the GPL requirements that all source code be released as well.).</p>
+
+<p>I doubt that either the Gnu foundation or IBM would chase me down for voiding a license for my personal photo manager, but the open source movement relies on the copyleft licenses to stay afloat, to a certain degree.  Without respecting those licenses we become hypocrits.</p>
+
+<p>I wonder if OCaml would work&#8230;</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Rogan Creswick</span></span>
+
+      
+
+
+
+
+  
+
+<time datetime="2006-05-24T00:00:00-07:00" pubdate>May 24<span>th</span>, 2006</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://creswick.github.com/blog/2006/05/24/licensed-to-invent/" data-via="autoorator" data-counturl="http://creswick.github.com/blog/2006/05/24/licensed-to-invent/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2006/01/27/2005-in-cities/" title="Previous Post: 2005 in cities">&laquo; 2005 in cities</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2006/08/14/foreachwhat/" title="next Post: foreach(What?)">foreach(What?) &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/31/blogging-with-octopress/">Blogging with Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/">Hacking your kitchen: making a sous vide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/">cabal-dev: sandboxing your Haskell development (and now with ghci!)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/06/prezi-scalable-navigable-presentations/">Prezi: scalable, navigable presentations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/26/recovered-puzzles/">Recovered Puzzles</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("autoorator", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/autoorator" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @autoorator</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/creswick?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Rogan Creswick -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

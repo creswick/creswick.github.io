@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Breaking away from Visio - Bitwise Evolution</title>
+  <meta name="author" content="Rogan Creswick">
+
+  
+  <meta name="description" content="The &#8216;proper&#8217; way to do user interface design is hotly contested in the OSS software development world, and the discussions usually boil &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://creswick.github.com/blog/2008/09/12/breaking-away-from-visio">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Bitwise Evolution" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Bitwise Evolution</a></h1>
+  
+    <h2>Musings of a Portland-area hacker bent on improving digital lifestyles.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:creswick.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Breaking Away From Visio</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2008-09-12T00:00:00-07:00" pubdate>Sep 12<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>The &#8216;proper&#8217; way to do user interface design is hotly contested in the OSS software development world, and the discussions usually boil down to three suggestions:</p>
+
+<ol>
+<li>&#8220;Just write it &#8211; it&#8217;s not that hard&#8221;</li>
+<li>&#8220;Use [glade|qt designer|netbeans|&#8230;] &#8211; all the widgets are there&#8221;</li>
+<li>&#8220;Just use pencil/pen/whiteboard/etc &#8211; it&#8217;s faster&#8221;</li>
+</ol>
+
+
+<p>I don&#8217;t agree with any of these &#8211; (1) is completely unreasonable.  Some people may be able to hack out a UI in their favorite language quickly, but when you suddenly need to move half the UI into a new dialog, or out of a dialog and into the main window, <em>and</em> change the tabs into a check list, with sample data, you&#8217;re screwed.  Once you finish manhandling your code to account for that change, you&#8217;ll need to add a component that is shaped like a septahedron with 7 distinct clickable areas and a tooltip that includes the latest stock quotes, and that tooltip needs to be scrollable.  The widget set places unreasonable restrictions on the design phase of your project.</p>
+
+<p>Option (2) suffers from the same issues as (1) &#8211; you&#8217;re constrained by the widgets available, although this is less of an issue because it&#8217;s generally easier to add images, and the images can look like the widgets you&#8217;re missing.  However, since GUI UI development tools are, well, for development, they require you to do lots of irrelevant (at this stage) tasks, like specifying how objects will behave when they&#8217;re resized, and dealing with layout managers.</p>
+
+<p>(3) is the closest fit for my needs, and I <em>do</em> do lots of paper/whiteboard prototyping, but eventually, I need to show something that looks <em>real</em>, and sketches don&#8217;t cut it.  There simply isn&#8217;t enough resolution there to convey everything that needs to be included in the mock-ups I create.</p>
+
+<p>Hm.. perhaps I should go into what I <em>do</em> need, since my needs may be pretty esoteric.  If you&#8217;ve made it this far, you&#8217;re probably seething with anger, or you&#8217;ve got some idea of where I&#8217;m coming from.  I&#8217;m frequently in need of electronic versions of UI prototypes for remote collaboration, <a href="http://www.usabilitynet.org/tools/wizard.htm">&#8220;wizard of oz&#8221; testing</a>, or for inclusion in presentations and reports.  These mock-ups need to look &#8220;real&#8221; or the is a substantial risk of biasing any experiments, and there is an expectation of polish that can&#8217;t be reached with hand-drawn interfaces.  Since a lot of what I create is to solve novel problems in (at times) esoteric domains, we often need to use a mix of existing and novel widgets.</p>
+
+<p>Generally, we use Visio to create these interfaces.  It offers a good balance between vector drawing capabilities and shape templates for common UI widgets / forms / etc. You are also able to import images, which is fairly critical when updating or adding to the UI of an existing tool.  (It&#8217;s easy to take a screenshot, clear out the details with the <a href="http://www.gimp.org/">Gimp</a>, and import as a background layer in Visio.)</p>
+
+<p>Unfortunately, I&#8217;ve been unable to find any OSS tools that can fill this niche as well as visio.  There are a few, as recent posts from <a href="http://ask.slashdot.org/article.pl?sid=05/11/19/2234228">slashdot</a> and the old <a href="http://discuss.joelonsoftware.com/default.asp?joel.3.218003.15">Joel on Software forums</a> show:</p>
+
+<ul>
+<li> <a href="http://dub.washington.edu:2007/denim/">DENIM</a>: Lets you sketch out interfaces with a tablet / mouse and create navigable web sites from those sketches.  Lacks in the &#8220;polish&#8221; area.</li>
+<li> <a href="http://www.evolus.vn/Pencil/Home.html">Pencil</a>: Firefox Plugin.  Peformance has been poor, in my experience. There are very few widgets (currently) available, and no image import capabilities (this is a huge flaw, IMHO).  Pencil could turn into something great, though.</li>
+<li> <a href="http://www.gnome.org/projects/dia/">DIA</a>: Last release was in March, 2007, but the svn repo does show some activity.  DIA lets you create things like network diagrams, UML, and flow charts, much like Visio, however, there are no UI stencils.  Instructions for creating new stencils (&#8216;shapes&#8217;) <a href="http://www.togaware.com/linux/survivor/Walkthrough_Creating0.html">exist</a>, but the svg support for shapes is very limited (no gradients, no rounded rectangles, etc..) and the documentation is even worse.</li>
+<li> <a href="http://www.koffice.org/kivio/">Kivio</a>: Much like dia, with essentially the same failings.</li>
+<li> QT Designer | Glade | etc.: see above comments about GUI development tools.</li>
+<li> <a href="http://www.inkscape.org/">Inkscape</a>: Nominally a vector drawing tool, much like Adobe Illustrator, Inkscape has an active community, good documentation, and it is quite stable.  Unfortunately, it is not possible to customize the pallets / shapes available, and there is not much community support to make it a good UI design tool (aside from what can be done with any vector drawing app of this quality).</li>
+<li> <a href="http://developer.yahoo.com/ypatterns/wireframes/">Yahoo! UI Stencils</a> (YUI): Not really a tool, but rather a collection of svg images of common interface widgets.</li>
+</ul>
+
+
+<p>None of these, on their own, do the job.  However, with nothing else looking bright, I&#8217;ve been digging into <a href="http://www.inkscape.org/">Inkscape</a> more over the last few days, and I think I&#8217;ve figured out a workflow that will do.</p>
+
+<p>First off, the <a href="http://developer.yahoo.com/ypatterns/wireframes/">YUI</a> stencils are critical &#8211; but they are not in a format that can be easily imported and used as &#8220;widgets&#8221;.  Ideally, Inkscape would let me define custom shapes, complete with constraints on the sub-components of those shapes to influence resize and translation behaviors, but that isn&#8217;t yet available (to my knowledge).  You <em>can</em> get around this, somewhat, by using the open dialog as a pallet of sorts:</p>
+
+<blockquote>&#8220;If you have a number of small SVG files whose contents you often reuse in other documents, you can conveniently use the Open dialog as a palette. Add the directory with your SVG sources into the bookmarks list so you can open it quickly. Then browse that directory looking at the previews. Once you found the file you need, simply drag it to the canvas and it will be imported into your current document.&#8221; (From the *Tips and Tricks* tutorial in Inkscape)</blockquote>
+
+
+<p>This would work reasonably well, if the open dialog were not modal! (Ranting about modal dialog is another post, or two, at least.)  Thankfully, you <em>can</em> drag from the dialog into an inkscape instance even if they are running on different processes :).  Therefore, you can start up two inkscape processes (NOT via the &#8220;new document&#8221; option on the toolbar or file menu &#8211; you have to actually start up two instances separately or the dialog&#8217;s modality will still interfere with your work).  Once you have the processes going, and two inkscape windows, open the open dialog on one of them, go to the directory with your widgets, minimize the (now useless) inkscape window you opened the dialog from, and rock on with the YUI stencils &amp; whatever other tools you need to hack out your UI in the other inkscape instance.</p>
+
+<p>There are a couple of things to keep in mind:</p>
+
+<ul>
+<li> Inkscape supports layers, so you can create stub data in a separate layer from the UI structure, and set the background content in another layer, etc.. so you don&#8217;t have to worry (as much) about grabbing the wrong thing and moving it out of place.</li>
+<li> The drag-and-drop action from the open dialog will include everything in the dragged svg file &#8211; so the YUI stencils (or any custom shapes you make) need to be broken out into separate files. (I&#8217;ve done this for some of the components, and you can download those files here: (<a id="p45" rel="attachment" href="http://blog.ciscavate.org/2008/09/breaking-away-from-visio.html/broken-out-yui-stencils/" title="Broken out YUI stencils">Broken out YUI stencils</a>).  They are released under a <a href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 License</a>.</li>
+</ul>
+
+
+<p>   Pencil (or one of the other options) may work better for you &#8211; many people have complained that their clients think an app is nearly finished because the UI looks &#8220;real&#8221;, and there are numerous ways to address that.  (eg: <a href="http://napkinlaf.sourceforge.net/">NapkinLAF</a> for Swing apps.) I haven&#8217;t had this problem, and something like NapkinLAF doesn&#8217;t address the problems I have, which are all related to pre-coding UI design.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Rogan Creswick</span></span>
+
+      
+
+
+
+
+  
+
+<time datetime="2008-09-12T00:00:00-07:00" pubdate>Sep 12<span>th</span>, 2008</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://creswick.github.com/blog/2008/09/12/breaking-away-from-visio/" data-via="autoorator" data-counturl="http://creswick.github.com/blog/2008/09/12/breaking-away-from-visio/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2008/09/05/wrestling-python/" title="Previous Post: Wrestling Python">&laquo; Wrestling Python</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2008/09/16/stackoverflow-endorsing-content-theft-from-day-one/" title="next Post: StackOverflow: Endorsing(?) content theft from day one">StackOverflow: Endorsing(?) content theft from day one &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/31/blogging-with-octopress/">Blogging with Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/">Hacking your kitchen: making a sous vide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/">cabal-dev: sandboxing your Haskell development (and now with ghci!)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/06/prezi-scalable-navigable-presentations/">Prezi: scalable, navigable presentations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/26/recovered-puzzles/">Recovered Puzzles</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("autoorator", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/autoorator" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @autoorator</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/creswick?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Rogan Creswick -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

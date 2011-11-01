@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Wrestling Python - Bitwise Evolution</title>
+  <meta name="author" content="Rogan Creswick">
+
+  
+  <meta name="description" content="With the launch of the StackOverflow beta I posed a question about python static analysis tools, as I have been playing with python and django &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://creswick.github.com/blog/2008/09/05/wrestling-python">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Bitwise Evolution" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Bitwise Evolution</a></h1>
+  
+    <h2>Musings of a Portland-area hacker bent on improving digital lifestyles.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:creswick.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Wrestling Python</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2008-09-05T00:00:00-07:00" pubdate>Sep 5<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>With the launch of the <a href="http://beta.stackoverflow.com">StackOverflow beta</a> I posed a question about python static analysis tools, as I have been playing with python and django recently for some side projects.  The responses at Stack Overflow quickly pointed to <a href="http://pychecker.sf.net">PyChecker</a>, <a href="http://divmod.org/trac/wiki/DivmodPyflakes">PyFlakes</a> and <a href="http://www.logilab.org/857">PyLint</a>.</p>
+
+<p>Over all, it was a disappointing experience.  My experiences are outlined below, and they (more or less) reflect this more <a href="http://www.doughellmann.com/articles/CompletelyDifferent-2008-03-linters/index.html ">extensive review by Doug Hellman</a>.</p>
+
+<p>Here are my first impressions of pyflakes, pychecker and pylint:</p>
+
+<ul>
+<li><p><strong>pychecker</strong>: It crashes frequently, most of the runs I tried resulted in Errors that originated in the pychecker code (eg: AttributeError or IndexError: list index out of range were the most common).  For some reason I had to set the DJANGO_SETTINGS_MODULE environment variable before it would even run on any of the app code, and the documentation is very sparse.</p></li>
+<li><p><strong>pyflakes</strong>: &#8216;pyflakes &#8211;help&#8217; throws a TypeError &#8211; erm&#8230; Documentation is also very sparse, and pyflakes is very forgiving (as far as I can tell, it only reports compile errors, warnings, redefinitions, and some concerns about imports&#8211;such as unused and wildcards).  pyflakes also seems to repeat itself:</p>
+
+<blockquote><p>eventlist/views.py:4: &#8216;Http404&#8217; imported but unused<br></p>
+
+<pre><code>eventlist/views.py:4: 'Http404' imported but unused&lt;br&gt;
+eventlist/views.py:5: 'from eventlist.models import *' used; unable to detect undefined names
+eventlist/views.py:59: 'authenticate' imported but unused&lt;br&gt;
+eventlist/views.py:61: redefinition of unused 'login' from
+</code></pre>
+
+<p>line 59<br></p>
+
+<pre><code>eventlist/views.py:5: 'from eventlist.models import *' used;
+</code></pre>
+
+<p>unable to detect undefined names <br>
+   eventlist/views.py:4: &#8216;Http404&#8217; imported but unused</p></blockquote></li>
+<li><p><strong>pylint</strong>: This seems to be the most capable of the tools suggested.  It has the best documentation.  LogiLab provides a tutorial, pylint has a help screen, and there is a (broken) link to a user manual, which would be extremely helpful.  There are some issues with applying pylint to django, since pylint doesn&#8217;t know about the django classes (such as models.Model).  This means that a fair number of otherwise valuable errors are generated about missing class fields.  eg:</p>
+
+<blockquote><p><code>E:105: get_events_by_tag: Class 'Tag' has no 'objects' member</code><br></p></blockquote></li>
+</ul>
+
+
+<p> Parsing these out automatically will be very difficult without some additional knowledge of the classes in use.  I&#8217;m not sure adding that is feasible, but it does seem likely that pylint is capable of dealing with this in the &#8220;right&#8221; way.  (I probably just need to point it to the django source, but there are no command line params that look likely, and, as mentioned earlier, the user manual is inaccessible.)</p>
+
+<p>For the moment, I&#8217;m still looking into pylint &#8211; pychecker and pyflakes need better documentation and they need to become more robust.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Rogan Creswick</span></span>
+
+      
+
+
+
+
+  
+
+<time datetime="2008-09-05T00:00:00-07:00" pubdate>Sep 5<span>th</span>, 2008</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://creswick.github.com/blog/2008/09/05/wrestling-python/" data-via="autoorator" data-counturl="http://creswick.github.com/blog/2008/09/05/wrestling-python/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2008/07/22/traveling-to-patras/" title="Previous Post: Traveling to Patras">&laquo; Traveling to Patras</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2008/09/12/breaking-away-from-visio/" title="next Post: Breaking away from Visio">Breaking away from Visio &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/31/blogging-with-octopress/">Blogging with Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/">Hacking your kitchen: making a sous vide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/">cabal-dev: sandboxing your Haskell development (and now with ghci!)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/06/prezi-scalable-navigable-presentations/">Prezi: scalable, navigable presentations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/26/recovered-puzzles/">Recovered Puzzles</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("autoorator", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/autoorator" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @autoorator</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/creswick?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Rogan Creswick -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: cooking | Bitwise Evolution]]></title>
+  <link href="http://creswick.github.com/blog/categories/cooking/atom.xml" rel="self"/>
+  <link href="http://creswick.github.com/"/>
+  <updated>2011-11-01T08:42:50-07:00</updated>
+  <id>http://creswick.github.com/</id>
+  <author>
+    <name><![CDATA[Rogan Creswick]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hacking your kitchen: making a sous vide]]></title>
+    <link href="http://creswick.github.com/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/"/>
+    <updated>2010-12-24T00:00:00-08:00</updated>
+    <id>http://creswick.github.com/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.ciscavate.org/wp-content/2010/12/crockpot.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/crockpot.jpg" alt="The sous vide." title="crockpot" width="200" class="size-full wp-image-170" /></a></p>
+
+<p>I recently found the cookbook <a href="http://www.cookingforgeeks.com">"Cooking for Geeks"</a> , and it inspired me to build a <a href="http://en.wikipedia.org/wiki/Sous-vide">sous vide</a> (the section on making a sous vide at home is also covered in a blog post by the author <a href="http://www.cookingforgeeks.com/blog/posts/diy-sous-vide/">here</a>).  If you're not familiar with the term, sous vide lets you very carefully control the temperature you're cooking at, so you <em>can't</em> over heat foods.</p>
+
+<p>Sous vide is similar to using a crockpot, but it requires <em>much</em> more control over the temperature than a typical crockpot provides.  If cooking with a crockpot is like sketching dinner, then sous vide is analogous to using finely-tuned drafting instruments.</p>
+
+<p>Jeff Potter (Author of Cooking for Geeks) provided part numbers for a suitable thermocouple (a probe thermometer) and a corresponding temp switch (a switch that controls a gate based on the temperature it sees from the attached thermocouple).  I would have had some trouble getting the right set-up without that guidance, but still ended up diverging a bit on accident.  I ordered an AC version of the temp switch instead of a DC version, but in the end I think it worked better this way.</p>
+
+<p>The biggest problem I have with Jeff's suggestions is that the book and blog show the temp switch and wiring sitting un-enclosed on the counter, with everything hard-wired together.  I'm not comfortable with 115vac running around on my kitchen counter, so I needed some sort of enclosure.  I also wanted to be able to detach the thermocouple to easily clean it, and I didn't want to modify my crockpot much at all.  (I really don't want <em>another</em> appliance, and I still want a functional crockpot.)</p>
+
+<h1>Parts</h1>
+
+<p><a href="http://blog.ciscavate.org/wp-content/2010/12/L1020357.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020357.jpg" alt="Sous vide controller - top" title="Sous vide controller - top" width="200" class="size-full wp-image-175" /></a></p>
+
+<p>Given that I don't have access to a fab. plant (or a maker bot!) I opted to go with a simple locking tupperware container for a housing.  They lock shut, have a gasket for a tight seal, and the plastic is very easy to modify to hold all the ports that the sous vide control needs.</p>
+
+<p>At this point it's probably reasonable to think of the control as a temperature-controlled power outlet, rather than something specific to a sous vide, since the purpose is really irrelevant for now.</p>
+
+<p>I'm not going to go into great detail about the specific parts (although I'll talk about the connections somewhat), but you can see the full parts list <a href="http://bit.ly/fBbj4M">here</a>.</p>
+
+<h2>Housing</h2>
+
+<p>The pictures show the housing fairly well.  We started by cutting out holes for all the components with a hot exacto knife (heated in a blow torch -- as Mike put it, it cut through plastic like hot butter through a knife ;).  Pretty much all the parts had some sort of template we could go by:
+ - temp switch: we used the wire cover to draw out the opening
+ - power outlet: I had a cover plate that I was intending to use, instead, we just used the cover plate to mark out the large round plug hole and the two screw holes, then used the cover plate screws to hold the plug in.
+ - thermocouple jack: just drilled it out with a drill.
+ - AC input: traced around a pc-style power cord, then cut to the outside of the sharpie line, then drilled out the screw holes (marked after we had the main hole in, and could test-fit the plug).</p>
+
+<p><a href="http://blog.ciscavate.org/wp-content/2010/12/L1020355.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020355.jpg" alt="Digital temperature display." title="Font view" width="500" class="size-full wp-image-182" /></a></p>
+
+<br/>
+
+
+<h2>Thermocouple connections</h2>
+
+<p>The temp probe arrived with a bare pair of wires on one end, which wasn't going to work that well, so we (I was working with a friend who has a soldering iron :) attached a 1/8" headphone plug to the cables, then soldered a corresponding jack to some 22-gauge wire that eventually went to the temp switch inputs (ports 7 &amp; 8 on the TCS-4010).</p>
+
+<h2>AC input</h2>
+
+<p>I was initially going to use a standard pigtail power cable to hook this up to the wall, but when shopping for parts I found a PC-style (D-shaped) power plug, which works beautifully, and it was cheap!</p>
+
+<p><a href="http://blog.ciscavate.org/wp-content/2010/12/L1020360.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020360.jpg" alt="the rear view of the controller" title="random-tomato" width="500" class="size-full wp-image-176" /></a></p>
+
+<br/>
+
+
+<h2>Power outlet</h2>
+
+<p>Locating a cheap power plug that would fit in a small container, and only had one plug was actually pretty difficult.  The outlets I found with a flange were more expensive than I could justify ($15-20), and everything else had two + plugs, or a plug and a switch, or so on.  Eventually, I settled on a 20-amp single-outlet plug, designed for a standard outlet box.  In the future, I think I'll go with a dual-outlet 15amp plug, or look more.  The 20-amp outlet is very hard to plug things into, and I'm not entirely sure why.  It works just fine once you get everything plugged in, though.</p>
+
+<h2>Wires</h2>
+
+<p>I went with 12-gauge solid copper, in three colors, for the internal wiring.  It was quite difficult to form to the right shape, though, and we needed to solder it in place.  The wire was so stiff that we ended up re-soldering quite a bit: we'd solder a connection, then bend the wire to make the next connection, and the solder would break.  Eventually, we wired it all together and did the soldering in one go.  This worked, but it meant we couldn't easily cover some of the connections with heat-shrink tubing.  In particular, the three connections to the AC input were bare, so we covered those with hot glue to keep fingers and other potential conductors from shorting it out (and delivering quite a shock).</p>
+
+<p>We were able to heat-shrink most of the connections, however, and everything is soldered in place, so I think it will hold up :).</p>
+
+<p><a href="http://blog.ciscavate.org/wp-content/2010/12/L1020356.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020356.jpg" alt="showing the AC-output" title="side view" width="500" class="size-full wp-image-183" /></a></p>
+
+<br/>
+
+
+<h2>Calibration</h2>
+
+<p>I did a test run with eggs to see how this worked, with multiple thermometers to compare readings (you can see one of the other thermometers in the first picture). I did a quick calibration based on those readings, but the controller was still off by about 5 degrees (that initial calibration was pretty drastic, there was a difference of over 10 degrees!). That became evident when I cracked the eggs and they were a bit under-cooked---the book suggested flash-boiling them anyway, so I had boiling water handy and re-calibrated based on that.  Don't do what I did, or if you do, cook something cheap in the first run :)</p>
+
+<h2>Next time...</h2>
+
+<ol>
+<li>Use stranded 12-gauge wire.  It should be more flexible, and hold solder better.</li>
+<li>Use a 15-amp power plug, so it's easier to plug/unplug appliances.</li>
+<li>Be careful about the locking tabs on the tupperware housing:  These are really, really, close to interfering with the plug and temp switch.</li>
+<li>I actually wanted to have the switch upside down, but because of the wire flexibility, we had to cut things to be very short.  That meant that we couldn't reach the screws to mount the temp switch, since the bottom of the housing would have been in the way.  I'd try and do this differently next time -- using stranded cable may work, or attach the temp switch first, then insert it, and finally solder the power input/output in place.</li>
+<li>Add an LED to the power supply that leads directly to the device.  It would be very nice to know when the appliance is actually getting power.</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

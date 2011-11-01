@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Cracking down on application clutter (or: my ${HOME} is my castle!) - Bitwise Evolution</title>
+  <meta name="author" content="Rogan Creswick">
+
+  
+  <meta name="description" content="There was once a time when your home directory was treated as a nearly sacred place, a safe haven where you had near complete control. This trust was &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://creswick.github.com/blog/2008/07/18/cracking-down-on-application-clutter-or-my-home-is-my-castle">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Bitwise Evolution" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Bitwise Evolution</a></h1>
+  
+    <h2>Musings of a Portland-area hacker bent on improving digital lifestyles.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:creswick.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Cracking Down on Application Clutter (or: My ${HOME} Is My Castle!)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2008-07-18T00:00:00-07:00" pubdate>Jul 18<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>There was once a time when your home directory was treated as a nearly sacred place, a safe haven where you had near complete control.  This trust was only breached for very special reasons: user specific settings and background storage for applications could go in &#8220;dot-files&#8221;&#8211;the hidden files or directories that begin with a &#8220;.&#8221; and therefore don&#8217;t show up in normal directory listings.</p>
+
+<p>Unfortunately, things began to change. I don&#8217;t know what kicked it off, but soon there was a Desktop (or desktop) folder.  It was glaring&#8211;many XFree86 window managers don&#8217;t even have the <em>concept</em> of a desktop, but the defaults environments were (and still are) often set to Desktop Managers.  Web browsers took after the DM&#8217;s, and soon we all had these glaring &#8220;Desktop&#8221; directories hanging out whether we wanted them or not.  I&#8217;ve managed to tolerate this infraction for years, and aside from the occasional frustration (eg: Ecilpse and NetBeans, with their request for a ~/workspace and ~/NetBeansProjects directories).</p>
+
+<p>However, today things changed.</p>
+
+<p><code lang="bash">
+$ ls ~
+bin/              PDF/     <br/>
+Desktop/          Pictures/<br/>
+development/      Public/      <br/>
+documents/        src/     <br/>
+Documents/        shared/      <br/>
+downloads/        Templates/   <br/>
+Mail/             Videos/      <br/>
+Music/            virtualMachines/
+myapps/           workspace/     <br/>
+</code></p>
+
+<p>Documents? (Ok, I can sort of understand that one.) Music? Pictures? Templates, PDF, Public, and Videos?! Did I suddenly become a master of multimedia? Keep in mind here, I&#8217;m a java hacker on a Linux box&#8211;this isn&#8217;t exactly a fine-tuned rendering/desktop publishing platform.   And of course, every one of those directories is empty.  Thankfully, I checked before deleting <code>documents</code> vs. <code>Documents</code> (I&#8217;ve been bitten there before&#8211;on a mac due to case conflation&#8211;but that&#8217;s another story).</p>
+
+<p>Why would I want a directory called PDF? I can understand (possibly) wanting to <em>tag</em> files with &#8220;PDF&#8221;, but as part of a single-dimensional sorting criteria? (Hey, lets store all my .h files in ~/H/ and all my .cpp files in ~/CPP/! It&#8217;ll be great!)</p>
+
+<p>Needless to say, I&#8217;ve removed the offending directories, and this time I&#8217;m ready:</p>
+
+<p><code lang="bash">
+$ kernel-filesystem-monitor-daemon-cat -v  watch ${HOME} |
+perl -ne '{
+   if( /<sup>CREATE/</sup> ) { # only report create events</p>
+
+<pre><code>  s|.*URL:\./||g; 
+  if ( !/^\./ ) { # don't report new dot-files
+     print "$_ created @ "; 
+     print `date`; 
+  }
+</code></pre>
+
+<p>   }
+}&#8217; > ~/whenCrapWentDown.txt
+</code>
+(newlines and comments introduced to improve clarity &#8211; if you&#8217;re pasting this into a shell, you&#8217;ll need to either add &#39;s or remove newlines.)</p>
+
+<p><a href="http://freshmeat.net/projects/kfsmd/">KFSMD (kernel-filesystem-monitor-daemon)</a> is an app that does exactly what it&#8217;s 32-character name says. Whenever a filesystem change occurs, it knows about it.  The <code>-cat</code> part just tells it to print to stdout, and the hunk of perl does some minor processing, and introduces time stamps.</p>
+
+<p>I&#8217;m actually running this in a sticky terminal that&#8217;s pinned to my E17 desktop, so if/when something starts building an empire in my home directory, I&#8217;ll be able to compare with what apps are running, and hopefully track it down.  (It would be nice to collect the PIDs of the process that actually issued the system call to touch the file system, but this is good enough for now.)</p>
+
+<p><img id="image37" src="http://blog.ciscavate.org/wp-content/uploads/2008/07/fsWatcher.png" alt="fsWatcher.png" width="474"/></p>
+
+<p>Now we wait&#8230;</p>
+
+<p>(<a href="http://www.linux.com/feature/124903">This article</a> got me going with KFSMD.)</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Rogan Creswick</span></span>
+
+      
+
+
+
+
+  
+
+<time datetime="2008-07-18T00:00:00-07:00" pubdate>Jul 18<span>th</span>, 2008</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://creswick.github.com/blog/2008/07/18/cracking-down-on-application-clutter-or-my-home-is-my-castle/" data-via="autoorator" data-counturl="http://creswick.github.com/blog/2008/07/18/cracking-down-on-application-clutter-or-my-home-is-my-castle/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2008/07/02/creating-wizards-in-java/" title="Previous Post: Creating Wizards in Java">&laquo; Creating Wizards in Java</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2008/07/22/traveling-to-patras/" title="next Post: Traveling to Patras">Traveling to Patras &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/31/blogging-with-octopress/">Blogging with Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/">Hacking your kitchen: making a sous vide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/">cabal-dev: sandboxing your Haskell development (and now with ghci!)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/06/prezi-scalable-navigable-presentations/">Prezi: scalable, navigable presentations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/26/recovered-puzzles/">Recovered Puzzles</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("autoorator", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/autoorator" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @autoorator</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/creswick?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Rogan Creswick -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,690 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Bitwise Evolution</title>
+  <meta name="author" content="Rogan Creswick">
+
+  
+  <meta name="description" content="I finally found a way to quickly navigate to my home directory in windows today. Being a long-time (well, 8-10 years) Linux user, when I started &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://creswick.github.com/blog/page/5">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Bitwise Evolution" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Bitwise Evolution</a></h1>
+  
+    <h2>Musings of a Portland-area hacker bent on improving digital lifestyles.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:creswick.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2006/08/21/home-is-where-emacs-is/">Home Is Where .emacs Is&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2006-08-21T00:00:00-07:00" pubdate>Aug 21<span>st</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I finally found a way to quickly navigate to my home directory in windows today.  Being a long-time (well, 8-10 years) Linux user, when I started working in windows 40 hours a week, I had to adapt a bit, but most of that adaptation meant installing cygwin utilities, bblean, and emacs.  Unfortunately, it&#8217;s most natural to put all the configuration files for these apps in my home directory &#8211; a concept that is <em>almost</em> completely alien to a windows system.  As you probably know, in Win XP you do have a home dir, conveniently located at <tt>c:Documents and Settingsusername</tt> which is not extremely easy to navigate to, and there are no simple shortcuts to get there as there are in Linux / unix environments.</p>
+
+<p>This has been annoying me for some time.  Everything goes into that directory &#8211; I&#8217;ve moved firefox downloads, Visual Studio projects, symlinked <tt>My Documents</tt> to there, etc&#8230; Now before you shout out that I brought this upon my self, consider that:</p>
+
+<ul>
+<li>I needed everything to be in the same location, for what should be obvious reasons. (but if the reason&#8217;s arent obvious, try backing up all your crap from a multi-year old windows machine where you <b>didn&#8217;t</b> keep everything in one place)</li>
+<li>More things were already using this location than were not (remember, most of what I use is cygwin).</li>
+<li>Cygwin makes it mildly painful to access things that don&#8217;t fit nicely into the cygwin virtual filesystem thing.</li>
+</ul>
+
+
+<p>Today, however, I found a solution.  Oddly enough, the integration between IE and Windows is why this works.</p>
+
+<ol>
+<li>Open the Windows Explorer</li>
+<li>Select View-Toolbars-customize</li>
+<li>Add the &#8220;Home&#8221; button to the toolbar</li>
+<li>Click on it. (This changes the Explorer &#8220;mode&#8221; to web-browser, and allows access to configure that button.)</li>
+<li>Select Tools-Internet Options</li>
+<li>Set your IE home page to <tt>c:Documents and Settingsusername</tt></li>
+<li>Voila! Click on the home button again, and there you are :)</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2006/08/14/foreachwhat/">foreach(What?)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2006-08-14T00:00:00-07:00" pubdate>Aug 14<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;ve been adapting to Java 1.5 and c# (and c#, with .NET 2.0), all of which feature a new construct: the <tt>foreach</tt> loop.  The syntax is relatively similar to the construct in numerous other languages, such as perl&#8217;s:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> 
+</span><span class='line'>foreach $var (@list){
+</span><span class='line'>    # ...
+</span><span class='line'>}
+</span><span class='line'> </span></code></pre></td></tr></table></div></figure>
+
+
+<p>In c# (or java, the syntax is the same), to loop over an array or IEnumerable collection, you just do:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> 
+</span><span class='line'>foreach(int x in indices){
+</span><span class='line'>   // ....
+</span><span class='line'>}
+</span><span class='line'> </span></code></pre></td></tr></table></div></figure>
+
+
+<p>Unfortunately, as I found today, the c# version shares something else with the Perl version: An absence of type checking.  Despite the explicit types in the loop construct, and the presence of generics (although these are missing in .NET foreach</tt> in c# is not type safe.  The end result is that you can do fun things like this with out the slightest hint of a warning:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> 
+</span><span class='line'>double[] values = new double[]{....};
+</span><span class='line'>/* snip */
+</span><span class='line'>foreach(int v in values){
+</span><span class='line'>   // guess what? v == Math.Floor(values[i]) !
+</span><span class='line'>}
+</span><span class='line'> </span></code></pre></td></tr></table></div></figure>
+
+
+<p>I find this particularly vexing because if you simply re-write the foreach to be a standard for loop, then the type checker will jump in and complain about the loss of precision:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> 
+</span><span class='line'>for(int i=0; i 
+</span><span class='line'>
+</span><span class='line'>With collections this becomes slightly more complex, and in .NET pre-2.0, Enumerators were not typed (they would simply return Objects, making it impossible to perform compile time type checking), with .NET 2.0, however these constructs could be parametrized, eg:
+</span><span class='line'>
+</span><span class='line'> </span></code></pre></td></tr></table></div></figure>
+
+
+<p>&#8220;`</p>
+
+<p>foreach(T id in IEnumerable){
+   // body
+}</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>Why this isn't done is a mystery to me.  At the very least a rewrite rule could be used to turn each foreach into an equivalent for loop.  (There are plenty of ways around any performance problems this would cause at run time, and I'm happy to pay a compile-time penalty if it prevents run-time bugs!)
+</span><span class='line'>
+</span><span class='line'>&lt;em&gt;Edit: Just for completeness, Java 1.5 does not exhibit this behavior, either when itterating over generic collections or arrays of basic data types:&lt;/em&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>double[] values = new double[]{0.5, 0.6, 0.7};</p>
+
+<p>for (int v : values){ // causes compile time error.
+   System.out.println(&#8220;v=&#8221;+v);
+}</p>
+
+<p>&#8220;`
+<em>Note that it is actually an <b>error</b> in java, not a warning even.  I would assume this has something to do with the requirements Sun placed on backwards compatability with older JREs &#8211; much, if not all, of the java Generics changes are simply rewrite rules.  C#, however, has no such constraints and can take advantage of a number of performance improvements that are not available to the java compiler.  I still don&#8217;t see that as an excuse for discarding type saftey. &#8211;ERC</em></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2006/05/24/licensed-to-invent/">Licensed to Invent?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2006-05-24T00:00:00-07:00" pubdate>May 24<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>My background in software development was built up on a strong belief that software should be freely available.  This belief led me to start using GNU/Linux and various GPL&#8217;d projects as an undergrad at Oregon State University.  Changing from the norm was painful - I had previously been on a window-only operating system diet, and while I could use Emacs, I was not yet zealous about it.   Numerous times I tried to go back to Windows, but the 2-4 week reinstall cycle that I had convinced myself was required (and may have been&#8230; this was in the early Win 98 days) drove me back to open solutions.</p>
+
+<p>I eventually came to love the ability to customize <em>everything</em>.  I have always been a &#8220;power user&#8221;, and I spent many hours crawling through the NT registry when I was in High school.  Linux, with the countless window managers and themeing sites drew me in like WinHack never could.  As I became more skilled in software development, I began customizing apps to my liking, hacking out bug fixes and adding features as I wanted them.  (Find a new game that looks cool, but can&#8217;t stand playing it with the keyboard? Add joystick support!) All of this was  made possible, or at least heavily benefitted from, open source licenses (Particularly the GPL).</p>
+
+<p>The intricacies of the various licenses were generally opaque to me, but I understood the gist of it:</p>
+
+<ul>
+    <li>The GPL let you release source code that was free but could not be made non-free by anyone but the author.</li>
+    <li>BSD-like licenses were less restrictive.</li>
+</ul>
+
+
+<p>That was about all I knew, or cared.  I was happy with the GPL, and I&#8217;ve scoffed at the complaint that <a title="Viral Licenses" href="http://en.wikipedia.org/wiki/Viral_license">Viral licenses</a> are evil.
+Recently, I started developing an application to assist with photograph management (back to the: <em>customize everything</em> point above&#8230; there are now to many applications to find exactly what I want, so I&#8217;m building my own&#8211;great solution, right?).  I settled on Java for the programming language, and intended to use the <a title="SWT" href="http://www.eclipse.org/swt/">SWT</a> (released under the <a title="Eclipse Public License" href="http://www.eclipse.org/org/documents/epl-v10.php">Eclipse Public License</a>) as the widget toolkit, since it is a visually attractive cross-platform solution.  However, I also want to make use of some <a title="GPL" href="http://www.gnu.org/copyleft/gpl.html">GPL</a> libraries.  If you&#8217;ve read through the mentioned licenses, you probably see the problem already.  It is not at all clear whether or not the SWT can be used with GPL applications.  <a href="http://azureus.sourceforge.net/">Azureus</a> seems to be doing this, and releasing their code under the GPL.  However, no one I&#8217;ve talked to can clearly state whether this is ok or not, and reference the relevant portions of legalese to support the claim.
+All this confusion has meant that the only &#8220;safe&#8221; route to either not release my program at all (I consider this unacceptable), or to settle on one of the two licenses above and only use compatible code, which means the GPL, simply because there is more GPL&#8217;d content available than EPL&#8217;d content.  The depressing end is that the viral nature of the GPL is the reason there was a conflict, because the SWT cannot be re-released under an SWT-incompatible license (and it is not clear that I can do this and meet the GPL requirements that all source code be released as well.).</p>
+
+<p>I doubt that either the Gnu foundation or IBM would chase me down for voiding a license for my personal photo manager, but the open source movement relies on the copyleft licenses to stay afloat, to a certain degree.  Without respecting those licenses we become hypocrits.</p>
+
+<p>I wonder if OCaml would work&#8230;</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2006/01/27/2005-in-cities/">2005 in Cities</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2006-01-27T00:00:00-08:00" pubdate>Jan 27<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Copying an idea seen on Join-The-Dots:</p>
+
+<ul>
+    <li>Portland, OR</li>
+    <li>Corvallis, OR</li>
+    <li>Seattle, WA</li>
+    <li>Los Angeles, CA</li>
+    <li>San Diego, CA</li>
+    <li>Twin Falls, ID</li>
+    <li>Jackson Hole, WY</li>
+    <li>Lincoln, NE</li>
+    <li>Chicago, IL</li>
+    <li>DeBois, PA</li>
+    <li>New York, NY</li>
+    <li>Toledo, OH</li>
+    <li>Ogden, UT</li>
+</ul>
+
+
+<p>One or more nights in each city.  Now, if only I had some ground-breaking reason for being in Ogden, UT and DeBois, PA :).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2005/08/26/putting-social-networks-to-work/">Putting Social Networks to Work</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2005-08-26T00:00:00-07:00" pubdate>Aug 26<span>th</span>, 2005</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the post on mapping the intern, I briefly discussed how having a map of interns across the US would be a cool thing. However, there are obviously some privacy concerns with that. In the comments, Tessa mentions using instant messengers as a conduit for personal info. The appearance of Google Talk completed the connection, and got me thinking.</p>
+
+<p>Google has all the infrastructure to do exactly what I want, and more. Unfortunately, as the Google tools are now, everything is disconnected. It is as if someone needs a meta-20% project to tie all these cool 20% projects together. (Sidebar: Google engineers are given 20% of their time to work on any side project the want. The idea is that some of these ideas will flourish and turn into the next great thing. <a href="http://www.orkut.com/">Orkut</a> started this way.)</p>
+
+<p>The particular Google aspects I&#8217;m thinking of are: <a href="http://maps.google.com/">Google Maps</a>, Google Talk and / or Gmail, and Orkut. (gah, no more links from me. Blogspot&#8217;s editor is either horrible with regard to adding links, or it uses some paradigm I&#8217;m completely unfamiliar with.&#8211;this is somewhat resolved by using WordPress now&#8230; but who knows if it&#8217;s actually better.) Personal info could be added to any of the three &#8220;personal&#8221; services (by which I mean workout, small, and googol talk) and shared through some friend-flagging mechanism in Orkut. From there, it&#8217;s trivial to build maps on a per-person basis. Google could probably do this now, but it would help to have all their tools tied together (things seem to be going in that direction, with the unified accounts between Gmail and Google talk.)</p>
+
+<p>I consider the above a proof-of-concept for the usefulness of social networks (I&#8217;ve been somewhat skeptical about their employ for some time). Are there other similar uses? At some levels, social networks seem a bit like a collaborative filtering approach to finding interesting people, but what do you do from there? Personally, I would find it odd if someone three links detached on Orkut contacted me just to say &#8220;hi&#8221;, however, there isn&#8217;t enough information about me readily available on Orkut to start a more interesting conversation out of the blue.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2005/08/17/mapping-the-intern/">Mapping the Intern</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2005-08-17T00:00:00-07:00" pubdate>Aug 17<span>th</span>, 2005</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>For the last two summers I have been interning for IBM in Westchester county, NY. While here, I&#8217;ve met a very wide distribution of interesting people (distributed across many axes, one of which is geographic &#8211; well, perhaps two of them ;). I think the community that we have formed is interesting for a number of reasons: One, as I have already mentioned, we are widely distributed across the globe; I think we are also likely to appear in each-other&#8217;s lives again, irrespective of our personal ties and attempts. There is no accident that we are a community &#8211; IBM already filtered us, and we all have a deeply rooted interest in technology. I fully expect (and hope!) to randomly run into interns from IBM in the years to come, simply because we walk similar lives in a relatively small global community of researchers. Everyone I have met has also proven to be extremely interesting, artistic and inventive.</p>
+
+<p>The problem, then, is that we don&#8217;t have an easy way to interact outside of IBM. Currently, we are only connected by an email list that doesn&#8217;t serve as a very precise means of communication. As an example: Earlier this year, my partner and I drove across the United States, and we didn&#8217;t have anything planned for the night we would be in Pennsylvania. Eventually, I sent an email to the interns list asking simply &#8220;is anyone in Pennsylvania? (or do you know if there is anything to do there?)&#8221;. This just seemed crude, although it would have worked if I had tried it sooner. It would have been nice to have some idea of who may be there, and where about they were. This need not be accurate, the granularity of cities would be fine, it would still help with trip planning. (Apologies if you were expecting something profound, this is all I&#8217;ve got today.)</p>
+
+<p>Today, out of the blue I realized how to do this, with the Google Maps API. If you aren&#8217;t familiar with the API, it lets you use the same technology on http://maps.google.com but with your own markers or whatever you want (within reason). You also get the scrolling /
+zooming and satellite imagery as well. I&#8217;d like to use this to map interns. The implementation would be pretty straightforward, but the
+privacy / legal implications aren&#8217;t clear-cut. Ideally, intern marks would have actual street addresses (and potentially other contact info as well), or at least mailing addresses associated with them. Common sense dictates that such a page should be private, and the Google terms of service supports this, after a manner:</p>
+
+<blockquote>&#8220;We also want to respect people&#8217;s privacy, so the API should not be used to identify private information about private individuals.&#8221;</blockquote>
+
+
+<p>An opt-in policy or click-through would probably remedy this, but I&#8217;m also not clear on whether Google is happy with a Google map being password-protected.  The answers to this aren&#8217;t very pressing &#8211; I have a number of projects on my stack that need work first, but if anyone has input, I&#8217;d like to hear it :)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2005/08/15/the-us-in-pictures/">The US in Pictures</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2005-08-15T00:00:00-07:00" pubdate>Aug 15<span>th</span>, 2005</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;ve posted photos from my drive across the US this spring, along with a host of other shots that I&#8217;ve been meaning to share for ages. I realized the other day that when driving through the midwest, despite being in awe of the scenery, and miles upon miles of picturesque fields, I never took any pictures. I do believe I was waiting for a high point to take them from, to get a full sweeping view of the surrounding area, but alas, I was in the Midwest.</p>
+
+<p><a href="http://www.minnen.org/rogan/photos/">http://www.minnen.org/rogan/photos/</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2005/08/10/playing-it-by-ear/">Playing It by Ear&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2005-08-10T00:00:00-07:00" pubdate>Aug 10<span>th</span>, 2005</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Those who know me well know that I am almost always listening to music of some sort. When I&#8217;m working you will usually find me with a set of headphones plugged into my ears, or speakers blasting (if that doesn&#8217;t bother anyone else nearby). Similarly, I always have the car radio on when it doesn&#8217;t interfere with conversation or intense driving, and I usually queue up some mp3s on the stereo before I start cooking dinner, cleaning, etc.</p>
+
+<p>My taste in music is about as diverse as the situations above. I don&#8217;t particularly enjoy country western, or rap / hip-hop, but pretty much everything else will show up on a playlist at some point. This is somewhat of a problem; while in general I will enjoy listening to anything, at any specific time I&#8217;d prefer to stay within a certain genre.</p>
+
+<p>The issue is that to achieve this level of filtering I need to do it manually.  With a couple thousand tracks (with much missing meta-data, such as the &#8220;official&#8221; genre) this becomes a huge task. Also, keep in mind that some artists cross a number of genres &#8211; A Perfect Circle and Nine Inch Nails are two good examples. Some NIN tracks are nearly symphonic while others are very industrial, this prevents bagging by artist in enough instances to be annoying.</p>
+
+<p>Recently a number of music management programs have cropped up that provide more filtering tools than a plain player such as winamp or xmms. iTunes is probably the best known of these programs &#8211; and I used iTunes for nearly two years and the searching it provides is much better than what I used before, but it still doesn&#8217;t do the level of filtering I want.</p>
+
+<p>About a week ago I began using amarok.  <a href="http://amarok.kde.org/">Amarok</a> is similar to iTunes, but it makes use of a service called <a href="http://www.audioscrobbler.com/">Audioscrobbler</a> to provide suggestions on what to play. Audioscrobbler uses collaborative filtering techniques to recommend songs based on what you are listening to. I&#8217;ll come back to this, but first a sidebar on collaborative filtering:</p>
+
+<blockquote>The idea behind collaborative filtering is that people have similar tastes in &#8220;things&#8221;. If you like a given movie, say Star Wars: Episode 3, then you may like Star Wars: Episode 4, because many people who liked the first movie also liked the second. MovieLens (http://movielens.umn.edu/login) does exactly this. As you rate movies, it compares your preferences with those of thousands of other people, and predicts how you will rate movies you haven&#8217;t seen. I&#8217;ve had good experiences with using MovieLens, but I put significantly more thought into choosing a movie to see than I put into choosing a song to listen to. This makes sense when you consider the time commitment &#8211; 5 minutes spent choosing a song is wasted time, you could have just listened to it in that time. (Choosing an album to buy is a different scenario also, and seems to share many aspects with choosing a movie.)</blockquote>
+
+
+<p>Now, back to amarok and audioscrobbler.  The problem here is that I want a specific genre, and I want it right now.  This is in stark contrast to choosing a movie, which I could wait to see later if I&#8217;m not in the mood for that particular movie &#8211; I can control the context in which I watch a movie, but I&#8217;m not willing to dedicate that effort to choosing a song. Music is a background task for me, and it shouldn&#8217;t dictate very much attention. When I&#8217;m listening my attention has other targets: research, writing, driving, etc. However, I am not so involved in these tasks (usually) that I don&#8217;t notice the background music.</p>
+
+<p>Audioscrobbler actually does pretty good. (The parts of amarok that take advantage of it are another story&#8230;) There are, however three (or more?) problems with audioscrobbler: 1) you must have a network connection to get suggestions, 2) your meta-data on each song must be correct, and 3) if you have diverse input to the system, you will get diverse output. To explain #3: The input I provide to audioscrobbler is of very limited use. The range of music I listen to is to large to provide information on what music &#8220;sounds&#8221; alike &#8211; Knowing that I like Bach and some tracks by Scooter (a rave artist) doesn&#8217;t help when I&#8217;m listening to Back or Scooter, since I probably don&#8217;t want Bach to pop on while I&#8217;m in a rave mood, or vice-versa. This has happened a number of times recently with amarok &#8211; it suggested a set of U2, Dave Matthews, Tool, and one of the tracks I used to program my iTrip. (The iTrip is a FM transmitter for an iPod, and the tracks are 6 seconds long, consisting only of a couple beeps that represent a new frequency to broadcast on.)</p>
+
+<p>The solution to this, I think, is to make recommendations based on the actual waveform of the music. This should be able to detect things such as tempo, average amplitude, the change in amplitude (and the frequency of that change&#8230;) and so on. It seems reasonable that this would provide a more accurate representation of what a song &#8220;sounds&#8221; like. I have done some minor experimentation with this idea in the past, and I had some success. It is something I&#8217;d like to get back to, but until then, I&#8217;ll see if I can fix some amarok bugs&#8230;</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2005/08/06/task-management/">Task Management</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2005-08-06T00:00:00-07:00" pubdate>Aug 6<span>th</span>, 2005</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One of the ever present things on my mental to-do list is to find, or create, a good task manager. A number of years back I became painfully aware that I can&#8217;t remember everything I need to do unless I write it down. I&#8217;ve tried a number of things, although I haven&#8217;t exhausted all the possibilities, by any means.</p>
+
+<p>The first attempt at solving this was a perl cgi scripted todo manager based on sample code for a guestbook in <em>Learning_Perl</em>. It worked great :) but the whole experience was a little unfulfilling (you could never delete things ;( ). I tried a number of other things &#8211; iCal, kalendar, and devtodo (a nice program, worth checking out if you&#8217;re interested in a filesystem-based console tool). But recently I stumbled on an approach that hadn&#8217;t occurred to me in the past.</p>
+
+<p>I&#8217;ve started using a vector-drawing program called <a href="http://www.inkscape.org/">Inkscape</a> to manage tasks at work. It started when I started using Inkscape to sketch portions of a software system I am implementing. Once the design phase was somewhat solidified and implementation began I started marking things off right on the document. Inkscape is handy for this because you can just create a new layer of the document and put transparent shapes on top of the portions that are done. I&#8217;ll try to get a screenshot up soon, but I don&#8217;t have a usable scenario right now).</p>
+
+<p>The result is a very spatially-dependent interface that is not inherently linked to time. For some domains I think these are desirable features, but in many cases they are not &#8211; I&#8217;m not sure if this is something that could be adapted to general task management or not, but so far I&#8217;ve found it to be very easy to use. It doesn&#8217;t take many cognitive cycles to gauge your progress, which is the greatest immediate reward I&#8217;ve found for a task manager, and adding tasks is only a problem if you feel strongly about the location.</p>
+
+<p>It is also trivial to add comments to individual or multiple tasks, or just as a sticky-note, just make them yellow :)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2005/08/04/distributed-communication/">Distributed Communication</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2005-08-04T00:00:00-07:00" pubdate>Aug 4<span>th</span>, 2005</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Over the past year, the people I know well have become quite scattered across the nation, if not the globe. As a result, I&#8217;m left wanting to keep up to date with friends in Southern California, Oregon, New York, Boston, Nebraska, Britain (for a while), Seattle, and at the moment, a body of water in southwest-ish Alaska. I&#8217;m sure there are others, but you people are hard to keep tabs on!</p>
+
+<p>This has led me to try blogging &#8211; somehow there&#8217;s a connection there that makes sense, but I doubt I can explain it modestly. Because of that, I&#8217;m going to claim this is a personal record for my own use.</p>
+
+<p>And with that,</p>
+
+<p>Good night!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/4/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/31/blogging-with-octopress/">Blogging with Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/">Hacking your kitchen: making a sous vide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/">cabal-dev: sandboxing your Haskell development (and now with ghci!)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/06/prezi-scalable-navigable-presentations/">Prezi: scalable, navigable presentations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/26/recovered-puzzles/">Recovered Puzzles</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("autoorator", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/autoorator" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @autoorator</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/creswick?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Rogan Creswick -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

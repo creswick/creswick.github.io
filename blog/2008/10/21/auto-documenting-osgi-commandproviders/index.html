@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Auto-documenting OSGi CommandProviders - Bitwise Evolution</title>
+  <meta name="author" content="Rogan Creswick">
+
+  
+  <meta name="description" content="(Edit: If you&#8217;re reading this after OSGi R4.2, then there is almost certainly a better way to accomplish the same thing) I&#8217;ve been &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://creswick.github.com/blog/2008/10/21/auto-documenting-osgi-commandproviders">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Bitwise Evolution" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Bitwise Evolution</a></h1>
+  
+    <h2>Musings of a Portland-area hacker bent on improving digital lifestyles.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:creswick.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Auto-documenting OSGi CommandProviders</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2008-10-21T00:00:00-07:00" pubdate>Oct 21<span>st</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>(<strong>Edit:</strong> If you&#8217;re reading this after OSGi R4.2, then there is almost certainly a better way to accomplish the same thing)</p>
+
+<p>I&#8217;ve been digging into OSGi a bit over the last week or so inorder to
+create some Eclipse plugins that will automatically discover
+eachother, and I&#8217;ve been generally impressed with the framework on the
+whole.  The documentation is a bit lacking, but there are some good
+blog posts about it.  (Specifically <a href="http://neilbartlett.name/blog/osgi-articles/&lt;u">Neil Bartlett&#8217;s introduction to
+OSGi</a>.)</p>
+
+<p>One thing that bugged me is the repetition needed when you implement
+the CommandProvider interface to add commands to the OSGi console.
+CommandProvider defines one method you must supply:</p>
+
+<p>[cc lang=&#8221;java&#8221;]</p>
+
+<pre><code>public String getHelp()
+</code></pre>
+
+<p>[/cc]</p>
+
+<p>OSGi then uses reflection to extract each of the methods that starts
+with an underscore, and supplies those methods to the command environment as
+new commands.  (The underscore is trimmed, and the name of the method becomes
+the command name.)  General practice is to include the name of the
+method in the return value of <code>getHelp()</code>, along with a description of
+what the method does, eg:</p>
+
+<p>[cc lang=&#8221;java&#8221;]
+public class SampleCommandProvider implements CommandProvider {</p>
+
+<p>   public synchronized void _run(CommandInterpreter ci) {</p>
+
+<pre><code>  // do stuff.
+</code></pre>
+
+<p>   }</p>
+
+<p>   public String getHelp() {</p>
+
+<pre><code>  return "\trun - execute a Runnable service";
+</code></pre>
+
+<p>   }
+}[/cc]</p>
+
+<p>This seems like a pain to maintain, so I took a quick look at
+annotations, and propose a new syntax:</p>
+
+<p>[cc lang=&#8221;java&#8221;]
+public class SampleCommandProvider extends
+   DescriptiveCommandProvider {</p>
+
+<p>   @CmdDescr(description=&#8221;execute a Runnable service&#8221;)
+   public synchronized void _run(CommandInterpreter ci) {</p>
+
+<pre><code>  // do stuff.
+</code></pre>
+
+<p>   }
+}[/cc]</p>
+
+<p>Here we&#8217;ve extracted the <code>getHelp()</code> method into a new superclass, so
+our SampleCommandProvider now extends an abstract class instead of
+implementing an interface.  It also makes use of an Annotation, which
+we need to define:</p>
+
+<p>[cc lang=&#8221;java&#8221;]
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;</p>
+
+<p>@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface CmdDescr {
+   String description();
+}[/cc]</p>
+
+<p>Finally, we just need to define the superclass that implements
+<code>getHelp()</code>:</p>
+
+<p>[cc lang=&#8221;java&#8221;]
+import java.lang.reflect.Method;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;</p>
+
+<p>import org.eclipse.osgi.framework.console.CommandProvider;</p>
+
+<p>public abstract class DescriptiveCommandProvider implements CommandProvider {</p>
+
+<p>   private static final Pattern CMD_PATTERN = Pattern.compile(&#8221;<sup>_(.*)&#8221;);</sup>
+   private String help = null;</p>
+
+<p>   public String getHelp() {</p>
+
+<pre><code>  if (null == help){
+     help = buildHelp();
+  }
+  return help;
+</code></pre>
+
+<p>   }</p>
+
+<p>   private String buildHelp() {</p>
+
+<pre><code>  StringBuilder helpBuff = new StringBuilder();
+
+  for (Method m : this.getClass().getMethods()){
+     if (methodIsCmd(m)){         
+        if (0 != helpBuff.length()){
+           helpBuff.append("\n");
+        }
+        helpBuff.append(getDocumentation(m));            
+     }
+  }
+  return helpBuff.toString();
+</code></pre>
+
+<p>   }</p>
+
+<p>   private boolean methodIsCmd(Method m) {</p>
+
+<pre><code>  return CMD_PATTERN.matcher(m.getName()).matches();
+</code></pre>
+
+<p>   }</p>
+
+<p>   private String getDocumentation(Method m) {</p>
+
+<pre><code>  StringBuilder methodHelp = new StringBuilder();
+
+  Matcher matcher = CMD_PATTERN.matcher(m.getName());
+  if(matcher.matches()){
+     methodHelp.append("\t"+matcher.group(1));
+
+     CmdDescr description = m.getAnnotation(CmdDescr.class);
+
+     if (null != description){
+        methodHelp.append(" - "+description.description());
+     }
+  }
+  return methodHelp.toString();
+</code></pre>
+
+<p>   }
+}
+[/cc]</p>
+
+<p>Note that the actual reflection on the class only happens once &#8211; all
+subsequent calls to <code>getHelp()</code> use a cached copy of the documentation.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Rogan Creswick</span></span>
+
+      
+
+
+
+
+  
+
+<time datetime="2008-10-21T00:00:00-07:00" pubdate>Oct 21<span>st</span>, 2008</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/eclipse/'>eclipse</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://creswick.github.com/blog/2008/10/21/auto-documenting-osgi-commandproviders/" data-via="autoorator" data-counturl="http://creswick.github.com/blog/2008/10/21/auto-documenting-osgi-commandproviders/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2008/09/23/its-called-a-docking-station-joel/" title="Previous Post: It's called a docking station, Joel :)">&laquo; It's called a docking station, Joel :)</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2008/11/01/treat-your-mailing-lists-like-reference-documents-please/" title="next Post: Treat your mailing lists like reference documents, please.">Treat your mailing lists like reference documents, please. &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/31/blogging-with-octopress/">Blogging with Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/">Hacking your kitchen: making a sous vide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/">cabal-dev: sandboxing your Haskell development (and now with ghci!)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/06/prezi-scalable-navigable-presentations/">Prezi: scalable, navigable presentations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/26/recovered-puzzles/">Recovered Puzzles</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("autoorator", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/autoorator" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @autoorator</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/creswick?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Rogan Creswick -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

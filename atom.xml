@@ -4,7 +4,7 @@
   <title><![CDATA[Bitwise Evolution]]></title>
   <link href="http://creswick.github.com/atom.xml" rel="self"/>
   <link href="http://creswick.github.com/"/>
-  <updated>2011-10-31T13:14:58-07:00</updated>
+  <updated>2011-11-01T08:42:50-07:00</updated>
   <id>http://creswick.github.com/</id>
   <author>
     <name><![CDATA[Rogan Creswick]]></name>
@@ -86,6 +86,1247 @@ shot.  It uses github pages to provide a blogging platform, which I&#8217;ve wan
 
 
 <p>There are more examples of including code here: http://octopress.org/docs/blogging/code/</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hacking your kitchen: making a sous vide]]></title>
+    <link href="http://creswick.github.com/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/"/>
+    <updated>2010-12-24T00:00:00-08:00</updated>
+    <id>http://creswick.github.com/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.ciscavate.org/wp-content/2010/12/crockpot.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/crockpot.jpg" alt="The sous vide." title="crockpot" width="200" class="size-full wp-image-170" /></a></p>
+
+<p>I recently found the cookbook <a href="http://www.cookingforgeeks.com">&#8220;Cooking for Geeks&#8221;</a> , and it inspired me to build a <a href="http://en.wikipedia.org/wiki/Sous-vide">sous vide</a> (the section on making a sous vide at home is also covered in a blog post by the author <a href="http://www.cookingforgeeks.com/blog/posts/diy-sous-vide/">here</a>).  If you&#8217;re not familiar with the term, sous vide lets you very carefully control the temperature you&#8217;re cooking at, so you <em>can&#8217;t</em> over heat foods.</p>
+
+<p>Sous vide is similar to using a crockpot, but it requires <em>much</em> more control over the temperature than a typical crockpot provides.  If cooking with a crockpot is like sketching dinner, then sous vide is analogous to using finely-tuned drafting instruments.</p>
+
+<p>Jeff Potter (Author of Cooking for Geeks) provided part numbers for a suitable thermocouple (a probe thermometer) and a corresponding temp switch (a switch that controls a gate based on the temperature it sees from the attached thermocouple).  I would have had some trouble getting the right set-up without that guidance, but still ended up diverging a bit on accident.  I ordered an AC version of the temp switch instead of a DC version, but in the end I think it worked better this way.</p>
+
+<p>The biggest problem I have with Jeff&#8217;s suggestions is that the book and blog show the temp switch and wiring sitting un-enclosed on the counter, with everything hard-wired together.  I&#8217;m not comfortable with 115vac running around on my kitchen counter, so I needed some sort of enclosure.  I also wanted to be able to detach the thermocouple to easily clean it, and I didn&#8217;t want to modify my crockpot much at all.  (I really don&#8217;t want <em>another</em> appliance, and I still want a functional crockpot.)</p>
+
+<h1>Parts</h1>
+
+<p><a href="http://blog.ciscavate.org/wp-content/2010/12/L1020357.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020357.jpg" alt="Sous vide controller - top" title="Sous vide controller - top" width="200" class="size-full wp-image-175" /></a></p>
+
+<p>Given that I don&#8217;t have access to a fab. plant (or a maker bot!) I opted to go with a simple locking tupperware container for a housing.  They lock shut, have a gasket for a tight seal, and the plastic is very easy to modify to hold all the ports that the sous vide control needs.</p>
+
+<p>At this point it&#8217;s probably reasonable to think of the control as a temperature-controlled power outlet, rather than something specific to a sous vide, since the purpose is really irrelevant for now.</p>
+
+<p>I&#8217;m not going to go into great detail about the specific parts (although I&#8217;ll talk about the connections somewhat), but you can see the full parts list <a href="http://bit.ly/fBbj4M">here</a>.</p>
+
+<h2>Housing</h2>
+
+<p>The pictures show the housing fairly well.  We started by cutting out holes for all the components with a hot exacto knife (heated in a blow torch &#8211; as Mike put it, it cut through plastic like hot butter through a knife ;).  Pretty much all the parts had some sort of template we could go by:
+ - temp switch: we used the wire cover to draw out the opening
+ - power outlet: I had a cover plate that I was intending to use, instead, we just used the cover plate to mark out the large round plug hole and the two screw holes, then used the cover plate screws to hold the plug in.
+ - thermocouple jack: just drilled it out with a drill.
+ - AC input: traced around a pc-style power cord, then cut to the outside of the sharpie line, then drilled out the screw holes (marked after we had the main hole in, and could test-fit the plug).</p>
+
+<p><a href="http://blog.ciscavate.org/wp-content/2010/12/L1020355.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020355.jpg" alt="Digital temperature display." title="Font view" width="500" class="size-full wp-image-182" /></a></p>
+
+<br/>
+
+
+<h2>Thermocouple connections</h2>
+
+<p>The temp probe arrived with a bare pair of wires on one end, which wasn&#8217;t going to work that well, so we (I was working with a friend who has a soldering iron :) attached a 1/8&#8221; headphone plug to the cables, then soldered a corresponding jack to some 22-gauge wire that eventually went to the temp switch inputs (ports 7 &amp; 8 on the TCS-4010).</p>
+
+<h2>AC input</h2>
+
+<p>I was initially going to use a standard pigtail power cable to hook this up to the wall, but when shopping for parts I found a PC-style (D-shaped) power plug, which works beautifully, and it was cheap!</p>
+
+<p><a href="http://blog.ciscavate.org/wp-content/2010/12/L1020360.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020360.jpg" alt="the rear view of the controller" title="random-tomato" width="500" class="size-full wp-image-176" /></a></p>
+
+<br/>
+
+
+<h2>Power outlet</h2>
+
+<p>Locating a cheap power plug that would fit in a small container, and only had one plug was actually pretty difficult.  The outlets I found with a flange were more expensive than I could justify ($15-20), and everything else had two + plugs, or a plug and a switch, or so on.  Eventually, I settled on a 20-amp single-outlet plug, designed for a standard outlet box.  In the future, I think I&#8217;ll go with a dual-outlet 15amp plug, or look more.  The 20-amp outlet is very hard to plug things into, and I&#8217;m not entirely sure why.  It works just fine once you get everything plugged in, though.</p>
+
+<h2>Wires</h2>
+
+<p>I went with 12-gauge solid copper, in three colors, for the internal wiring.  It was quite difficult to form to the right shape, though, and we needed to solder it in place.  The wire was so stiff that we ended up re-soldering quite a bit: we&#8217;d solder a connection, then bend the wire to make the next connection, and the solder would break.  Eventually, we wired it all together and did the soldering in one go.  This worked, but it meant we couldn&#8217;t easily cover some of the connections with heat-shrink tubing.  In particular, the three connections to the AC input were bare, so we covered those with hot glue to keep fingers and other potential conductors from shorting it out (and delivering quite a shock).</p>
+
+<p>We were able to heat-shrink most of the connections, however, and everything is soldered in place, so I think it will hold up :).</p>
+
+<p><a href="http://blog.ciscavate.org/wp-content/2010/12/L1020356.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020356.jpg" alt="showing the AC-output" title="side view" width="500" class="size-full wp-image-183" /></a></p>
+
+<br/>
+
+
+<h2>Calibration</h2>
+
+<p>I did a test run with eggs to see how this worked, with multiple thermometers to compare readings (you can see one of the other thermometers in the first picture). I did a quick calibration based on those readings, but the controller was still off by about 5 degrees (that initial calibration was pretty drastic, there was a difference of over 10 degrees!). That became evident when I cracked the eggs and they were a bit under-cooked&#8212;the book suggested flash-boiling them anyway, so I had boiling water handy and re-calibrated based on that.  Don&#8217;t do what I did, or if you do, cook something cheap in the first run :)</p>
+
+<h2>Next time&#8230;</h2>
+
+<ol>
+<li>Use stranded 12-gauge wire.  It should be more flexible, and hold solder better.</li>
+<li>Use a 15-amp power plug, so it&#8217;s easier to plug/unplug appliances.</li>
+<li>Be careful about the locking tabs on the tupperware housing:  These are really, really, close to interfering with the plug and temp switch.</li>
+<li>I actually wanted to have the switch upside down, but because of the wire flexibility, we had to cut things to be very short.  That meant that we couldn&#8217;t reach the screws to mount the temp switch, since the bottom of the housing would have been in the way.  I&#8217;d try and do this differently next time &#8211; using stranded cable may work, or attach the temp switch first, then insert it, and finally solder the power input/output in place.</li>
+<li>Add an LED to the power supply that leads directly to the device.  It would be very nice to know when the appliance is actually getting power.</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[cabal-dev: sandboxing your Haskell development (and now with ghci!)]]></title>
+    <link href="http://creswick.github.com/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/"/>
+    <updated>2010-12-22T00:00:00-08:00</updated>
+    <id>http://creswick.github.com/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci</id>
+    <content type="html"><![CDATA[<p>Reproducing builds is pretty much essential if you intend to do sustainable software development, and while it&#8217;s generally possible, it&#8217;s been fairly difficult to do so with Haskell.  One of the challenges has been that there are only generally two local databases of installed packages for any given (user, ghc-version) pair.  Each ghc install has a global package database, and each user has a user package database for each version of ghc.  This is perfectly suitable in most situations, but it becomes problematic when you need conflicting packages to be installed for disparate development projects.  <a href="http://hackage.haskell.org/package/cabal-dev">Cabal-dev</a> removes the user package database from the picture, and it is relatively simple (with some self-control :) to maintain a minimal global package database: just don&#8217;t install anything system-wide with cabal.</p>
+
+<p>Cabal-dev does this by creating a per-project sandbox that contains a package database of all the dependencies as well as the project under development.  Therefore, it was simple to add support for launching ghci with this package database in place of the user package database.  That&#8217;s been added in cabal-dev-0.7.3.1, which is available on hackage now, allowing you to do things like this (using my <a href="http://code.google.com/p/havsa/">Haskell Version Space Algebra</a> library as an example):</p>
+
+<p><code lang="bash">
+$ cd havsa
+$ ls
+LICENSE  Setup.hs  src/  versionspaces.cabal
+$ cabal-dev install
+Resolving dependencies...
+Configuring mtl-1.1.1.1...
+Preprocessing library mtl-1.1.1.1...
+Building mtl-1.1.1.1...
+[ 1 of 21] Compiling Control.Monad.Identity ( Control/Monad/Identity.hs, dist/build/Control/Monad/Identity.o )
+....
+Registering VersionSpaces-0.0...
+Installing library in
+/home/creswick/development/havsa/cabal-dev//lib/VersionSpaces-0.0/ghc-6.12.3
+Registering VersionSpaces-0.0...
+$ cabal-dev ghci
+GHCi, version 6.12.3: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+Loading package ffi-1.0 ... linking ... done.
+Prelude> :m + AI.VersionSpaces
+Prelude AI.VersionSpaces> showBSR EmptyBSR
+Loading package syb-0.1.0.2 ... linking ... done.
+Loading package base-3.0.3.2 ... linking ... done.
+Loading package mtl-1.1.1.1 ... linking ... done.
+Loading package logict-0.4.1 ... linking ... done.
+Loading package VersionSpaces-0.0 ... linking ... done.
+"Empty"
+Prelude AI.VersionSpaces>
+</code></p>
+
+<p>This is still far from perfect: you can&#8217;t easily load code into the ghci session without exiting, re-running cabal-dev install and cabal-dev ghci, but it&#8217;s a good start.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Prezi: scalable, navigable presentations]]></title>
+    <link href="http://creswick.github.com/blog/2010/10/06/prezi-scalable-navigable-presentations/"/>
+    <updated>2010-10-06T00:00:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2010/10/06/prezi-scalable-navigable-presentations</id>
+    <content type="html"><![CDATA[<p><strong>Edit:</strong>Prezi now has support for customizing colors / themes, and even documentation for the css! <a href="http://prezi.com/learn/color-wizard/?utm_source=MadMimi&utm_medium=email&utm_content=Holiday+features:+colors+and+fonts,+drag+and+drop&utm_campaign=Introducing+Colors,+Fonts,+and+Snap&utm_term=customize"> I&#8217;m happy to see official support for these features, but the layout problems are still a show-stopper for me.<strong>/Edit</strong></p>
+
+<p>I have been adopting a presentation style that diverges from the traditional bullet-point style promoted by Open Office and PowerPoint (although, PowerPoint 2007 diverges from pure bullets to more interesting shapes, using shading and encapsulation to show hierarchy.  It&#8217;s a large improvement, but it still falls short of my ideal).  Instead of bullets and text, I try to make use of imagery and visual examples whenever possible.</p>
+
+<p>My experience has reinforced what I&#8217;ve come across in the literature about balancing your audience&#8217;s attention between the content on the wall and your narration.  Too much text or detail and you risk loosing your audience because they&#8217;re overwhelmed or, if you&#8217;re lucky, because they are focusing on the slide content instead of listening to your explanations.  It is also much easier to trigger emotional responses with visuals than it is with text, which explains some of the motivation for promotional/motivational presentations that are virtually devoid of text.  (<a href="http://www.sethgodin.com/">Seth Godin&#8217;s</a> talks come to mind.  One way in which my presentations differ substantially from Seth&#8217;s is that I generally talk about fairly technical topics.  The difficulties associated with finding high-quality, emotional, images to convey the intricate details of <tt>ptrace(2)</tt> is not the topic of this post, however.)</p>
+
+<p>A number of years back, I found a mention of using Scalable Vector Graphics (SVGs) for unconstrained presentations and that idea has stuck.  I&#8217;ve been developing slides in PowerPoint (OpenOffice has not yet reached the point where I can create professional-looking content), but I&#8217;ve never been happy with the traditional slide-based presentation style.  SVGs promise the ability to move between arbitrary locations, following a pre-defined path from &#8220;slide&#8221; to &#8220;slide&#8221;.  Furthermore, since the content is scalable, you can literally zoom in to a portion of content to go into more detail, or zoom out to show context.  This presentation mode would also make it easy to diverge from your plan based on audience feedback.  This <em>can</em> be done with PowerPoint, but it is extremely difficult.</p>
+
+<p><a href="http://prezi.com">Prezi</a> promises these benefits, so I spent the last few days building a presentation with Prezi at Galois: <a href="http://www.galois.com/blog/2010/09/30/tech-talk-enabling-portable-build-systems/">portable build systems</a>.  (The prezi presentation is near the bottom of this post.)  The rest of this entry discusses my experiences with Prezi.</p>
+
+<h2>The Good, the Bad and the Ugly</h2>
+
+<p>I initially found the Prezi interface to be very intuitive.  The translation &#8220;zebra&#8221;, a stripped round mult-function circle, appears whenever you select an object.  You then use the zebra to move, scale, rotate, or otherwise manipulate the selected object.  Other options are presented through a bubble menu that rotates and scales to show more detailed options as you select sub &#8220;bubbles&#8221;.  It is well worth the few minutes it takes to sign up for a free account and try it out.  If you happen to be using 64-bit linux, you probably won&#8217;t be able to use the flash app, however.  Prezi doesn&#8217;t appear to work under that environment.  (if you can interact with the presentation embedded on this page, then you should be Ok.)  There is also an Adobe Air-based desktop app, which I used extensively.</p>
+
+<p>I was off and brainstorming a presentation mind-map style after only a few minutes playing with the interface.  The freedom to create a few words of text, zoom in and flesh out more details, jump back out and pull in an image, all without concern for the layout of final form of the presentation was extremely motivating and liberating.</p>
+
+<p>I was able to be quite productive with Prezi until I began to consider the need for a unifying theme.  Two things stood in the way:</p>
+
+<ol>
+<li>Only eight options were provided for the overall look and feel of the presentation, and none were close enough to the Galois color scheme. There is also no way to add new look and feel options, and each option changes all the colors, fonts, backgrounds, and general style of the presentation.</li>
+<li>The set of shapes and drawing tools is very limited. You can create: Thin free-hand lines, thick free-hand &#8220;highlighter&#8221; lines, circular rings (round frames), square brackets (square frames), gradient-filled rounded rectangles (roundrect frames), arrows, text in one of three fonts (optionally with bullets).
+</ol>
+
+
+<p>None of the pre-defined colors can be changed through the user interface, aside from the eight styles mentioned above, which change <em>all</em> the colors / styles and fonts.  You can include arbitrary images, which helps with the limited set of shapes, however, you can only include pdfs if you are using the web-based client, the desktop client does not currently support pdf importing.</p>
+
+<p>I stumbled across a solution to the limited selection of colors by unzipping the .pez file that holds a Prezi presentation on-disk and exploring the contents:
+<code lang="bash">
+prezi/
+├── content.xml
+├── preview.png
+└── repo/</p>
+
+<pre><code>├── 13177749.png
+├── 13177754.jpg
+├── 13177758.png
+├── 13177835.swf
+├── codetree.png
+└── Personal_computer,_exploded_5.png
+</code></pre>
+
+<p></code>
+content.xml defines the SVG-like presentation content, and it ends with a set of css styles:
+<code lang="html"></p>
+
+
+
+<p></code>
+The colors in these styles can be adjusted, and you can even add new styles here (although you will need to manually insert them into the xml where you wish to use the new styles).  After editing the content.xml, zip up the presentation tree, taking care to maintain the correct hierarchy and no compression:
+<code lang="bash">
+$ ls
+prezi/
+$ zip -r -0 enabling-portable-build-systems-biuinv2vus9x.pez prezi/
+</code>
+One surprising benefit is that the updated styles are actually adopted by the UI widgets in the Prezi application, once you load a modified .pez file.</p>
+
+<p><a href="http://blog.ciscavate.org/wp-content/2010/10/prezi-text.png" style="text-align:center;" ><img src="http://blog.ciscavate.org/wp-content/2010/10/prezi-text.png" alt="The &quot;Title | Title | Body&quot; buttons change according to the css stylesheet in content.xml." title="prezi-text" width="300" style="margin-left:auto;margin-right:auto;"/></a></p>
+
+<p>These changes also persist across saves, loads, uploading to Prezi.com, and they appear to render properly when embedded, granting quite a lot of power, if you&#8217;re able and willing to work with xml and css periodically.</p>
+
+<p>Editing content.xml also proved to be the best way to spellcheck the presentation content, although the text that is actually <em>displayed</em> is in CDATA nodes, which your editor may skip over when running a spell checker.  Thankfully, the text is duplicated as plain text nodes, so you are still alerted to spelling errors when running ispell-buffer in emacs.  You can then fix the CDATA entry with a recursive edit.  (I suspect that the duplication is there to simplify text searching.)</p>
+
+<p>I&#8217;m rather satisfied with these workarounds: The ugly aspects could be automated with some simple tools to update the content.xml as needed, and the hacks I found worked surprisingly well.</p>
+
+<h2>Background images and &#8220;refactoring&#8221;</h2>
+
+<p>Unfortunately, I don&#8217;t think Prezi is ready for prime-time, despite my success with css styles and spellchecking.  There are simply no facilities to precisely align or distribute objects with respect to each-other.  Further complicating this is the lack of a <a href="http://community.prezi.com/prezi/topics/grouping_as_in_cntrl_g">&#8220;group&#8221; option</a> to create aggregate objects.  You can select multiple objects by dragging a rectangle if you hold shift, but that isn&#8217;t possible if the objects are on top of other objects &#8211; the first click of a shift-drag must occur on the background of the Prezi, or you will simply select the lower object.  While this sounds a bit like a minor quibble, it is impossible to accurately position complex sets of objects if they are layered on top of other content (such as a background image).  I often need to add or remove &#8220;slides&#8221;, and with Prezi, that can include a lot of object translations to provide or absorb space while fitting with the high-level overview of your presentation.  Without alignment tools, you also take the risk that a title will display askew with respect to the screen borders when you are mid-presentation.</p>
+
+<p>I eventually adopted the following practice to help keep content square:</p>
+
+<ul>
+<li>Press &#8216;space&#8217; to enter &#8220;show&#8221; mode, and position the screen as it would be to show the &#8220;slide&#8221;, then pres &#8216;space&#8217; again to return to edit mode.</li>
+<li>Create a roundrect frame, it will be square with the current view.</li>
+<li>Use the borders of the roundrect as visual guides to make the slide content as square as possible.  I usually place the baseline of the title text with the top of the roundrect and then position it after the angle has been fixed.</li>
+<li>Delete the roundrect</li>
+</ul>
+
+
+<p>Now, never rotate any individual components of that slide again.  Use shift-clicking to select everything in the slide each time you need to rotate or move the slide.  If you need to add new content, first enter &#8216;show&#8217; mode and click on the frame to make the camera rotate properly with respect to the slide.</p>
+
+<h2>Summary</h2>
+
+<p>I&#8217;m excited to see how Prezi evolves, and I will be one of the first in line once the selection / alignment problems are fixed.  I hope that Prezi will motivate other implementations with similar capabilities, there is plenty of room for some healthy competition.</p>
+
+<div class="prezi-player"><style type="text/css" media="screen">.prezi-player { width: 550px; } .prezi-player-links { text-align: center; }</style><object id="prezi_biuinv2vus9x" name="prezi_biuinv2vus9x" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="550" height="400"><param name="movie" value="http://prezi.com/bin/preziloader.swf"/><param name="allowfullscreen" value="true"/><param name="allowscriptaccess" value="always"/><param name="bgcolor" value="#ffffff"/><param name="flashvars" value="prezi_id=biuinv2vus9x&amp;lock_to_path=0&amp;color=ffffff&amp;autoplay=no&amp;autohide_ctrls=0"/><embed id="preziEmbed_biuinv2vus9x" name="preziEmbed_biuinv2vus9x" src="http://prezi.com/bin/preziloader.swf" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="550" height="400" bgcolor="#ffffff" flashvars="prezi_id=biuinv2vus9x&amp;lock_to_path=0&amp;color=ffffff&amp;autoplay=no&amp;autohide_ctrls=0"></embed></object><div class="prezi-player-links"><p><a title="Galois is developing build system configuration capabilities to improve the portability of build systems." href="http://prezi.com/biuinv2vus9x/enabling-portable-build-systems/">Enabling Portable Build Systems</a> on <a href="http://prezi.com">Prezi</a></p></div></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Recovered Puzzles]]></title>
+    <link href="http://creswick.github.com/blog/2010/07/26/recovered-puzzles/"/>
+    <updated>2010-07-26T00:00:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2010/07/26/recovered-puzzles</id>
+    <content type="html"><![CDATA[<p>I used to collect puzzles&#8211;back when I had a wiki to post them to&#8211;but that content was lost to me a few years ago when the system hosting my personal content had a slew of hard drive issues.  I was lamenting that loss last week when a coworker suggested that I could possibly find the content on the way-back machine at <a href="http://www.archive.org">archive.org</a>, and indeed, I did!</p>
+
+<p>Without further ado, here&#8217;s a short list of brainteasers (none are of my creation, and I do not have citations&#8211;if you know who to credit for any of these, please let me know and I will add proper attribution info.)</p>
+
+<p><strong>Calendar Cubes</strong></p>
+
+<p>A man has two cubes on his desk. Each face of each cube has a single-digit number wirtten on it. With these two cubes, the man is able to enumerate all the days in any month, and each morning he arranges the cubes so that the number of the current day is on top, <em>always</em> using both cubes. How are the numbers distributed on the cubes?</p>
+
+<p><strong>Pennies 1</strong></p>
+
+<p>You are blindfolded in a room with 100 pennies. 30 of the pennies are heads-up, the remainder are tails-up. You can interact with the pennies in any way, but your fingers are not dexterous enough to feel the contours of the coins (so you can&#8217;t feel one to see which side is heads, or tails). Since you are blindfolded, you can&#8217;t see them either. Your task is to manipulate the coins such that there are two sets and each set has an equal number of coins that are heads-up. (The sets must be disjoint, non-empty, and all pennies must be in one of the two sets.)</p>
+
+<p><strong>Pennies 2</strong></p>
+
+<p>Given N pennies, one of which is counterfiet (and therefore is of different weight from the remainder) and a balance, how can you find the counterfeit coin in less three weighings on the balance.</p>
+
+<p><strong>Eggs</strong></p>
+
+<p>You are in a 100-floor building on a planet with oddly low gravity and/or surprisingly durable eggs.  You happen to have two of these eggs (unfertilized, I assure you). Your task is to find the highest floor from which you can drop an egg and have it remain intact.</p>
+
+<p><strong>Numbers</strong></p>
+
+<p>Given 99 unique integers between 1 and 100, provide an optimal algorithm to find the remaining integer in that range that is not in the set.</p>
+
+<p>Hint: Bcgvzny gnxrf yvarne gvzr naq pbafgnag fcnpr.</p>
+
+<p><strong>Prisoners</strong></p>
+
+<p>50 people are inprisioned, and during their imprisonment the captor will invite people randomly in to visit with her. All visits are one-on-one, and each prisoner has a unique tunnel from their cell to the captor&#8217;s office (so you can&#8217;t look out your cell and see who is going in). In the captor&#8217;s room is a bowl that the prisoners can optionally turn over, or turn right-side up during their visit(s). The initial state of the bowl is known to everyone.</p>
+
+<p>The imprisonment may last for an infinite period of time, during which each prisoner will be invited into the captor&#8217;s office many, many times (essentially infinite, but it needs not be infinite, it could just be a reasonably small number in the optimal case). The imprisonment ends when one prisoner says: &#8220;Everyone has been in to see the captor at least once.&#8221; If a prisoner says this and they are wrong, all prisoners are killed immediately. Because the captor may decide not to visit anyone for a while, it is as if the prisoners have no concept of time, so they can&#8217;t bound the number of people seen based on the passage of time.</p>
+
+<p>To give the prisoners a chance, they are allowed to convene briefly before their imprisonment, during which time they can plan a strategy. How do they do it?</p>
+
+<p><strong>Sequences</strong>
+What is the next line in this sequence?</p>
+
+<pre>
+1
+1 1
+2 1
+1 1 1 2
+3 1 1 2
+2 1 1 2 1 3
+</pre>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Test-Driven XML Schema dev with xmlstarlet]]></title>
+    <link href="http://creswick.github.com/blog/2009/10/17/test-driven-xml-schema-dev-with-xmlstarlet/"/>
+    <updated>2009-10-17T00:00:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2009/10/17/test-driven-xml-schema-dev-with-xmlstarlet</id>
+    <content type="html"><![CDATA[<p>Just to document how I do this:</p>
+
+<p><em>Problem:</em> I need a schema for FooTask</p>
+
+<p><em>Solution:</em></p>
+
+<ul>
+<li> Create a &#8216;tests&#8217; directory.</li>
+<li> populate said directory with simple example xml files.</li>
+<li> Name those files <code>valid-foo.xml</code> or <code>invalid-bar.xml</code> (I use numbers for foo and bar).</li>
+<li> Create your xsd file in the same directory as &#8216;tests&#8217;. Lets call it <code>foo.xsd</code></li>
+<li>  Copy the following Makefile into the same location.</li>
+</ul>
+
+
+<p>[cc lang=&#8221;bash&#8221;]
+XSD=foo.xsd</p>
+
+<h1>run xmlstarlet with -e to see verbose error.</h1>
+
+<p>test:</p>
+
+<pre><code>@for file in `ls -1 tests/valid*.xml`; do if xmlstarlet val -q --xsd ${XSD} $${file}; then echo "pass"; else echo "fail: $${file}"; fi; done
+@for file in `ls -1 tests/invalid*.xml`; do if ! xmlstarlet val -q --xsd ${XSD} $${file}; then echo "pass"; else echo "fail: $${file}"; fi; done
+</code></pre>
+
+<p>[/cc]</p>
+
+<p>Now, run make, and if anything fails you can manually run <code>xmlstarlet val -e --xsd foo.xsh [failing file.xml]</code> to see the details.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Implications: Coding for Homomorphicly Encrypted Input]]></title>
+    <link href="http://creswick.github.com/blog/2009/07/17/implications-coding-for-homomorphicly-encrypted-input/"/>
+    <updated>2009-07-17T00:00:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2009/07/17/implications-coding-for-homomorphicly-encrypted-input</id>
+    <content type="html"><![CDATA[<p>Craig Gentry (Stanford / IBM) recently published a <a href="http://portal.acm.org/citation.cfm?id=1536414.1536440">paper</a> that proves the existence of fully homomorphic crypto systems.  This has caused quite a stir, since such a system would allow an untrusted party to perform computations on encrypted data, returning an encrypted result, without ever knowing anything about the input or output.  I&#8217;m not going to explain what homomorphic encryption is (at least, not in great detail).  Bruce Schneier&#8217;s blog has a <a href="http://www.schneier.com/blog/archives/2009/07/homomorphic_enc.html">great post</a> about it, and the comments there are extremely helpful in understanding how it works, and what this means for cloud computing.</p>
+
+<p>I make no claims to being a cryptographer, but I did have a number of questions about the practical viability of this approach.  Now, there are many questions in that vein that are directed at the performance characteristics of Gentry&#8217;s approach (which are abysmal, but not asymptotically so).  I was curious about The use of side effects to discern information about the encrypted content.</p>
+
+<p>For example, anyone who has used a debugger knows that you can monitor the flow of a program that has been instrumented with debugging symbols, and you can learn a great deal about the input even without examining the content of variables.  If a given conditional branch directs execution one way, then you know the predicate evaluated to a specific value.  I set out to determine why this sort of attack is not a problem, and I ended up learning a lot about the way programs that run on encrypted data must operate.</p>
+
+<h3>Homomorphisms</h3>
+
+<p>Let&#8217;s take a moment to quickly discuss homomorphisms, and homomorphic encryption.</p>
+
+<blockquote>a homomorphism is a structure-preserving map between two algebraic structures &#8211;<a href="http://en.wikipedia.org/wiki/Homomorphism">Wikipedia</a></blockquote>
+
+
+<p>In this case (encryption) the homomorphism is a mapping from the clear text and the cypher-text.  Fully homomorphic encryption, as Gentry discovered, preserves addition and multiplication&#8211;meaning that you can add and multiply cyphertext, and the result can be decrypted to reveal clear text that has been added and multiplied in the same way.  Addition and Multiplication provide the operations necessary to implement boolean logic, and therefore, are sufficient to program very complex transformations (I&#8217;m not certain that it is safe to say &#8220;arbitrarily complex&#8221;).</p>
+
+<p>It&#8217;s important to realize that <em>every</em> addition or multiplication operation results in a value that is encrypted.  The running program can not know the intermediate results, and indeed it does not.</p>
+
+<h3>So, how do conditionals work?</h3>
+
+<p>Edward Kmett <a href="http://www.schneier.com/blog/archives/2009/07/homomorphic_enc.html#c383405">posted</a> the conversion from if/then/else to addition/multiplication on Schneier&#8217;s blog:</p>
+
+<p>[cc lang=&#8221;java&#8221;]
+if (condition) {
+   return then_clause;
+} else {
+   return else_clause;
+}
+[/cc]</p>
+
+<p>becomes:</p>
+
+<p>[cc lang=&#8221;java&#8221;]
+return condition * then_clause + (1-condition) * else_clause;
+[/cc]</p>
+
+<p>Here&#8217;s a &#8220;real&#8221; example (it compiles, at least) using both approaches.  This is just meant to be used for explanation &#8211; compilers could easily do the translation from the code in is0_clear() to is0_enc().  I&#8217;ve written them out separately here so we can look at the generated bytecode.
+[cc lang=&#8221;java&#8221;]
+public class Test {
+   public int is0_clear(int input) {</p>
+
+<pre><code>  if (0==input){
+     return 2;
+  } else {
+     return 3;
+  }
+</code></pre>
+
+<p>   }</p>
+
+<p>   public int is0_enc(int input) {</p>
+
+<pre><code>  // I'm cheating a bit to keep this simple -- calculate
+  // the conditional to be either 0 or 1:
+  int cond = 0==input ? 1 : 0;
+  return cond * 2 + (1-cond) * 3;
+</code></pre>
+
+<p>   }
+}
+[/cc]</p>
+
+<p>And here&#8217;s the bytecode (generated by sun-java-6, and output with javap -verbose).</p>
+
+<p>[cc lang=&#8221;asm&#8221;]
+public int is0_clear(int);
+  Code:
+   Stack=2, Locals=2, Args_size=2
+   0:   iconst_0
+   1:   iload_1
+   2:   if_icmpne   7  // Conditional Jump!!
+   5:   iconst_2
+   6:   ireturn        // return a constant 2
+   7:   iconst_3
+   8:   ireturn        // return a constant 3</p>
+
+<p>public int is0_enc(int);
+  Code:
+   Stack=3, Locals=3, Args_size=2
+   0:   iconst_0      // lines 0-9 here are for the &#8220;cheating&#8221; part
+   1:   iload_1        // just ignore them &#8211; the arithmetic to accomplish
+   2:   if_icmpne   9   // the same thing is complex, and not important.
+   5:   iconst_1
+   6:   goto    10
+   9:   iconst_0
+   10:  istore_2   // note that there are no conditional jumps below here:
+   11:  iload_2 <br/>
+   12:  iconst_2
+   13:  imul
+   14:  iconst_1
+   15:  iload_2
+   16:  isub
+   17:  iconst_3
+   18:  imul
+   19:  iadd
+   20:  ireturn   // return the result of the calculated expression.
+[/cc]</p>
+
+<p>Since every operation results in an unknown value, <em>no conditional branches</em> can be taken!  Every branch has to be evaluated, and the correct result of the &#8216;correct&#8217; branch is selected by multiplying by a binary value, that is itself, encrypted!  This means that things like run-time short-circuit evaluation are not possible, monitoring progam flow is meaningless,  (possibly?) every input will result in the same run-time, and all side-effects will happen regardless of the input.</p>
+
+<h3>Implications?</h3>
+
+<p>Going further down this rabbit hole, caching is impossible, and global state (if even posible) is likely to be extremely dangerous.  I shudder to think of how Python&#8217;s concept of scoping would interact with a compiler that generates code for homomorphicly encrypted input.</p>
+
+<p>Aside from the pure overhead of dealing with encrypted data, and the &#8220;refreshing&#8221; required with Gentry&#8217;s algorithm, I think that there are going to be some serious performance and development concerns once homomorphic encryption becomes a reality.  The programming practices that are common in languages like Java and Python now are not likely to hold up.  I expect that the APIs that enable operation on encrypted data will be based on <a href="http://en.wikipedia.org/wiki/Total_function">total functions</a>, and I have only begun to think about the implications for testing, code coverage, and quality assurance.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Cleaning up my browser.]]></title>
+    <link href="http://creswick.github.com/blog/2009/06/20/cleaning-up-my-browser/"/>
+    <updated>2009-06-20T00:00:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2009/06/20/cleaning-up-my-browser</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.ciscavate.org/wp-content/2009/06/opera-clean.png"><img src="http://blog.ciscavate.org/wp-content/2009/06/opera-clean.png" alt="opera-clean" title="opera-clean" width="200" class="alignright size-medium wp-image-111" /></a></p>
+
+<p>I&#8217;m done with firefox &#8211; Opera 10 now plays flash well, has adblock via. urifilters, a cleaner UI (no menubar, a menu <em>button</em>!) vertical tabs are supported natively, etc&#8230; I don&#8217;t really like the widget toolkit used in the file open/save dialog, but that&#8217;s <em>much</em> better than the horrid performance/stability/bizarre bugs of Firefox.</p>
+
+<p>The minimal UI possible with Opera is also a major win in my book.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Maven deployment issues]]></title>
+    <link href="http://creswick.github.com/blog/2009/06/06/maven-deployment-issues/"/>
+    <updated>2009-06-06T00:00:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2009/06/06/maven-deployment-issues</id>
+    <content type="html"><![CDATA[<p>I&#8217;ve been building / porting various projects to maven lately, and pushing them to our in-house maven server.  For a while, I was doing this from my laptop at home.  However, at work, I&#8217;m pushing to localhost (it&#8217;s a temporary thing while we determine if maven will actually work long-term.)</p>
+
+<p>The following error had me stumped for a few days:
+[cc lang=&#8221;bash&#8221;]
+[INFO] Error retrieving previous build number for artifact &#8216;de.balokb:libreadline-java-i386-Linux-c23cxx6:jar&#8217;: repository metadata for: &#8216;snapshot de.balokb:libreadline-java-i386-Linux-c23cxx6:1.0-SNAPSHOT&#8217; could not be retrieved from repository: inhouse_snapshot due to an error: Exit code: 1 - Host key verification failed.
+[/cc]</p>
+
+<p>All the googling I did turned up people stumped with ssh public key problems, or users who had specified ssh: instead of extssh: &#8230; etc.  It was fairly quick to elleminate those issues, or so I thought.  (<code>ssh localhost</code> right? No problem.)</p>
+
+<p>I happened to look in more detail at my pom.xml:
+[cc lang=&#8221;xml&#8221;]</p>
+
+<pre><code>&lt;repository&gt;
+  &lt;id&gt;inhouse&lt;/id&gt;
+  &lt;name&gt;Inhouse Internal Release Repository&lt;/name&gt;
+  &lt;url&gt;scpexe://10.0.0.26/var/www/maven/inhouse&lt;/url&gt;
+&lt;/repository&gt;
+</code></pre>
+
+<p>[/cc]</p>
+
+<p>hm&#8230; <code>10.0.0.26</code> I wonder&#8230;</p>
+
+<p>[cc]
+$ ssh 10.0.0.26
+The authenticity of host &#8216;10.0.0.26 (10.0.0.26)&#8217; can&#8217;t be established.
+RSA key fingerprint is a7:bf:36:4c:b9:c7:c2:f9:03:9a:3a:a7:4f:10:e5:ba.
+Are you sure you want to continue connecting (yes/no)?
+[/cc]</p>
+
+<p>Ah ha!  I clearly can&#8217;t use a pom.xml that lists &#8220;localhost&#8221; in the server section &#8211; I&#8217;d only be able to push from one place.  However, since I&#8217;d never ssh&#8217;d to <code>10.0.0.26</code> from localhost, the fingerprint was unknown, and that was causing maven to error out with the problem I saw initially.</p>
+
+<p>&#8220;Fingerprint ID failed&#8221; would have been a nicer error message, but I don&#8217;tk now that that is possible.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bitten by dependency management]]></title>
+    <link href="http://creswick.github.com/blog/2009/05/23/bitten-by-dependency-management/"/>
+    <updated>2009-05-23T00:00:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2009/05/23/bitten-by-dependency-management</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.ciscavate.org/wp-content/2009/05/dependencies.png"><img src="http://blog.ciscavate.org/wp-content/2009/05/dependencies-small.png" alt="dependencies-small" title="dependencies-small" width="145" height="200" class="alignright size-full wp-image-106" /></a>I&#8217;ve started using Maven to manage my java projects, and overall I&#8217;m very happy with it.  It seems to be more mature than ivy, with better documentation, and the vast majority of tasks that I need &#8220;just work&#8221; (just don&#8217;t ask me about jni&#8211;that&#8217;s another post).</p>
+
+<p>Today, (and yesterday, and a good portion of the night in-between) I ran into a nasty bug in a library that I didn&#8217;t know my code depended on.  It isn&#8217;t particularly important <em>what</em> I was working on, but just for context: I needed to strip a lot of text content out of nodes in the complete wikipedia revision history dump, so I was using Sax to parse the xml stream, filter out the stuff I wanted filtered out, and save the stuff that, well, I wanted saved.  Being that the input was all of wikipedia, there were a fair number of unicode characters in there.  As it turns out, the 2.6.2 xercesImpl has some sort of bug that allows xml with certain characters to be read without throwing exceptions, but when you try to write the chars that were actually read, you end up trying to write characters that aren&#8217;t valid in xml.  Even if I&#8217;d known that in advance, my response would have been something like &#8220;ok, so what? I&#8217;m not using xercesImpl, and certainly not a version <em>that</em> old&#8221;.</p>
+
+<p>Well.</p>
+
+<p>You see, in addition to using Maven, I&#8217;ve also been using the <a href="http://code.google.com/p/google-collections/">Google Collections</a> and <a href="http://code.google.com/p/jsr-305/">JSR305</a> libraries, so I just drop those <code>&lt;dependency&gt;</code> entries into the pom for all my new projects&#8211;I just assume that I&#8217;ll need them, and I usually do.</p>
+
+<p>Unfortunately, JSR305 1.3.8 depends on jaxen 1.1.1, which depends on xercesImpl 2.6.2 (jaxen also needs this dependency via xom 1.0, for what that&#8217;s worth).</p>
+
+<p>Because that dependency was already present in my build path (via <code>mvn eclipse:eclipse</code>) and in the generated jar (via <code>&lt;addClasspath&gt;</code> and <code>&lt;classpathPrefix&gt;</code> in the <code>maven-jar-plugin</code>  configuration section), I never realized that my sax code actually had a <em>direct</em> dependency on xerces as well.  This all came to a head when, 3.53gb into my 2.8tb run, these rather unhelpful exceptions started popping up:</p>
+
+<p>[cc lang=&#8221;bash&#8221;]
+java.io.IOException: The character &#8216;?&#8217; is an invalid XML character</p>
+
+<pre><code>   at org.apache.xml.serialize.BaseMarkupSerializer.characters(Unknown
+</code></pre>
+
+<p>Source)</p>
+
+<pre><code>   at com.stottlerhenke.tools.wikiparse.ContentStripper.characters(ContentStripper.java:195)
+   at org.apache.xerces.parsers.AbstractSAXParser.characters(Unknown
+</code></pre>
+
+<p>Source)</p>
+
+<pre><code>   at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl$FragmentContentDispatcher.dispatch(Unknown
+</code></pre>
+
+<p>Source)</p>
+
+<pre><code>   at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown
+</code></pre>
+
+<p>Source)</p>
+
+<pre><code>   at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
+   at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
+   at org.apache.xerces.parsers.XMLParser.parse(Unknown Source)
+   at org.apache.xerces.parsers.AbstractSAXParser.parse(Unknown Source)
+   at com.stottlerhenke.tools.wikiparse.ContentStripper.parse(ContentStripper.java:96)
+   at com.stottlerhenke.tools.wikiparse.ContentStripper.main(ContentStripper.java:379)
+</code></pre>
+
+<p>[/cc]</p>
+
+<p><code>&lt;rant&gt;</code> &#8220;?&#8221; is not unicode &#8211; it fits just fine in asci tables everywhere &#8211; so please don&#8217;t tell me that it&#8217;s an invalid unicode character :) (0xd800 <em>is</em> an invalid unicode character, and that would have been <em>much</em> more helpful) <code>&lt;/rant&gt;</code></p>
+
+<p>Many hours later I was able to find a sample of the actual input that was causing these problems, and I was able to reproduce the issue with an input slightly smaller than 2.8tb.  Once that was done, I set out to make a minimal test case.  Rather than bother with a new maven project, I just hacked it out in emacs (not using google collections, etc. because, clearly, I wanted it minimal).  To my surprise, everything worked, and worked fantastically! But how? I didn&#8217;t even supply an xml api on the classpath, yet it ran just fine!</p>
+
+<p>In truth, I <em>did</em> supply an xml api &#8211; xercesImpl.jar, and many other libraries &#8211; via my environment&#8217;s <code>$CLASSPATH</code>.  (Figuring that out was another adventure, but I digress.)  Once it became clear that I was indeed using a broken library it was simply a matter of explicitly specifying the dependency on a new version of xercesImpl, and rebuilding.</p>
+
+<p>The moral?</p>
+
+<p>Know your dependencies!  This should come along with knowing your language&#8217;s built-in APIs well.  It wasn&#8217;t clear to me that the SAX packages I was using were not part of the core java API, so it didn&#8217;t strike me as odd that I didn&#8217;t need to specify a classpath entry or a pom dependency before I could use sax.</p>
+
+<p>If you suspect something strange, you can see the dependency tree in the generated html documentation you get when running <code>mvn site</code>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Fixing the key repeat in Ubuntu 9.04]]></title>
+    <link href="http://creswick.github.com/blog/2009/05/14/fixing-the-key-repeat-in-ubuntu-904/"/>
+    <updated>2009-05-14T00:00:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2009/05/14/fixing-the-key-repeat-in-ubuntu-904</id>
+    <content type="html"><![CDATA[<p>I just upgraded my workstation to Jaunty (Ubuntu 9.04) and the key repeat delay and speed dropped to a frustrating level.</p>
+
+<p>gnome-control-center can be used to fix this, but it requires that the gnome-settings-daemon be running, which forces it&#8217;s opinions on many other aspects of my environment (I run Enlightenment dr17).</p>
+
+<p>Poking around a bit, and help from #e on freenode, revealed that <code>xset</code> can be used to fix the key repeat settings.</p>
+
+<p>[cc lang=&#8221;bash&#8221;]</p>
+
+<h1>Look at the current settings:</h1>
+
+<p>$ xset q
+Keyboard Control:
+  auto repeat:  on    key click percent:  0    LED mask:  00000000
+  auto repeat delay:  660    repeat rate:  25
+  auto repeating keys:  00ffffffdffffbbf</p>
+
+<pre><code>                    fadfffefffedffff
+                    9fffffffffffffff
+                    fff7ffffffffffff
+</code></pre>
+
+<h1>lets speed things up a bit&#8230;</h1>
+
+<p>$ xset r rate 250 40
+[/cc]</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Things are a little messy...]]></title>
+    <link href="http://creswick.github.com/blog/2009/03/31/things-are-a-little-messy/"/>
+    <updated>2009-03-31T00:00:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2009/03/31/things-are-a-little-messy</id>
+    <content type="html"><![CDATA[<p>I&#8217;ve had some minor upgrade issues with the blog lately, and I am only about halfway through updating everything.  In the meantime, I&#8217;m afraid things will look a bit messy.  (Syntax highlighting is currently broken, and there are probably other formatting / data issues as well.  I think I have to restore the uploads directory, for one, so there probably won&#8217;t be any images in the posts for a while.)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Like food?]]></title>
+    <link href="http://creswick.github.com/blog/2009/02/04/like-food/"/>
+    <updated>2009-02-04T00:00:00-08:00</updated>
+    <id>http://creswick.github.com/blog/2009/02/04/like-food</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.ciscavate.org/wp-content/2009/02/imperial_stout.jpg"><img src="http://blog.ciscavate.org/wp-content/2009/02/imperial_stout-184x300.jpg" alt="" title="imperial_stout" height="100" class="alignright size-medium wp-image-89" /></a>
+I started writing for another blog this week:</p>
+
+<p><a href="http://bbcas.blogspot.com">Brewed, Bottled, Cultured and Sweetened</a> is a blog about beer, coffee, wine, cheese, chocolate, etc&#8230; that I&#8217;m writing with an old friend from <a href="http://codersbase.com">Dagit.o</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Linux Tablet: Wacom rotations - waking up on the wrong side]]></title>
+    <link href="http://creswick.github.com/blog/2009/01/26/the-linux-tablet-wacom-rotations-waking-up-on-the-wrong-side/"/>
+    <updated>2009-01-26T00:00:00-08:00</updated>
+    <id>http://creswick.github.com/blog/2009/01/26/the-linux-tablet-wacom-rotations-waking-up-on-the-wrong-side</id>
+    <content type="html"><![CDATA[<p><strong>Update: updated the script with improved (functional) error output.  added notes about xhost.</strong></p>
+
+<p>There is an annoying bug in the sequence of code that manages the wacom rotation / sleep / resume and stylus calibration right now. (Where &#8220;right now&#8221; is Ubuntu Intrepid, with the <a href="http://linuxwacom.sourceforge.net/">0.8.2-1 wacom drivers</a>.)</p>
+
+<p>This is a document bug over at the <a href="https://bugs.launchpad.net/ubuntu/+source/wacom-tools/+bug/295292">ubuntu launchpad</a>, and the poster there does a fine job of describing the intricacies of reproducing the bug, so I&#8217;ll only give a brief explanation here to help get indexed.</p>
+
+<p>If you rotate the screen any amount, even returning to the original rotation, and then sleep the machine, when it wakes up, the stylus will not be calibrated properly &#8211; the cursor will be off to the side of the stylus point.  It doesn&#8217;t seem to matter how it was calibrated when the machine slept, nor does it matter what rotation you&#8217;re in when you put the machine to sleep.</p>
+
+<p>There is one straightforward workaround:  When you wake the machine, run wacomcpl, click on stylus, click calibrate (the mouse should now be under the stylus again), and exit wacomcpl.  This is incredibly cumbersome, but at least it&#8217;s better than restarting X, which is what I have been doing.</p>
+
+<p>Further inspection (based largely on the thread of comments on that launchpad bug) reveals that the problem is actually related to bad values for the TopX, TopY, BottomX and BottomY settings on the wacom devices after a resume.  By resetting these to their proper values for the current rotation, we can reestablish the proper calibration.  First off, we need to know the proper values, and the easiest way to get them is with <code>xsetwacom</code>:</p>
+
+<p>[cc lang=&#8221;bash&#8221;]</p>
+
+<h1>!/bin/bash</h1>
+
+<h1>wacomSettings</h1>
+
+<p>echo &#8220;TopX=&#8221; <code>xsetwacom get stylus TopX</code>
+echo &#8220;TopY=&#8221; <code>xsetwacom get stylus TopY</code>
+echo &#8220;BottomX=&#8221; <code>xsetwacom get stylus BottomX</code>
+echo &#8220;BottomY=&#8221; <code>xsetwacom get stylus BottomY</code>
+[/cc]</p>
+
+<p>Now, we&#8217;ll run this for each rotation, and save the results.  You should end up with something like the following:</p>
+
+<p>[cc lang=&#8221;bash&#8221;]
+ |rogue on bach |AC 70% | @ 00:02:26 ~|
+ $ xrotate 1 &amp;&amp; wacomSettings
+xrandr to left, xsetwacom to 2
+TopX= -46
+TopY= -3
+BottomX= 18605
+BottomY= 24518
+ |rogue on bach |AC 70% | @ 00:02:28 ~|
+ $ xrotate 2 &amp;&amp; wacomSettings
+xrandr to inverted, xsetwacom to 3
+TopX= 58
+TopY= -46
+BottomX= 24579
+BottomY= 18605
+ |rogue on bach |AC 70% | @ 00:02:35 ~|
+ $ xrotate 3 &amp;&amp; wacomSettings
+xrandr to right, xsetwacom to 1
+TopX= -173
+TopY= 58
+BottomX= 18478
+BottomY= 24579
+ |rogue on bach |AC 70% | @ 00:02:41 ~|
+ $ xrotate 0 &amp;&amp; wacomSettings
+xrandr to normal, xsetwacom to 0
+TopX= -3
+TopY= -173
+BottomX= 24518
+BottomY= 18478
+[/cc]</p>
+
+<p>(Note that my bash prompt looks like &amp; command lines above are indented, and the output is left-aligned)</p>
+
+<p>That gives us enough information to script the calibration when we resume.  For example, when resuming to a &#8220;normal&#8221; rotation, I need to run:</p>
+
+<p>[cc lang=&#8221;bash&#8221;]
+xsetwacom set stylus TopX -3
+xsetwacom set stylus TopY -173
+xsetwacom set stylus BottomX 24518
+xsetwacom set stylus BottomY 18478
+[/cc]
+(Wrap that in a bash script and give it a shot!)</p>
+
+<p>Here&#8217;s the full script that gets the current orientation and then calibrates the common wacom devices:</p>
+
+<p>[cc lang=&#8221;bash&#8221;]</p>
+
+<h1>!/bin/bash</h1>
+
+<p>#</p>
+
+<h1>waCalibrate.sh: recalibrates the wacom stylus</h1>
+
+<p>#</p>
+
+<h1>Author: Rogan Creswick</h1>
+
+<h1>License: just be nice</h1>
+
+<h1>Set LOG to something reasonable:</h1>
+
+<h1>(The file does not need to exist, but the <em>directory</em> does)</h1>
+
+<p>LOG=/home/rogue/calibration.out
+XSETWACOM=/usr/local/bin/xsetwacom</p>
+
+<p>#</p>
+
+<h1>Calibrates the wacom devices {stylus, eraser, cursor} with the</h1>
+
+<h1>given offsets:</h1>
+
+<p>#</p>
+
+<h1>Usage:</h1>
+
+<h1>calibrate <topx> <topy> <bottomx> <bottomy></h1>
+
+<p>#
+function calibrate {</p>
+
+<pre><code>${XSETWACOM} --display :0.0 set stylus TopX $1 &gt;&gt; ${LOG} 2&gt;&amp;1
+${XSETWACOM} --display :0.0 set stylus TopY $2 &gt;&gt; ${LOG} 2&gt;&amp;1
+${XSETWACOM} --display :0.0 set stylus BottomX $3 &gt;&gt; ${LOG} 2&gt;&amp;1
+${XSETWACOM} --display :0.0 set stylus BottomY $4 &gt;&gt; ${LOG} 2&gt;&amp;1
+
+${XSETWACOM} --display :0.0 set eraser TopX $1 &gt;&gt; ${LOG} 2&gt;&amp;1
+${XSETWACOM} --display :0.0 set eraser TopY $2 &gt;&gt; ${LOG} 2&gt;&amp;1
+${XSETWACOM} --display :0.0 set eraser BottomX $3 &gt;&gt; ${LOG} 2&gt;&amp;1
+${XSETWACOM} --display :0.0 set eraser BottomY $4 &gt;&gt; ${LOG} 2&gt;&amp;1
+
+${XSETWACOM} --display :0.0 set cursor TopX $1 &gt;&gt; ${LOG} 2&gt;&amp;1
+${XSETWACOM} --display :0.0 set cursor TopY $2 &gt;&gt; ${LOG} 2&gt;&amp;1
+${XSETWACOM} --display :0.0 set cursor BottomX $3 &gt;&gt; ${LOG} 2&gt;&amp;1
+${XSETWACOM} --display :0.0 set cursor BottomY $4 &gt;&gt; ${LOG} 2&gt;&amp;1
+</code></pre>
+
+<p>}</p>
+
+<p>function fixCalibration {</p>
+
+<pre><code># get the current orientation:
+ORIENTATION=`xrandr --verbose --query | grep " connected" | awk '{print $5}'`
+echo "Orientation: ${ORIENTATION}" &gt;&gt; ${LOG}
+
+case "${ORIENTATION}" in
+normal)
+    calibrate -3 -173 24518 18478   
+    ;;
+left)
+    calibrate -46 -3 18605 24518
+    ;;
+right)
+    calibrate -173 58 18478 24579
+    ;;
+inverted)
+    calibrate 58 -46 24579 18605
+    ;;
+*)
+    calibrate -3 -173 24518 18478
+    echo "ERROR!! unknown orientation! ${ORIENTATION}" &gt;&gt; ${LOG}
+    ;;
+esac
+</code></pre>
+
+<p>}</p>
+
+<p>case &#8220;$1&#8221; in</p>
+
+<pre><code>resume|thaw)
+date &gt;&gt; ${LOG}
+fixCalibration 
+whoami &gt;&gt; ${LOG} 
+    ;;
+*)
+echo "not a resum|thaw event: $1" &gt;&gt; ${LOG}
+    ;;
+</code></pre>
+
+<p>esac
+[/cc]</p>
+
+<p>Stick that in <code>/etc/pm/sleep.d/40wacomCalibrate</code> (or some similarly named file), make it executable by all (<code>chmod a+x /etc/pm/sleep.d/40wacomCalibrate</code>) and it should be run when the system resumes.</p>
+
+<p><strong>Update:</strong> I found that the logging of the old script didn&#8217;t work, so I&#8217;ve updated the script to reflect that.  There were also some problems with how I was testing the first script, and the actions I was taking didn&#8217;t actually trigger the bug.  (The bug seems to be quite state-dependent, and markovian assumption was wrong.)  To get this to work, root will need to have access to the display that xsetwacom uses.  The simplest way to do this is to add <code>xhost +</code> to you x startup.  (I put it in my ~/.xsession just before <code>exec enlightenment-start</code>).
+</bottomy></bottomx></topy></topx></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Linux Tablet: Wacom drivers]]></title>
+    <link href="http://creswick.github.com/blog/2009/01/12/the-linux-tablet-wacom-drivers/"/>
+    <updated>2009-01-12T00:00:00-08:00</updated>
+    <id>http://creswick.github.com/blog/2009/01/12/the-linux-tablet-wacom-drivers</id>
+    <content type="html"><![CDATA[<p>Ubuntu 8.10 configured most everything properly, as mentioned in the <a href="http://blog.ciscavate.org/2009/01/the-path-to-a-linux-tablet.html">previous post</a> in this series, but it did not result in a functional pen.</p>
+
+<p>The tablet screen is a wacom digitizer with a pen that has two buttons (eraser and a finger button), and the tablet can differentiate between touching and hovering.  The linux wacom driver &amp; tools are necessary to get this all working.  While I didn&#8217;t find a single page with instructions that worked flawlessly, I was able to figure it out from a collection of links:</p>
+
+<ul>
+<li> The Linux Wacom project:
+
+<ul>
+<li><a href="http://linuxwacom.sourceforge.net/index.php/minihowto">http://linuxwacom.sourceforge.net/index.php/minihowto</a></li>
+<li><a href="http://linuxwacom.sourceforge.net/index.php/howto/x11">http://linuxwacom.sourceforge.net/index.php/howto/x11</a></li>
+</ul>
+</li>
+<li> The Aliencam blog:
+
+<ul>
+<li><a href="http://blog.aliencam.net/articles/aliencams-customized-ubuntu-setup-guide/">http://blog.aliencam.net/articles/aliencams-customized-ubuntu-setup-guide/</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p>First off, you will need the latest version of the linux Wacom driver (8.2.1 at the time of this writing).  The driver versions seem to be tied to your kernel versions, so this is quite important.  The wacom-tools package that comes with Ubuntu is not sufficient (in fact, you&#8217;ll want to uninstall it if you have it already).</p>
+
+<p>Once you have the wacom package downloaded, follow the directions for installing it in the howto (linked above).  The wacom package uses a typical configure, make, make install process but there are a few kinks:</p>
+
+<ul>
+<li> configure (almost?) always succeeds, regardless of the dependencies you have yet to fill.  The make step will simply not build all the things you need if this happens, but it won&#8217;t fail visibly.</li>
+<li> You&#8217;ll need to copy the kernel module into the /lib/modules/<code>uname -r</code>/kernel/drivers/usb/input/ directory manually (creating subdirs if necessary), <em>before</em> running make install.  (This is outlined in the mini-howto.)</li>
+</ul>
+
+
+<p>Once wacom is installed, you can begin working with the X.org configuration.  This is fairly clearly explained at the aliencam blog linked above, or you can use my xorg.conf here.</p>
+
+<p>[cc lang=&#8221;bash&#8221;]
+Section &#8220;Device&#8221;</p>
+
+<pre><code>Identifier  "Configured Video Device"
+</code></pre>
+
+<p>EndSection</p>
+
+<p>Section &#8220;Monitor&#8221;</p>
+
+<pre><code>Identifier  "Configured Monitor"
+</code></pre>
+
+<p>EndSection</p>
+
+<p>Section &#8220;Screen&#8221;</p>
+
+<pre><code>Identifier  "Default Screen"
+Monitor     "Configured Monitor"
+Device      "Configured Video Device"
+</code></pre>
+
+<p>EndSection</p>
+
+<h1>BEGIN TABLET SECTION</h1>
+
+<p>Section &#8220;InputDevice&#8221;</p>
+
+<pre><code>Driver      "wacom"
+Identifier  "stylus"
+Option      "Device"    "/dev/ttyS0"    # serial ONLY
+Option      "Type"      "stylus"
+Option      "ForceDevice"   "ISDV4"     # Tablet PC ONLY
+Option      "Button2"   "3"
+</code></pre>
+
+<p>EndSection</p>
+
+<p>Section &#8220;InputDevice&#8221;</p>
+
+<pre><code>Driver      "wacom"
+Identifier  "eraser"
+Option      "Device"    "/dev/ttyS0"   # serial ONLY
+Option      "Type"          "eraser"
+Option      "ForceDevice"   "ISDV4"     # Tablet PC ONLY
+Option      "Button3"   "2"
+</code></pre>
+
+<p>EndSection</p>
+
+<p>Section &#8220;InputDevice&#8221;</p>
+
+<pre><code>Driver        "wacom"
+Identifier    "cursor"
+Option        "Device"      "/dev/ttyS0"    # serial ONLY
+Option        "Type"        "cursor"
+Option        "ForceDevice" "ISDV4"     # Tablet PC ONLY
+</code></pre>
+
+<h1>Option        &#8220;Mode&#8221;            &#8220;Absolute&#8221;</h1>
+
+<p>EndSection</p>
+
+<h1>This section is for the TabletPC that supports touch</h1>
+
+<h1>Section &#8220;InputDevice&#8221;</h1>
+
+<h1>Driver        &#8220;wacom&#8221;</h1>
+
+<h1>Identifier    &#8220;touch&#8221;</h1>
+
+<h1>Option        &#8220;Device&#8221;        &#8220;/dev/input/wacom&#8221;  # USB ONLY</h1>
+
+<h1>Option        &#8220;Type&#8221;          &#8220;touch&#8221;</h1>
+
+<h1>Option        &#8220;ForceDevice&#8221;   &#8220;ISDV4&#8221;               # Tablet PC ONLY</h1>
+
+<h1>Option        &#8220;USB&#8221;           &#8220;on&#8221;                  # USB ONLY</h1>
+
+<h1>EndSection</h1>
+
+<h1>END TABLET SECTION</h1>
+
+<p>Section &#8220;ServerLayout&#8221;</p>
+
+<pre><code>Identifier  "Default Layout"
+Screen      "Default Screen"
+</code></pre>
+
+<h1>InputDevice &#8220;Synaptics Touchpad&#8221;</h1>
+
+<h1>added to get tablet working</h1>
+
+<pre><code>InputDevice     "stylus"    "SendCoreEvents"
+InputDevice     "cursor"    "SendCoreEvents"
+InputDevice     "eraser"    "SendCoreEvents"
+</code></pre>
+
+<h1>InputDevice &#8220;touch&#8221;     &#8220;SendCoreEvents&#8221;</h1>
+
+<p>EndSection
+[/cc]</p>
+
+<p>After doing that, you should be able to reboot and the pen should be working.  You can do things like configure the buttons with <code>xsetwacom</code> (and you&#8217;ll need that when it comes time to rotate the screen), but I kept getting this error when I tried to run <code>xsetwacom</code>:</p>
+
+<p>[cc lang=&#8221;bash&#8221;]
+$ xsetwacom
+xsetwacom: error while loading shared libraries: libwacomcfg.so.0: cannot open shared object file: no such file or directory.
+[/cc]</p>
+
+<p>I made a lucky guess, and fixed the problem with a quick ldconfig:</p>
+
+<p>[cc lang=&#8221;bash&#8221;]
+$ sudo ldconfig  # that was a lucky guess.
+[/cc]</p>
+
+<p><em>Update:</em> There were some issues with the wacom calibration after a sleep/resume cycle <em>if</em> the laptop screen had been rotated during that prior wake cycle (this happens a <em>lot</em> more than it seems, given how complex that description is.)  I&#8217;ve written up a workaround <a href="http://blog.ciscavate.org/2009/01/the-linux-tablet-wacom-rotations-waking-up-on-the-wrong-side.html">here</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The path to a Linux Tablet]]></title>
+    <link href="http://creswick.github.com/blog/2009/01/10/the-path-to-a-linux-tablet/"/>
+    <updated>2009-01-10T00:00:00-08:00</updated>
+    <id>http://creswick.github.com/blog/2009/01/10/the-path-to-a-linux-tablet</id>
+    <content type="html"><![CDATA[<p>I finally broke down and bought a Lenovo X61 tablet (with SXGA+ screen!), and it arrived this week.  This is the first of a series of posts about getting it up and running with Linux.</p>
+
+<p>First off, some specs:</p>
+
+<ul>
+<li> Lenovo X61 Tablet PC with XSGA+ (1400x1050) screen (not multi-touch)</li>
+<li> 4 gigs of ram</li>
+<li> 200gb SATA hard disk</li>
+<li> WIFI (Intel PRO/Wireless 4965 AG or AGN)</li>
+<li> Gigabit Ethernet (Intel 82566MM)</li>
+<li> Bluetooth</li>
+<li> Wide-area networking card (3G)</li>
+<li> Fingerprint reader</li>
+<li> Integrated SD card reader (Richoh R5C822 SD/SDIO/MMC/MS/MSPro)</li>
+<li> Intel Audio (82801H ICH8 Family audio controller)</li>
+<li> 1 PCMCIA (type-I?) slot</li>
+<li> 4-cell battery</li>
+<li> Ultrabay Slim (which will be holding my Ultrabay CD-RW / DVD drive from my old T42p)</li>
+<li> Intel Mobile GM965/GL960 video controller. (256mb video ram?)</li>
+</ul>
+
+
+<p>I&#8217;ll flesh that list out more as I can find the details (eg: wireless chipset, video, etc..)</p>
+
+<p>First off, I blew some time poking around in Vista of course :).  The handwriting input app is phenomenal in a lot of ways.  It works very well, training is well integrated, and it has worked with every input area I&#8217;ve tried.  It <em>could</em> be better if it had contextual clues, and could tie into things like Eclipse&#8217;s intellisense.  Overall, though, it is amazing how simple it is to use, and how aesthetically pleasing the handwriting actually is.  There is a lot to be said for using a couple extra pixels to make the strokes taper off as you pull the pen away.  It has QWAN.</p>
+
+<p>That done, I started to move on to installing Linux.  I&#8217;m giving Ubuntu 8.10 the first chance, and I thought I&#8217;d try using a USB-based install so I wouldn&#8217;t have to monkey around with the Ultrabase &amp; drive.  If you have an 8.10 system already, you can easily create a bootable usb ubuntu drive with <code>usb-creator</code> and an ubuntu iso.  This takes perhaps 45min - 1 hour.</p>
+
+<p>Booting was as simple as going into the ibm bios-like page (by hitting the ThinkVantage button on boot) and telling it to boot from another device, then selecting the usb drive (that I had already inserted).  I split the existing 200gb partition in two with the ubuntu installer, keeping Vista in it&#8217;s 100 gig sandbox, and leaving the remaining ~100 gigs for Ubuntu to partition further (which it did, as two partitions: one for / and one for swap.  /dev/sda5 and /dev/sda6).</p>
+
+<p>I do wish it had said how much space was being allocated to each of those partitions though.  The installer didn&#8217;t give any indication.</p>
+
+<p>Installation from booting the installer from usb to booting into the installed system took right about 30min.  I&#8217;m impressed :)</p>
+
+<p>Out of the box:</p>
+
+<ul>
+<li> The screen is the proper res</li>
+<li> Wireless looks like it might be working (I have to AP to verify)</li>
+<li> Sound works</li>
+<li> the pen does <em>not</em></li>
+<li> Screen rotation does not work</li>
+<li> closing the lid shuts off the screen, but does not put the laptop to sleep.
+
+<ul>
+<li>This was easily fixed in the gnome power-management settings, and hey, it resumes too!</li>
+</ul>
+</li>
+<li> putting the laptop in tablet mode seems to have no effect (at least it doesn&#8217;t shut off the screen ;)</li>
+<li> Some power management is clearly working (screen dims when unplugged)</li>
+<li> bluetooth was detected, but I have to way to test it.</li>
+<li> Dual-booting seems to work just fine, although there are two entries for Vista in the grub menu, and the first boots into the Rescue and Recovery system.  Vista also had to do a chkdsk, and reboot before it would load.</li>
+</ul>
+
+
+<p>More information as I figure it out :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Treat your mailing lists like reference documents, please.]]></title>
+    <link href="http://creswick.github.com/blog/2008/11/01/treat-your-mailing-lists-like-reference-documents-please/"/>
+    <updated>2008-11-01T00:00:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2008/11/01/treat-your-mailing-lists-like-reference-documents-please</id>
+    <content type="html"><![CDATA[<p>I desperately needed to find out why the tutorials I&#8217;ve been following for an Eclipse PDE task today kept referencing a startup.jar file that I could not locate.</p>
+
+<p>A couple google searches later turned up this link:</p>
+
+<p><a href="http://dev.eclipse.org/newslists/news.eclipse.platform/msg62159.html">http://dev.eclipse.org/newslists/news.eclipse.platform/msg62159.html</a></p>
+
+<p>The poster in that thread had the same problem (back in Feb. 2007), and found the answer, but none of the content in that thread makes it trivial to locate the answer again.</p>
+
+<p>The responder (with the answer) simply included a link to another mailing list:</p>
+
+<p><a href="http://dev.eclipse.org/mhonarc/lists/cross-project-issues-dev/maillist.html">http://dev.eclipse.org/mhonarc/lists/cross-project-issues-dev/maillist.html</a></p>
+
+<p>Notice that that page is <em>not</em> constant.  Today, it shows the most recent posts as of October 31st, 2008.  In order to figure out what had happened to startup.jar, I had to take into account the OP&#8217;s response (&#8220;Ok so this is <em>very</em> recent.&#8221;), the timestamp on the messages (Mon, 12 Feb 2007) and then navigate the mailing list archives to find that time period, and start reading.</p>
+
+<p>Please don&#8217;t put people through this sort of crap.  It&#8217;s generally not difficult to find permlinks to a given email, or include a quick note with the actual answer.  I have the answer now (<a href="http://dev.eclipse.org/mhonarc/lists/cross-project-issues-dev/msg00873.html">startup.jar was replaced with org.eclipse.equinox.launcher in 3.3</a>), but there is no way that I can tie that answer to the conversation I&#8217;ve linked to above.</p>
+
+<p>For the purposes of Google:</p>
+
+<p>If you&#8217;re having this problem:</p>
+
+<blockquote>
+I&#8217;m trying to do some automation, but I&#8217;m running into a problem with the 3.3 integration build.<br /><br />
+
+java -cp plugins\org.eclipse.platform_3.2.100.v20070126\startup.jar org.eclipse.core.launcher.Main<br /><br />
+
+doesn&#8217;t do anything. It doesn&#8217;t say anything. The only information I&#8217;m getting is an exit status of 13. </blockquote>
+
+
+<p>Then you need to use &#8220;java -jar plugins/org.eclipse.equinox.launcher_1.0.0.v20070207.jar&#8221; (adjusting the version numbers for your installation).</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Auto-documenting OSGi CommandProviders]]></title>
+    <link href="http://creswick.github.com/blog/2008/10/21/auto-documenting-osgi-commandproviders/"/>
+    <updated>2008-10-21T00:00:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2008/10/21/auto-documenting-osgi-commandproviders</id>
+    <content type="html"><![CDATA[<p>(<strong>Edit:</strong> If you&#8217;re reading this after OSGi R4.2, then there is almost certainly a better way to accomplish the same thing)</p>
+
+<p>I&#8217;ve been digging into OSGi a bit over the last week or so inorder to
+create some Eclipse plugins that will automatically discover
+eachother, and I&#8217;ve been generally impressed with the framework on the
+whole.  The documentation is a bit lacking, but there are some good
+blog posts about it.  (Specifically <a href="http://neilbartlett.name/blog/osgi-articles/&lt;u">Neil Bartlett&#8217;s introduction to
+OSGi</a>.)</p>
+
+<p>One thing that bugged me is the repetition needed when you implement
+the CommandProvider interface to add commands to the OSGi console.
+CommandProvider defines one method you must supply:</p>
+
+<p>[cc lang=&#8221;java&#8221;]</p>
+
+<pre><code>public String getHelp()
+</code></pre>
+
+<p>[/cc]</p>
+
+<p>OSGi then uses reflection to extract each of the methods that starts
+with an underscore, and supplies those methods to the command environment as
+new commands.  (The underscore is trimmed, and the name of the method becomes
+the command name.)  General practice is to include the name of the
+method in the return value of <code>getHelp()</code>, along with a description of
+what the method does, eg:</p>
+
+<p>[cc lang=&#8221;java&#8221;]
+public class SampleCommandProvider implements CommandProvider {</p>
+
+<p>   public synchronized void _run(CommandInterpreter ci) {</p>
+
+<pre><code>  // do stuff.
+</code></pre>
+
+<p>   }</p>
+
+<p>   public String getHelp() {</p>
+
+<pre><code>  return "\trun - execute a Runnable service";
+</code></pre>
+
+<p>   }
+}[/cc]</p>
+
+<p>This seems like a pain to maintain, so I took a quick look at
+annotations, and propose a new syntax:</p>
+
+<p>[cc lang=&#8221;java&#8221;]
+public class SampleCommandProvider extends
+   DescriptiveCommandProvider {</p>
+
+<p>   @CmdDescr(description=&#8221;execute a Runnable service&#8221;)
+   public synchronized void _run(CommandInterpreter ci) {</p>
+
+<pre><code>  // do stuff.
+</code></pre>
+
+<p>   }
+}[/cc]</p>
+
+<p>Here we&#8217;ve extracted the <code>getHelp()</code> method into a new superclass, so
+our SampleCommandProvider now extends an abstract class instead of
+implementing an interface.  It also makes use of an Annotation, which
+we need to define:</p>
+
+<p>[cc lang=&#8221;java&#8221;]
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;</p>
+
+<p>@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface CmdDescr {
+   String description();
+}[/cc]</p>
+
+<p>Finally, we just need to define the superclass that implements
+<code>getHelp()</code>:</p>
+
+<p>[cc lang=&#8221;java&#8221;]
+import java.lang.reflect.Method;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;</p>
+
+<p>import org.eclipse.osgi.framework.console.CommandProvider;</p>
+
+<p>public abstract class DescriptiveCommandProvider implements CommandProvider {</p>
+
+<p>   private static final Pattern CMD_PATTERN = Pattern.compile(&#8221;<sup>_(.*)&#8221;);</sup>
+   private String help = null;</p>
+
+<p>   public String getHelp() {</p>
+
+<pre><code>  if (null == help){
+     help = buildHelp();
+  }
+  return help;
+</code></pre>
+
+<p>   }</p>
+
+<p>   private String buildHelp() {</p>
+
+<pre><code>  StringBuilder helpBuff = new StringBuilder();
+
+  for (Method m : this.getClass().getMethods()){
+     if (methodIsCmd(m)){         
+        if (0 != helpBuff.length()){
+           helpBuff.append("\n");
+        }
+        helpBuff.append(getDocumentation(m));            
+     }
+  }
+  return helpBuff.toString();
+</code></pre>
+
+<p>   }</p>
+
+<p>   private boolean methodIsCmd(Method m) {</p>
+
+<pre><code>  return CMD_PATTERN.matcher(m.getName()).matches();
+</code></pre>
+
+<p>   }</p>
+
+<p>   private String getDocumentation(Method m) {</p>
+
+<pre><code>  StringBuilder methodHelp = new StringBuilder();
+
+  Matcher matcher = CMD_PATTERN.matcher(m.getName());
+  if(matcher.matches()){
+     methodHelp.append("\t"+matcher.group(1));
+
+     CmdDescr description = m.getAnnotation(CmdDescr.class);
+
+     if (null != description){
+        methodHelp.append(" - "+description.description());
+     }
+  }
+  return methodHelp.toString();
+</code></pre>
+
+<p>   }
+}
+[/cc]</p>
+
+<p>Note that the actual reflection on the class only happens once &#8211; all
+subsequent calls to <code>getHelp()</code> use a cached copy of the documentation.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[It's called a docking station, Joel :)]]></title>
+    <link href="http://creswick.github.com/blog/2008/09/23/its-called-a-docking-station-joel/"/>
+    <updated>2008-09-23T00:00:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2008/09/23/its-called-a-docking-station-joel</id>
+    <content type="html"><![CDATA[<p>The venerable Joel Spolsky asked recently why <a href="http://www.joelonsoftware.com/items/2008/09/20.html">someone hasn&#8217;t made a device</a> that clips to the back of a desk and:</p>
+
+<blockquote>
+    * It&#8217;s a power strip<br>
+    * It&#8217;s a network hub<br>
+    * It&#8217;s a USB hub<br>
+    * You clamp it onto the back of any desk
+</blockquote>
+
+
+<p>The idea being that:</p>
+
+<blockquote>This would make it easy to plug in laptops, USB peripherals, and all your rechargers at your desk without crawling around on the floor.</blockquote>
+
+
+<p>He links to a device that does some of this, and runs ~$150/device.  At that price, I think a better solution is a docking station&#8211;when you get down to it, I don&#8217;t want to plug in 4 things every time I sit down even if it doesn&#8217;t involve crawling under the desk (power, video, usb, ethernet and possibly audio).  I think it&#8217;s unlikely that all the features needed above are really necessary when you just show up for a meeting, or hop over to your coworker&#8217;s office for a short hacking session.  Many conference rooms these days already have tables wired for ethernet / power and svga video to a projector.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[StackOverflow: Endorsing(?) content theft from day one]]></title>
+    <link href="http://creswick.github.com/blog/2008/09/16/stackoverflow-endorsing-content-theft-from-day-one/"/>
+    <updated>2008-09-16T00:00:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2008/09/16/stackoverflow-endorsing-content-theft-from-day-one</id>
+    <content type="html"><![CDATA[<p><a href="http://www.joelonsoftware.com">Joel Spolsky</a> and <a href="http://www.codinghorror.com">Jeff Atwood</a> just launched the public beta of <a href="http://www.stackoverflow.com">Stackoverflow</a> today, with the intent of building a community for high-quality technical questions and answers.  I&#8217;ve been using the site for about three weeks now, during the closed beta, and I&#8217;ve noticed a disturbing trend that was outlined in Joel&#8217;s <a href="http://www.joelonsoftware.com/items/2008/09/15.html">announcement post</a> today:</p>
+
+<blockquote>
+Want to know an easy way to earn reputation? Find a question somewhere with several good, but incomplete, answers. Steal all the answers and write one long, complete, detailed answer which is better than the incomplete ones.
+</blockquote>
+
+
+<p>The site presents an interface where much of the functionality is hidden from new users.  You can&#8217;t comment on posts, for example, until you&#8217;ve earned 50 &#8220;rep&#8221;.  Voting up takes 15 rep, voting down takes 100 rep, and each downvote you place will cost you one rep.  You gain rep by posting questions and answers that other users vote up, or accept.  The result is an addictive system that, in theory, prevents <a href="http://en.wikipedia.org/wiki/Griefer">&#8220;Griefing&#8221;</a> (the system does <em>NOT</em> prevent griefing, by the way.  It is extremely easy to game.)</p>
+
+<p>Because of this, it is tempting to re-post successful content from other sources, and nothing the creators (Atwood and Spolsky) have incorporated into the site, or the recent announcements, has indicated that this is objectionable.  Afterall, good content on Stackoverflow will improve their service, regardless of where it came from, and regardless of whether it is properly credited.</p>
+
+<p>After using stackoverflow for a couple weeks, I think that they have created a useful service, but I also want to call them out for providing an environment that is encouraging plagiarism.  Duplication/copying of content <em>within</em> stackoverflow does not set easy with me, but I&#8217;m willing to accept that the content I create for stackoverflow is public domain, and is free to be copied at will.  <strong>However</strong> <a href="http://stackoverflow.com/questions/17512/computer-language-puns-and-jokes#47867">these</a> <a href="http://stackoverflow.com/questions/17512/computer-language-puns-and-jokes#45355">posts</a> <a href="http://stackoverflow.com/questions/17512/computer-language-puns-and-jokes#48783">are</a> <a href="http://stackoverflow.com/questions/35809/why-are-vi-and-emacs-popular#36007">not</a>.</p>
 ]]></content>
   </entry>
   

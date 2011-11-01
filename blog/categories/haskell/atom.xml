@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: haskell | Bitwise Evolution]]></title>
+  <link href="http://creswick.github.com/blog/categories/haskell/atom.xml" rel="self"/>
+  <link href="http://creswick.github.com/"/>
+  <updated>2011-11-01T08:42:50-07:00</updated>
+  <id>http://creswick.github.com/</id>
+  <author>
+    <name><![CDATA[Rogan Creswick]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[cabal-dev: sandboxing your Haskell development (and now with ghci!)]]></title>
+    <link href="http://creswick.github.com/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/"/>
+    <updated>2010-12-22T00:00:00-08:00</updated>
+    <id>http://creswick.github.com/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci</id>
+    <content type="html"><![CDATA[<p>Reproducing builds is pretty much essential if you intend to do sustainable software development, and while it's generally possible, it's been fairly difficult to do so with Haskell.  One of the challenges has been that there are only generally two local databases of installed packages for any given (user, ghc-version) pair.  Each ghc install has a global package database, and each user has a user package database for each version of ghc.  This is perfectly suitable in most situations, but it becomes problematic when you need conflicting packages to be installed for disparate development projects.  <a href="http://hackage.haskell.org/package/cabal-dev">Cabal-dev</a> removes the user package database from the picture, and it is relatively simple (with some self-control :) to maintain a minimal global package database: just don't install anything system-wide with cabal.</p>
+
+<p>Cabal-dev does this by creating a per-project sandbox that contains a package database of all the dependencies as well as the project under development.  Therefore, it was simple to add support for launching ghci with this package database in place of the user package database.  That's been added in cabal-dev-0.7.3.1, which is available on hackage now, allowing you to do things like this (using my <a href="http://code.google.com/p/havsa/">Haskell Version Space Algebra</a> library as an example):</p>
+
+<p><code lang="bash">
+$ cd havsa
+$ ls
+LICENSE  Setup.hs  src/  versionspaces.cabal
+$ cabal-dev install
+Resolving dependencies...
+Configuring mtl-1.1.1.1...
+Preprocessing library mtl-1.1.1.1...
+Building mtl-1.1.1.1...
+[ 1 of 21] Compiling Control.Monad.Identity ( Control/Monad/Identity.hs, dist/build/Control/Monad/Identity.o )
+....
+Registering VersionSpaces-0.0...
+Installing library in
+/home/creswick/development/havsa/cabal-dev//lib/VersionSpaces-0.0/ghc-6.12.3
+Registering VersionSpaces-0.0...
+$ cabal-dev ghci
+GHCi, version 6.12.3: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+Loading package ffi-1.0 ... linking ... done.
+Prelude> :m + AI.VersionSpaces
+Prelude AI.VersionSpaces> showBSR EmptyBSR
+Loading package syb-0.1.0.2 ... linking ... done.
+Loading package base-3.0.3.2 ... linking ... done.
+Loading package mtl-1.1.1.1 ... linking ... done.
+Loading package logict-0.4.1 ... linking ... done.
+Loading package VersionSpaces-0.0 ... linking ... done.
+"Empty"
+Prelude AI.VersionSpaces>
+</code></p>
+
+<p>This is still far from perfect: you can't easily load code into the ghci session without exiting, re-running cabal-dev install and cabal-dev ghci, but it's a good start.</p>
+]]></content>
+  </entry>
+  
+</feed>

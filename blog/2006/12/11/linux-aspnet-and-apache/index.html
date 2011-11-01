@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Linux, ASP.Net and Apache - Bitwise Evolution</title>
+  <meta name="author" content="Rogan Creswick">
+
+  
+  <meta name="description" content="The mono project, which aims to provide an OSS alternative to the .Net framework, is capable of serving ASP.Net pages (amongst other things). On &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://creswick.github.com/blog/2006/12/11/linux-aspnet-and-apache">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Bitwise Evolution" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Bitwise Evolution</a></h1>
+  
+    <h2>Musings of a Portland-area hacker bent on improving digital lifestyles.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:creswick.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Linux, ASP.Net and Apache</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2006-12-11T00:00:00-08:00" pubdate>Dec 11<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>The mono project, which aims to provide an OSS alternative to the .Net framework, is capable of serving ASP.Net pages (amongst other things).  On Friday I sat down to do this, and realized that while there are many pages that describe the process, none that I could find, covered all the info needed to actually get up and running.  (I&#8217;ve built a Google Notebook of the better links I visited &#8211; look <a href="http://www.google.com/notebook/public/07937799986237074011/BDRQYIwoQi-HOhPQh">here</a> for those.)</p>
+
+<h2>The Webserver</h2>
+
+<p>ASP.Net pages are served up by a web server called XSP (or XSP2).  XSP is a stand alone web server, however it doesn&#8217;t have much of the functionality of Apache.  XSP is great for testing, and would work well on a dev machine, but it&#8217;s not something you&#8217;d use directly for a live sever.  Generally, you&#8217;ll want to run Apache with mod_mono, which is essentially a wrapper around XSP[2].</p>
+
+<p>XSP vs. XSP2 &#8211; XSP2 is capable of serving up ASP.Net 2.0 pages, while XSP is only 1.1 capable.</p>
+
+<h2>Packages</h2>
+
+<p>I work under Ubuntu, but the packages needed should be fairly easy to translate to other distros:
+(I already had mono installed &#8211; that step was trivial <code>apt-get install mono</code> or something similar.  If you don&#8217;t have mono running, do that first.)</p>
+
+<ul>
+<li> apache2</li>
+<li> apache2-common</li>
+<li> apache2-mpm-worker</li>
+<li> apache2-utils</li>
+<li> asp.net2-examples</li>
+<li> mono-xsp2</li>
+<li> mono-xsp2-base</li>
+<li> mono-apache-server2</li>
+<li> libapache2-mod-mono</li>
+</ul>
+
+
+<p>Installing mod_mono will tell you to force-reload apache:</p>
+
+<pre>
+ $ sudo /etc/init.d/apache2 force-reload
+ * Forcing reload of apache 2.0 web server... 
+apache2: could not open document config file /etc/mono-server/mono-server-hosts.conf   [fail]</pre>
+
+
+<p>In Ubuntu, at least, the default <code>mod_mono.conf</code> is not setup for XSP2.  If you see the failure above, then just pop open <code>/etc/apache2/mods-enabled/mod_mono.conf</code> and swap the commented lines to point to the correct mono-server directory.  <code>/etc/mono-server2/mono-server2-hosts.conf</code>.</p>
+
+<h2>Configuration</h2>
+
+<p>(The Ubuntu documentation has the best description of this process I&#8217;ve found.  Look <a href="https://help.ubuntu.com/community/ModMono">here</a> for their steps.  I&#8217;ve included this section anyway because I still had difficulty connecting the problems I had with the solution posted on the Ubuntu page.)</p>
+
+<p>I&#8217;ll assume you&#8217;ve been able to install and load the <code>mod_mono</code> module.  From this point, we need to set the ASP handler, and define mono web applications.  The first step is straightforward, at least if you&#8217;re familiar with Apache configuration:</p>
+
+<pre><code> # Enable ASP in /usr/share/asp.net2-demos
+ Alias /samples "/usr/share/asp.net2-demos"
+
+      SetHandler mono
+</code></pre>
+
+<p>The second step is new to me &#8211; apparently mono needs an application root of some sort defined in addition to the handler configured above.  Most pages suggest using the line:</p>
+
+<pre><code> MonoApplications "/samples:/usr/share/asp.net2-demos/"
+</code></pre>
+
+<p>However, that caused &#8216;mod_mono&#8217; to segfault continuously (the apache logs were horrible:</p>
+
+<pre><code> Another mod-mono-server with the same arguments is already running
+ Another mod-mono-server with the same arguments is already running
+ [notice] child pid 7371 exit signal Segmentation fault (11)
+ [notice] child pid 7372 exit signal Segmentation fault (11)
+ [notice] child pid 7373 exit signal Segmentation fault (11)
+ [notice] child pid 7374 exit signal Segmentation fault (11)
+ ....
+ # (about 1 / second)
+</code></pre>
+
+<p>It turns out that there is another way to accomplish the same thing.  <code>/etc/mono-server2/</code> can contain <code>.webapp</code> files which define essentially the same thing.  The format for these files can be found in &#8216;man xsp2&#8217;:</p>
+
+<pre><code>       {appname}
+       {virtual host for application}
+       {port for application}
+       {virtual directory in apache}
+       {physical path to aspx files}
+        is true by default --&amp;gt;
+       {true|false}
+</code></pre>
+
+<p>For the asp.net2 samples, I used this webapp config:</p>
+
+<pre><code>       samples
+       localhost
+       80
+       /samples
+       /usr/share/asp.net2-demos
+</code></pre>
+
+<p>After that, starting up apache worked without error and pointing a browser at http://localhost/samples popped up the Mono-project ASP.Net sample page.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Rogan Creswick</span></span>
+
+      
+
+
+
+
+  
+
+<time datetime="2006-12-11T00:00:00-08:00" pubdate>Dec 11<span>th</span>, 2006</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://creswick.github.com/blog/2006/12/11/linux-aspnet-and-apache/" data-via="autoorator" data-counturl="http://creswick.github.com/blog/2006/12/11/linux-aspnet-and-apache/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2006/12/10/blog-migrations/" title="Previous Post: Blog migrations">&laquo; Blog migrations</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2007/03/20/mtel-posting-from-emacs/" title="next Post: mt.el: posting from emacs">mt.el: posting from emacs &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/31/blogging-with-octopress/">Blogging with Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/">Hacking your kitchen: making a sous vide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/">cabal-dev: sandboxing your Haskell development (and now with ghci!)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/06/prezi-scalable-navigable-presentations/">Prezi: scalable, navigable presentations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/26/recovered-puzzles/">Recovered Puzzles</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("autoorator", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/autoorator" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @autoorator</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/creswick?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Rogan Creswick -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

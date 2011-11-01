@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: candy | Bitwise Evolution]]></title>
+  <link href="http://creswick.github.com/blog/categories/candy/atom.xml" rel="self"/>
+  <link href="http://creswick.github.com/"/>
+  <updated>2011-11-01T08:42:50-07:00</updated>
+  <id>http://creswick.github.com/</id>
+  <author>
+    <name><![CDATA[Rogan Creswick]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Cleaning up my browser.]]></title>
+    <link href="http://creswick.github.com/blog/2009/06/20/cleaning-up-my-browser/"/>
+    <updated>2009-06-20T00:00:00-07:00</updated>
+    <id>http://creswick.github.com/blog/2009/06/20/cleaning-up-my-browser</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.ciscavate.org/wp-content/2009/06/opera-clean.png"><img src="http://blog.ciscavate.org/wp-content/2009/06/opera-clean.png" alt="opera-clean" title="opera-clean" width="200" class="alignright size-medium wp-image-111" /></a></p>
+
+<p>I'm done with firefox -- Opera 10 now plays flash well, has adblock via. urifilters, a cleaner UI (no menubar, a menu <em>button</em>!) vertical tabs are supported natively, etc... I don't really like the widget toolkit used in the file open/save dialog, but that's <em>much</em> better than the horrid performance/stability/bizarre bugs of Firefox.</p>
+
+<p>The minimal UI possible with Opera is also a major win in my book.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vanity, chapter 1]]></title>
+    <link href="http://creswick.github.com/blog/2006/10/31/vanity-chapter-1/"/>
+    <updated>2006-10-31T00:00:00-08:00</updated>
+    <id>http://creswick.github.com/blog/2006/10/31/vanity-chapter-1</id>
+    <content type="html"><![CDATA[<blockquote><em>...empty pride inspired by an overweening conceit of one's personal attainments or decorations; [1913 Webster]</em></blockquote>
+
+
+<p>I'm a sucker for pretty desktops and window managers.  This weakness has yet to make me succumb to the lure of a full Gnome (or KDE) desktop, however.  (Although I did play with the <strike>hack</strike> kludge known as <em>XGL/compiz</em> for a month or so.) I alternate between <a title="Enlightenment" href="http://www4.get-e.org/">Enlightenment</a> and <a title="FVWM" href="http://fvwm.org">FVWM</a>, however, I do use a fair number of GTK apps.  Eventually, I hope to create some gtk apps, (or wxWidgets, or etc... it all boils down to gtk showing up on screen though).  Up 'till now I've suffered through with the dreadfull defaults -- in my opinion, of course -- but that just changed with <a title="gtk-theme-switch2" href="http://www.muhri.net/nav.php3?node=gts">gtk-theme-switch2</a>.</p>
+
+<p><img alt="gtk-theme-switch2" src="http://www.ciscavate.org/data/themeSwitch2.png" /></p>
+
+<p>It is awesome :) theme loading, previewing, setting, etc.. all without a hint of the gnome infrastructure to screw your keyboard layout, fonts, or power management.</p>
+]]></content>
+  </entry>
+  
+</feed>

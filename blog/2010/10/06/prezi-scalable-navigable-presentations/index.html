@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Prezi: scalable, navigable presentations - Bitwise Evolution</title>
+  <meta name="author" content="Rogan Creswick">
+
+  
+  <meta name="description" content="Edit:Prezi now has support for customizing colors / themes, and even documentation for the css! I&#8217;m happy to see official support for these &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://creswick.github.com/blog/2010/10/06/prezi-scalable-navigable-presentations">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Bitwise Evolution" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Bitwise Evolution</a></h1>
+  
+    <h2>Musings of a Portland-area hacker bent on improving digital lifestyles.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:creswick.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Prezi: Scalable, Navigable Presentations</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2010-10-06T00:00:00-07:00" pubdate>Oct 6<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><strong>Edit:</strong>Prezi now has support for customizing colors / themes, and even documentation for the css! <a href="http://prezi.com/learn/color-wizard/?utm_source=MadMimi&utm_medium=email&utm_content=Holiday+features:+colors+and+fonts,+drag+and+drop&utm_campaign=Introducing+Colors,+Fonts,+and+Snap&utm_term=customize"> I&#8217;m happy to see official support for these features, but the layout problems are still a show-stopper for me.<strong>/Edit</strong></p>
+
+<p>I have been adopting a presentation style that diverges from the traditional bullet-point style promoted by Open Office and PowerPoint (although, PowerPoint 2007 diverges from pure bullets to more interesting shapes, using shading and encapsulation to show hierarchy.  It&#8217;s a large improvement, but it still falls short of my ideal).  Instead of bullets and text, I try to make use of imagery and visual examples whenever possible.</p>
+
+<p>My experience has reinforced what I&#8217;ve come across in the literature about balancing your audience&#8217;s attention between the content on the wall and your narration.  Too much text or detail and you risk loosing your audience because they&#8217;re overwhelmed or, if you&#8217;re lucky, because they are focusing on the slide content instead of listening to your explanations.  It is also much easier to trigger emotional responses with visuals than it is with text, which explains some of the motivation for promotional/motivational presentations that are virtually devoid of text.  (<a href="http://www.sethgodin.com/">Seth Godin&#8217;s</a> talks come to mind.  One way in which my presentations differ substantially from Seth&#8217;s is that I generally talk about fairly technical topics.  The difficulties associated with finding high-quality, emotional, images to convey the intricate details of <tt>ptrace(2)</tt> is not the topic of this post, however.)</p>
+
+<p>A number of years back, I found a mention of using Scalable Vector Graphics (SVGs) for unconstrained presentations and that idea has stuck.  I&#8217;ve been developing slides in PowerPoint (OpenOffice has not yet reached the point where I can create professional-looking content), but I&#8217;ve never been happy with the traditional slide-based presentation style.  SVGs promise the ability to move between arbitrary locations, following a pre-defined path from &#8220;slide&#8221; to &#8220;slide&#8221;.  Furthermore, since the content is scalable, you can literally zoom in to a portion of content to go into more detail, or zoom out to show context.  This presentation mode would also make it easy to diverge from your plan based on audience feedback.  This <em>can</em> be done with PowerPoint, but it is extremely difficult.</p>
+
+<p><a href="http://prezi.com">Prezi</a> promises these benefits, so I spent the last few days building a presentation with Prezi at Galois: <a href="http://www.galois.com/blog/2010/09/30/tech-talk-enabling-portable-build-systems/">portable build systems</a>.  (The prezi presentation is near the bottom of this post.)  The rest of this entry discusses my experiences with Prezi.</p>
+
+<h2>The Good, the Bad and the Ugly</h2>
+
+<p>I initially found the Prezi interface to be very intuitive.  The translation &#8220;zebra&#8221;, a stripped round mult-function circle, appears whenever you select an object.  You then use the zebra to move, scale, rotate, or otherwise manipulate the selected object.  Other options are presented through a bubble menu that rotates and scales to show more detailed options as you select sub &#8220;bubbles&#8221;.  It is well worth the few minutes it takes to sign up for a free account and try it out.  If you happen to be using 64-bit linux, you probably won&#8217;t be able to use the flash app, however.  Prezi doesn&#8217;t appear to work under that environment.  (if you can interact with the presentation embedded on this page, then you should be Ok.)  There is also an Adobe Air-based desktop app, which I used extensively.</p>
+
+<p>I was off and brainstorming a presentation mind-map style after only a few minutes playing with the interface.  The freedom to create a few words of text, zoom in and flesh out more details, jump back out and pull in an image, all without concern for the layout of final form of the presentation was extremely motivating and liberating.</p>
+
+<p>I was able to be quite productive with Prezi until I began to consider the need for a unifying theme.  Two things stood in the way:</p>
+
+<ol>
+<li>Only eight options were provided for the overall look and feel of the presentation, and none were close enough to the Galois color scheme. There is also no way to add new look and feel options, and each option changes all the colors, fonts, backgrounds, and general style of the presentation.</li>
+<li>The set of shapes and drawing tools is very limited. You can create: Thin free-hand lines, thick free-hand &#8220;highlighter&#8221; lines, circular rings (round frames), square brackets (square frames), gradient-filled rounded rectangles (roundrect frames), arrows, text in one of three fonts (optionally with bullets).
+</ol>
+
+
+<p>None of the pre-defined colors can be changed through the user interface, aside from the eight styles mentioned above, which change <em>all</em> the colors / styles and fonts.  You can include arbitrary images, which helps with the limited set of shapes, however, you can only include pdfs if you are using the web-based client, the desktop client does not currently support pdf importing.</p>
+
+<p>I stumbled across a solution to the limited selection of colors by unzipping the .pez file that holds a Prezi presentation on-disk and exploring the contents:
+<code lang="bash">
+prezi/
+├── content.xml
+├── preview.png
+└── repo/</p>
+
+<pre><code>├── 13177749.png
+├── 13177754.jpg
+├── 13177758.png
+├── 13177835.swf
+├── codetree.png
+└── Personal_computer,_exploded_5.png
+</code></pre>
+
+<p></code>
+content.xml defines the SVG-like presentation content, and it ends with a set of css styles:
+<code lang="html"></p>
+
+
+
+<p></code>
+The colors in these styles can be adjusted, and you can even add new styles here (although you will need to manually insert them into the xml where you wish to use the new styles).  After editing the content.xml, zip up the presentation tree, taking care to maintain the correct hierarchy and no compression:
+<code lang="bash">
+$ ls
+prezi/
+$ zip -r -0 enabling-portable-build-systems-biuinv2vus9x.pez prezi/
+</code>
+One surprising benefit is that the updated styles are actually adopted by the UI widgets in the Prezi application, once you load a modified .pez file.</p>
+
+<p><a href="http://blog.ciscavate.org/wp-content/2010/10/prezi-text.png" style="text-align:center;" ><img src="http://blog.ciscavate.org/wp-content/2010/10/prezi-text.png" alt="The &quot;Title | Title | Body&quot; buttons change according to the css stylesheet in content.xml." title="prezi-text" width="300" style="margin-left:auto;margin-right:auto;"/></a></p>
+
+<p>These changes also persist across saves, loads, uploading to Prezi.com, and they appear to render properly when embedded, granting quite a lot of power, if you&#8217;re able and willing to work with xml and css periodically.</p>
+
+<p>Editing content.xml also proved to be the best way to spellcheck the presentation content, although the text that is actually <em>displayed</em> is in CDATA nodes, which your editor may skip over when running a spell checker.  Thankfully, the text is duplicated as plain text nodes, so you are still alerted to spelling errors when running ispell-buffer in emacs.  You can then fix the CDATA entry with a recursive edit.  (I suspect that the duplication is there to simplify text searching.)</p>
+
+<p>I&#8217;m rather satisfied with these workarounds: The ugly aspects could be automated with some simple tools to update the content.xml as needed, and the hacks I found worked surprisingly well.</p>
+
+<h2>Background images and &#8220;refactoring&#8221;</h2>
+
+<p>Unfortunately, I don&#8217;t think Prezi is ready for prime-time, despite my success with css styles and spellchecking.  There are simply no facilities to precisely align or distribute objects with respect to each-other.  Further complicating this is the lack of a <a href="http://community.prezi.com/prezi/topics/grouping_as_in_cntrl_g">&#8220;group&#8221; option</a> to create aggregate objects.  You can select multiple objects by dragging a rectangle if you hold shift, but that isn&#8217;t possible if the objects are on top of other objects &#8211; the first click of a shift-drag must occur on the background of the Prezi, or you will simply select the lower object.  While this sounds a bit like a minor quibble, it is impossible to accurately position complex sets of objects if they are layered on top of other content (such as a background image).  I often need to add or remove &#8220;slides&#8221;, and with Prezi, that can include a lot of object translations to provide or absorb space while fitting with the high-level overview of your presentation.  Without alignment tools, you also take the risk that a title will display askew with respect to the screen borders when you are mid-presentation.</p>
+
+<p>I eventually adopted the following practice to help keep content square:</p>
+
+<ul>
+<li>Press &#8216;space&#8217; to enter &#8220;show&#8221; mode, and position the screen as it would be to show the &#8220;slide&#8221;, then pres &#8216;space&#8217; again to return to edit mode.</li>
+<li>Create a roundrect frame, it will be square with the current view.</li>
+<li>Use the borders of the roundrect as visual guides to make the slide content as square as possible.  I usually place the baseline of the title text with the top of the roundrect and then position it after the angle has been fixed.</li>
+<li>Delete the roundrect</li>
+</ul>
+
+
+<p>Now, never rotate any individual components of that slide again.  Use shift-clicking to select everything in the slide each time you need to rotate or move the slide.  If you need to add new content, first enter &#8216;show&#8217; mode and click on the frame to make the camera rotate properly with respect to the slide.</p>
+
+<h2>Summary</h2>
+
+<p>I&#8217;m excited to see how Prezi evolves, and I will be one of the first in line once the selection / alignment problems are fixed.  I hope that Prezi will motivate other implementations with similar capabilities, there is plenty of room for some healthy competition.</p>
+
+<div class="prezi-player"><style type="text/css" media="screen">.prezi-player { width: 550px; } .prezi-player-links { text-align: center; }</style><object id="prezi_biuinv2vus9x" name="prezi_biuinv2vus9x" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="550" height="400"><param name="movie" value="http://prezi.com/bin/preziloader.swf"/><param name="allowfullscreen" value="true"/><param name="allowscriptaccess" value="always"/><param name="bgcolor" value="#ffffff"/><param name="flashvars" value="prezi_id=biuinv2vus9x&amp;lock_to_path=0&amp;color=ffffff&amp;autoplay=no&amp;autohide_ctrls=0"/><embed id="preziEmbed_biuinv2vus9x" name="preziEmbed_biuinv2vus9x" src="http://prezi.com/bin/preziloader.swf" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="550" height="400" bgcolor="#ffffff" flashvars="prezi_id=biuinv2vus9x&amp;lock_to_path=0&amp;color=ffffff&amp;autoplay=no&amp;autohide_ctrls=0"></embed></object><div class="prezi-player-links"><p><a title="Galois is developing build system configuration capabilities to improve the portability of build systems." href="http://prezi.com/biuinv2vus9x/enabling-portable-build-systems/">Enabling Portable Build Systems</a> on <a href="http://prezi.com">Prezi</a></p></div></div>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Rogan Creswick</span></span>
+
+      
+
+
+
+
+  
+
+<time datetime="2010-10-06T00:00:00-07:00" pubdate>Oct 6<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://creswick.github.com/blog/2010/10/06/prezi-scalable-navigable-presentations/" data-via="autoorator" data-counturl="http://creswick.github.com/blog/2010/10/06/prezi-scalable-navigable-presentations/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/07/26/recovered-puzzles/" title="Previous Post: Recovered Puzzles">&laquo; Recovered Puzzles</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/" title="next Post: cabal-dev: sandboxing your Haskell development (and now with ghci!)">cabal-dev: sandboxing your Haskell development (and now with ghci!) &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/31/blogging-with-octopress/">Blogging with Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/">Hacking your kitchen: making a sous vide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/">cabal-dev: sandboxing your Haskell development (and now with ghci!)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/06/prezi-scalable-navigable-presentations/">Prezi: scalable, navigable presentations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/26/recovered-puzzles/">Recovered Puzzles</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("autoorator", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/autoorator" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @autoorator</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/creswick?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Rogan Creswick -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,878 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Bitwise Evolution</title>
+  <meta name="author" content="Rogan Creswick">
+
+  
+  <meta name="description" content="MT + Emacs + Markdown &amp; Geshi? Is it possible? We&#8217;re here to find out :) I just got around to
+installing ml.el in emacs, and this post is &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://creswick.github.com/blog/page/4">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Bitwise Evolution" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Bitwise Evolution</a></h1>
+  
+    <h2>Musings of a Portland-area hacker bent on improving digital lifestyles.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:creswick.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2007/03/20/mtel-posting-from-emacs/">mt.el: Posting From Emacs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2007-03-20T00:00:00-07:00" pubdate>Mar 20<span>th</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>MT + Emacs + Markdown &amp; Geshi?</h2>
+
+<p>Is it possible? We&#8217;re here to find out :) I just got around to
+installing <code>ml.el</code> in emacs, and this post is essentially a test to
+see if markdown syntax will work (and round-trip to Movable Type and
+back to emacs &#8211; it seems to come <em>from</em> mt correctly&#8230;).</p>
+
+<h3>Source code:</h3>
+
+<pre><code>transcode-language: java
+public class TestClass{
+
+   /**
+    * test
+    */
+    public static void main(String[] args){
+      // ...
+    }
+}
+</code></pre>
+
+<h3>Well, not quite.</h3>
+
+<p>Everything seems to work, aside from the &lt;pre &#8230;&gt; tags I use for code
+formatting with geshi.  I&#8217;ll have to look into a way of incorporating
+that with some existing markdown formatting trick.</p>
+
+<p>Ah-ha! The MT Geshi plugin I&#8217;m using
+(<a href="http://periodic-kingdom.org/ben/">transcode</a>) expects code blocks to
+be in the following format:</p>
+
+<pre><code>  &amp;lt;pre&amp;gt;&amp;lt;code&amp;gt;transcode-language: language
+   ....
+  &amp;lt;/code&amp;gt;&amp;lt;pre&amp;gt;
+</code></pre>
+
+<p>Markdown turns all consistantly indented regions into
+&lt;pre&gt;&lt;code&gt;..&lt;/code&gt;&lt;/pre&gt; blocks, so all you have to do is to start
+each code block with the (somewhat ugly) transcode-language: lang
+line.  It&#8217;s taken out by transcode, so the source will show up w/out
+it.  Next task: Add an emacs filter to turn &lt;code lang=&#8221;<em>lang</em>&#8220;&gt;&#8230; into
+the above mentioned indentation/transcode syntax.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2006/12/11/linux-aspnet-and-apache/">Linux, ASP.Net and Apache</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2006-12-11T00:00:00-08:00" pubdate>Dec 11<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The mono project, which aims to provide an OSS alternative to the .Net framework, is capable of serving ASP.Net pages (amongst other things).  On Friday I sat down to do this, and realized that while there are many pages that describe the process, none that I could find, covered all the info needed to actually get up and running.  (I&#8217;ve built a Google Notebook of the better links I visited &#8211; look <a href="http://www.google.com/notebook/public/07937799986237074011/BDRQYIwoQi-HOhPQh">here</a> for those.)</p>
+
+<h2>The Webserver</h2>
+
+<p>ASP.Net pages are served up by a web server called XSP (or XSP2).  XSP is a stand alone web server, however it doesn&#8217;t have much of the functionality of Apache.  XSP is great for testing, and would work well on a dev machine, but it&#8217;s not something you&#8217;d use directly for a live sever.  Generally, you&#8217;ll want to run Apache with mod_mono, which is essentially a wrapper around XSP[2].</p>
+
+<p>XSP vs. XSP2 &#8211; XSP2 is capable of serving up ASP.Net 2.0 pages, while XSP is only 1.1 capable.</p>
+
+<h2>Packages</h2>
+
+<p>I work under Ubuntu, but the packages needed should be fairly easy to translate to other distros:
+(I already had mono installed &#8211; that step was trivial <code>apt-get install mono</code> or something similar.  If you don&#8217;t have mono running, do that first.)</p>
+
+<ul>
+<li> apache2</li>
+<li> apache2-common</li>
+<li> apache2-mpm-worker</li>
+<li> apache2-utils</li>
+<li> asp.net2-examples</li>
+<li> mono-xsp2</li>
+<li> mono-xsp2-base</li>
+<li> mono-apache-server2</li>
+<li> libapache2-mod-mono</li>
+</ul>
+
+
+<p>Installing mod_mono will tell you to force-reload apache:</p>
+
+<pre>
+ $ sudo /etc/init.d/apache2 force-reload
+ * Forcing reload of apache 2.0 web server... 
+apache2: could not open document config file /etc/mono-server/mono-server-hosts.conf   [fail]</pre>
+
+
+<p>In Ubuntu, at least, the default <code>mod_mono.conf</code> is not setup for XSP2.  If you see the failure above, then just pop open <code>/etc/apache2/mods-enabled/mod_mono.conf</code> and swap the commented lines to point to the correct mono-server directory.  <code>/etc/mono-server2/mono-server2-hosts.conf</code>.</p>
+
+<h2>Configuration</h2>
+
+<p>(The Ubuntu documentation has the best description of this process I&#8217;ve found.  Look <a href="https://help.ubuntu.com/community/ModMono">here</a> for their steps.  I&#8217;ve included this section anyway because I still had difficulty connecting the problems I had with the solution posted on the Ubuntu page.)</p>
+
+<p>I&#8217;ll assume you&#8217;ve been able to install and load the <code>mod_mono</code> module.  From this point, we need to set the ASP handler, and define mono web applications.  The first step is straightforward, at least if you&#8217;re familiar with Apache configuration:</p>
+
+<pre><code> # Enable ASP in /usr/share/asp.net2-demos
+ Alias /samples "/usr/share/asp.net2-demos"
+
+      SetHandler mono
+</code></pre>
+
+<p>The second step is new to me &#8211; apparently mono needs an application root of some sort defined in addition to the handler configured above.  Most pages suggest using the line:</p>
+
+<pre><code> MonoApplications "/samples:/usr/share/asp.net2-demos/"
+</code></pre>
+
+<p>However, that caused &#8216;mod_mono&#8217; to segfault continuously (the apache logs were horrible:</p>
+
+<pre><code> Another mod-mono-server with the same arguments is already running
+ Another mod-mono-server with the same arguments is already running
+ [notice] child pid 7371 exit signal Segmentation fault (11)
+ [notice] child pid 7372 exit signal Segmentation fault (11)
+ [notice] child pid 7373 exit signal Segmentation fault (11)
+ [notice] child pid 7374 exit signal Segmentation fault (11)
+ ....
+ # (about 1 / second)
+</code></pre>
+
+<p>It turns out that there is another way to accomplish the same thing.  <code>/etc/mono-server2/</code> can contain <code>.webapp</code> files which define essentially the same thing.  The format for these files can be found in &#8216;man xsp2&#8217;:</p>
+
+<pre><code>       {appname}
+       {virtual host for application}
+       {port for application}
+       {virtual directory in apache}
+       {physical path to aspx files}
+        is true by default --&amp;gt;
+       {true|false}
+</code></pre>
+
+<p>For the asp.net2 samples, I used this webapp config:</p>
+
+<pre><code>       samples
+       localhost
+       80
+       /samples
+       /usr/share/asp.net2-demos
+</code></pre>
+
+<p>After that, starting up apache worked without error and pointing a browser at http://localhost/samples popped up the Mono-project ASP.Net sample page.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2006/12/10/blog-migrations/">Blog Migrations</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2006-12-10T00:00:00-08:00" pubdate>Dec 10<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;ve moved <a href="http://blog.ciscavate.org">Bitwise Evolution</a> to yet another blog &#8211; this time I&#8217;ve moved from WordPress to MovableType.    The motivating factor was that WordPress made it extremely difficult to post correctly formatted code along with other content.  WordPress also doesn&#8217;t store a non-html version of each post, so you can&#8217;t easily edit old content without hacking auto-generated html.</p>
+
+<p>Movable Type proved to be slightly more difficult to install, but it is much more configurable, and has a huge set of varied and useful plugins that actually do what they describe (<em>gasp</em>).  Some of the things I&#8217;ve enabled include:</p>
+
+<ul>
+<li> <a href="http://daringfireball.net/projects/markdown/">Markdown</a> for wiki-like markup</li>
+<li> <a href="http://daringfireball.net/projects/smartypants/">SmartyPants</a> for smart quotes.</li>
+<li> <a href="http://qbnz.com/highlighter/">GeSHi</a> for syntax highlighting.  (This required a couple additional plugins)
+
+<ul>
+<li><a href="http://periodic-kingdom.org/ben/">Transcode</a> To hook MovableType up to GeSHi</li>
+<li><a href="http://bradchoate.com/weblog/2002/08/12/mtmacros">MTMacro</a> Needed to make the transcode syntax bearable.</li>
+<li><a href="http://bradchoate.com/weblog/2002/07/27/mtregex">MTRegex</a> To add conditional behavior to the macros.</li>
+</ul>
+</li>
+<li> <a href="http://gemal.dk/mt/acronym.html">Acronym</a> Used to enable mouse-over acronym expansion (so you can easily find out what DTD, XHTML, PCMCIA and etc. stand for, and it&#8217;s all automatic.)</li>
+<li> <a href="http://plugins.movalog.com/livepreview/">LivePreview</a> because none of the stuff above (except for Markdown and Smartypants) render correctly in the default preview view.</li>
+</ul>
+
+
+<p>Here&#8217;s the macro used to turn &#8216;&lt;pre lang=&#8221;java&#8221;&gt; &#8230;. &lt;/pre&gt;&#8217; into the proper format for transcode:</p>
+
+<pre><code> &amp;lt;pre&amp;gt;&amp;lt;code&amp;gt;transcode-language: java
+       ...
+ &amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;
+</code></pre>
+
+<p>Macro:</p>
+
+<pre><code> &lt;pre&gt;``` 
+</code></pre>
+
+<p> transcode-language:</p>
+
+<p>&#8220;`</pre></p>
+
+<pre><code> &lt;pre&gt;&lt;/pre&gt;
+</code></pre>
+
+<p>Sooner or later I&#8217;ll probably take another look at blogging from emacs.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2006/11/08/polymorphic-generics-in-c/">Polymorphic Generics in C#</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2006-11-08T00:00:00-08:00" pubdate>Nov 8<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Generics are great for adding some level of type safety to C#, but you may run into problems when using Generic classes with objects that aren&#8217;t of the exact Class or Interface indicated by the generic type template.  Enter Generic Constraints.</p>
+
+<p>Generic Constraints let you restrict the number of types a type variable can apply to.  For example, Assume you have three classes:</p>
+
+<pre>  
+class Aclass{/*...*/}  
+class Bclass : Aclass{/*..*/}  
+class Cclass : Aclass{/*..*/}  </pre>
+
+
+<p></p>
+
+<p>If you have a method that takes a list of Aclass, you may want to be able to call it with a list of Bclass or Cclass as well.  The naive approach doesn&#8217;t work however:</p>
+
+<pre> 
+public void foo(List&lt;Aclass&gt; myList){ /* ... */ }</pre>
+
+
+<p>When you call foo with a List or List, the compiler will complain that the types don&#8217;t match. (unless you provide overrides of foo).  Instead, make foo a generic method, and specify a constraint on the type:</p>
+
+<pre> 
+public void foo&lt;T&gt;(List&lt;T&gt; myList) 
+    where T : Aclass 
+{ 
+  /* now you can treat
+      myList as a List&lt;Aclass&gt;*/ 
+}</pre>
+
+
+<p>This link goes over generics in c# in detail:</p>
+
+<p><a href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnvs05/html/csharp_generics.asp">MSDN on Generics</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2006/10/31/vanity-chapter-1/">Vanity, Chapter 1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2006-10-31T00:00:00-08:00" pubdate>Oct 31<span>st</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><em>&#8230;empty pride inspired by an overweening conceit of one&#8217;s personal attainments or decorations; [1913 Webster]</em></blockquote>
+
+
+<p>I&#8217;m a sucker for pretty desktops and window managers.  This weakness has yet to make me succumb to the lure of a full Gnome (or KDE) desktop, however.  (Although I did play with the <strike>hack</strike> kludge known as <em>XGL/compiz</em> for a month or so.) I alternate between <a title="Enlightenment" href="http://www4.get-e.org/">Enlightenment</a> and <a title="FVWM" href="http://fvwm.org">FVWM</a>, however, I do use a fair number of GTK apps.  Eventually, I hope to create some gtk apps, (or wxWidgets, or etc&#8230; it all boils down to gtk showing up on screen though).  Up &#8216;till now I&#8217;ve suffered through with the dreadfull defaults &#8211; in my opinion, of course &#8211; but that just changed with <a title="gtk-theme-switch2" href="http://www.muhri.net/nav.php3?node=gts">gtk-theme-switch2</a>.</p>
+
+<p><img alt="gtk-theme-switch2" src="http://www.ciscavate.org/data/themeSwitch2.png" /></p>
+
+<p>It is awesome :) theme loading, previewing, setting, etc.. all without a hint of the gnome infrastructure to screw your keyboard layout, fonts, or power management.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2006/10/30/in-agreement-at-last/">In Agreement at Last..</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2006-10-30T00:00:00-08:00" pubdate>Oct 30<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Finally, windows did something I agree with:</p>
+
+<p><img align="left" src="http://www.ciscavate.org/data/protection.png" />If only it had caught itself during the OS install instead of just a measly user-space app&#8230;</p>
+
+<p>Maybe this has been fixed in Vista&#8230; (&#8230;could that be the reason it&#8217;s still not out? I suppose I shouldn&#8217;t get my hopes up.)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2006/10/07/at-the-top-of-the-stack/">At the Top of the Stack&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2006-10-07T00:00:00-07:00" pubdate>Oct 7<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As is the case with many geek-endeavors, the things I&#8217;m currently working on have nothing to do with the goal I set out to achieve.  At the moment I&#8217;m trying to find a way to convert xhtml into <a href="http://www.mwolson.org/projects/MuseMode.html">muse markup</a>.</p>
+
+<p>Why? Because your average Java programmer Just Doesn&#8217;t Get It when it comes to building a UI with Swing.  Obviously.</p>
+
+<p>Frustration with Swing UIs led to the idea that I should throw together a tutorial on building a GUI with swing while paying attention to separation of concerns re: layout, manipulation, threading and data.  Blogging seemed like a prime medium to present such a tutorial, since each post could be tagged with a meaningful tag (eg: swing_tutorial) and I could post in sections.</p>
+
+<p>This, of course, necessitates a blog (which I have, obviously) but which does emphatically <strong>not</strong> have any input mechanisms worth using for an extended period of time.  The wordpress on-line editors are, in a word, pathetic.  They may work great if you just want to stream your consciousness out to the world where it can pollute everyone&#8217;s Google results with poor spelling and meaningless chatter, but the editors available simply can&#8217;t handle source code.</p>
+
+<p>It <strong>is</strong> possible to feed the blog pure html, which is (unfortunately) a step up from the rich editor, but which also isn&#8217;t going to cut it, because it could be so much better.</p>
+
+<p>Seriously, look at Mediawiki, or twiki, or any of the millions of wiki engines out there.  They <strong>ALL</strong> support better input mechanisms than wordpress.  So why am I using wordpress at all? Because for everything else &#8211; user support, rss feeds, tags, data-base backed storage, plugins etc&#8230; it works great (as far as I know, come back in a week when I&#8217;ve resolved the editor issue to hear what else sucks. That should be enough time for me to find it.).</p>
+
+<h3>Solutions</h3>
+
+<p>I hope to get around this pain-in-the-ass that is the wordpress editor by using emacs to post content via worpress&#8217;s xml-rpc support. Therefore I need to find / enable or create support in emacs for the following things:</p>
+
+<pre><code>&lt;li&gt;wiki-like markup, with support for code tags that can be interpreted by the geshi plugin on wordpress.&lt;/li&gt;
+&lt;li&gt;a translator that converts wiki-like markup to xhtml, and back&lt;/li&gt;
+&lt;li&gt;xml-rpc support, and the ability to retrieve and submit blog posts.&lt;/li&gt;
+&lt;li&gt;Multiple Major Mode support for the wiki-like text mode, so that the aforementioned code tags use the correct font-lock mode&lt;/li&gt;
+&lt;li&gt;A preview capability, so the blog posts can be converted, fed to a w3-el buffer and viewed, then edited again prior to posting and publishing.&lt;/li&gt;
+</code></pre>
+
+<p>Most of these are possible in some fashion or another, but currently I&#8217;m stuck on the &#8220;translator for xhtml to wiki-like markup&#8221;. Stay tuned for improvements, and news as I pop things off the stack.</p>
+
+<p>Someday maybe I&#8217;ll get around to talking about java.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2006/10/06/blogging-with-emacs-mtel/">Blogging With Emacs + mt.el</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2006-10-06T00:00:00-07:00" pubdate>Oct 6<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;ve wanted to use emacs as a blogging tool for a long time, but I&#8217;ve
+always run into issues.  Today I ran across a blog post that describes
+an approach that works:</p>
+
+
+<p> <p>http://ektich.wordpress.com/2006/01/30/how-to-blog-from-emacs/</p></p>
+
+<p>In addition to the instructions there, I had to pull down:</p>
+
+
+
+
+<p><li>elib (with apt)</li>
+<li>xml.el (from: http://www.astro.princeton.edu/~rhl/skyserver/xml.el)</li></p>
+
+
+
+
+<p>Ping me with questions &#8211; more details soon to come as I play with
+mt.el, and possibly weblogger.el (which looks nicer, on first
+impressions.)</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2006/09/13/not-ranting-about-net-collections/">(Not?) Ranting About .NET Collections&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2006-09-13T00:00:00-07:00" pubdate>Sep 13<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The .NET collections continually frustrate me with the obvious ommisions, even in .NET 2.0.  Coming from a Java / Lisp background, I really expect two things out of a data structures API:</p>
+
+<ul>
+    <li>Lots of collections to choose from.</li>
+    <li>and; Easy manipulation of the structures you have available.</li>
+</ul>
+
+
+<p>.NET doesn&#8217;t fill either of these requirements very well.  At least we have generics now (which, admittedly, is a step above what&#8217;s available in Lisp &#8211; with regard to types, anyway).</p>
+
+<p>Today I ran into (yet another) annoyance with .NET collections &#8211; sorting arrays elegantly.  Given an array, you can sort it in accending order (according to the default comparer) with Arrays.Sort(..).</p>
+
+<pre>
+// build &amp; populate the array. 
+double[] values = source.ToArray(); 
+
+// destructively!! sorts values, returns void, of course.
+Array.Sort(values); 
+</pre>
+
+
+<p>That&#8217;s nice. Now, sort it in reverse:</p>
+
+<pre>
+// build &amp; populate the array. 
+double[] values = source.ToArray(); 
+
+Array.Sort(values); 
+// reverse the array.. adds O(n) ops.
+Array.Reverse(values);
+</pre>
+
+
+<p>or&#8230;</p>
+
+<pre>
+// build &amp; populate the array. 
+double[] values = source.ToArray(); 
+
+Array.Sort(values, Double.ReverseComparer); 
+</pre>
+
+
+<p>Oh, wait. There is no ReverseComparer on Double.. actually, there&#8217;s no Comparer on Double either, but there is for most objects&#8230; so in general I could just wrap the comparer in a delegate or an anon class (to invert it) and use that.</p>
+
+<p>Wait again.. c# doesn&#8217;t have anon classes, and Sort doesn&#8217;t take a delegate under any incantation. So, we could do this:</p>
+
+<pre>
+private class ReverseDoubleComparer : IComparer&lt;double&gt;{
+    public int Compare(double x, double y){
+        return y.CompareTo(x);
+    }
+}
+
+/* 
+intervening code...
+*/
+// build &amp; populate the array. 
+double[] values = source.ToArray(); 
+
+Array.Sort(values, new ReverseDoubleComparer()); 
+</pre>
+
+
+<p>That will work, but wow&#8230; for every type, I&#8217;ll need to create a new class, and I can only deal with classes that implement IComparable.CompareTo(..).  Thankfully, I can use generics and some constructor overloading to deal with both situations:</p>
+
+<pre>
+public class BackwardsComparer&lt;T&gt; : IComparer&lt;T&gt;{
+   public BackwardsComparer(IComparer&lt;T&gt; c){
+     _comparer = c;
+   }
+
+   public int Compare(T x, T y){
+       return _comparer.Compare(y,x);
+   }
+
+   private IComparer&lt;T&gt; _comparer = null;
+}
+</pre>
+
+
+<p>Now, we just need to do the following:</p>
+
+<pre>
+string[] strs = strSource.ToArray();
+
+// sort strs in reverse alphabetical order:
+Array.Sort(strs, 
+   new BackwardsComparer&lt;T&gt;(StringComparer.CurrentCulture));
+</pre>
+
+
+<p>And there we have it &#8211; reverse array sorting without the additional cost of a Reverse() call, and avoiding the ugliness of case-specific classes floating around.  (The complete listing for BackwardsComparer and test suite are here: <a href="http://www.ciscavate.org/data/BackwardsComparer.cs">BackwardsComparer.cs</a> and <a href="http://www.ciscavate.org/data/BackwardsComparerTest.cs">BackwardsComparerTest.cs</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2006/08/29/playing-with-deepest-sender/">Playing With Deepest Sender</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2006-08-29T00:00:00-07:00" pubdate>Aug 29<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I ran across <a href="https://addons.mozilla.org/firefox/1811/">Deepest Sender</a>, a firefox extension used for posting to a blog, today and thought I&#8217;d give it a shot.  It supports a small, but reasonable set of blog apps (Wordpress, LJ, &#8230; two or three others that escape me at the moment, and I can&#8217;t find the list right now..)   Setup was easy, and it wasn&#8217;t difficult to connect to my wordpress install , but I don&#8217;t see how to add multiple blogs, or choose a blog to post to that isn&#8217;t the default.  I&#8217;m also a bit mystified at how it manages drafts (you can save to a local file, but that doesn&#8217;t quite cut it &#8211; I want to take advantage of the draft capabilities of the blog app, so I&#8217;m not tied to one machine).</p>
+
+<p>I wonder if it will let me use code tags in the rich editor..</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> 
+</span><span class='line'>-- haskell?
+</span><span class='line'>foo :: Int -&gt; Int
+</span><span class='line'>foo x = x * x
+</span><span class='line'> </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> 
+</span><span class='line'>// Java test
+</span><span class='line'>public static int foo(int x){
+</span><span class='line'>    return x * x;
+</span><span class='line'>}
+</span><span class='line'> </span></code></pre></td></tr></table></div></figure>
+
+
+<p>&#8230;not really&#8230; (although, there is a source view, and it&#8217;s just a click of a tab to switch back and forth, which is how I entered the c# sample below, although it look horrible in the rich editor.) There are some interesting fields under the options menu, including a text area to enter a stylesheet, but no indication of what it does.  I may need to dig into the help docs later, but I&#8217;ll probably look into emacs extensions first.  For now, the jury is out.  <code>
+  ///  /// Sample c# ///  public static int Foo(int x){   return x * x; }  
+</code></p>
+
+<p>Ah, when posting, I discovered how the draft works.  There is a checkbox marked &#8220;draft&#8221; which publishes content as a draft, rather than to the site.  It would be much clearer to just have two buttons:  &#8220;Publish&#8221; and &#8220;Save as draft&#8221;, it would take up the same amount of space, and require fewer clicks, but I suppose you could accidentally publish to the main site when you really wanted to click on draft.  In any case, it ruined the formatting on the code snippet, so for my purposes it will not work.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/5/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/3/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/31/blogging-with-octopress/">Blogging with Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/">Hacking your kitchen: making a sous vide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/">cabal-dev: sandboxing your Haskell development (and now with ghci!)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/06/prezi-scalable-navigable-presentations/">Prezi: scalable, navigable presentations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/26/recovered-puzzles/">Recovered Puzzles</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("autoorator", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/autoorator" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @autoorator</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/creswick?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Rogan Creswick -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

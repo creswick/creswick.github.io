@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The Linux Tablet: Wacom drivers - Bitwise Evolution</title>
+  <meta name="author" content="Rogan Creswick">
+
+  
+  <meta name="description" content="Ubuntu 8.10 configured most everything properly, as mentioned in the previous post in this series, but it did not result in a functional pen. The &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://creswick.github.com/blog/2009/01/12/the-linux-tablet-wacom-drivers">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Bitwise Evolution" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Bitwise Evolution</a></h1>
+  
+    <h2>Musings of a Portland-area hacker bent on improving digital lifestyles.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:creswick.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">The Linux Tablet: Wacom Drivers</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2009-01-12T00:00:00-08:00" pubdate>Jan 12<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Ubuntu 8.10 configured most everything properly, as mentioned in the <a href="http://blog.ciscavate.org/2009/01/the-path-to-a-linux-tablet.html">previous post</a> in this series, but it did not result in a functional pen.</p>
+
+<p>The tablet screen is a wacom digitizer with a pen that has two buttons (eraser and a finger button), and the tablet can differentiate between touching and hovering.  The linux wacom driver &amp; tools are necessary to get this all working.  While I didn&#8217;t find a single page with instructions that worked flawlessly, I was able to figure it out from a collection of links:</p>
+
+<ul>
+<li> The Linux Wacom project:
+
+<ul>
+<li><a href="http://linuxwacom.sourceforge.net/index.php/minihowto">http://linuxwacom.sourceforge.net/index.php/minihowto</a></li>
+<li><a href="http://linuxwacom.sourceforge.net/index.php/howto/x11">http://linuxwacom.sourceforge.net/index.php/howto/x11</a></li>
+</ul>
+</li>
+<li> The Aliencam blog:
+
+<ul>
+<li><a href="http://blog.aliencam.net/articles/aliencams-customized-ubuntu-setup-guide/">http://blog.aliencam.net/articles/aliencams-customized-ubuntu-setup-guide/</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p>First off, you will need the latest version of the linux Wacom driver (8.2.1 at the time of this writing).  The driver versions seem to be tied to your kernel versions, so this is quite important.  The wacom-tools package that comes with Ubuntu is not sufficient (in fact, you&#8217;ll want to uninstall it if you have it already).</p>
+
+<p>Once you have the wacom package downloaded, follow the directions for installing it in the howto (linked above).  The wacom package uses a typical configure, make, make install process but there are a few kinks:</p>
+
+<ul>
+<li> configure (almost?) always succeeds, regardless of the dependencies you have yet to fill.  The make step will simply not build all the things you need if this happens, but it won&#8217;t fail visibly.</li>
+<li> You&#8217;ll need to copy the kernel module into the /lib/modules/<code>uname -r</code>/kernel/drivers/usb/input/ directory manually (creating subdirs if necessary), <em>before</em> running make install.  (This is outlined in the mini-howto.)</li>
+</ul>
+
+
+<p>Once wacom is installed, you can begin working with the X.org configuration.  This is fairly clearly explained at the aliencam blog linked above, or you can use my xorg.conf here.</p>
+
+<p>[cc lang=&#8221;bash&#8221;]
+Section &#8220;Device&#8221;</p>
+
+<pre><code>Identifier  "Configured Video Device"
+</code></pre>
+
+<p>EndSection</p>
+
+<p>Section &#8220;Monitor&#8221;</p>
+
+<pre><code>Identifier  "Configured Monitor"
+</code></pre>
+
+<p>EndSection</p>
+
+<p>Section &#8220;Screen&#8221;</p>
+
+<pre><code>Identifier  "Default Screen"
+Monitor     "Configured Monitor"
+Device      "Configured Video Device"
+</code></pre>
+
+<p>EndSection</p>
+
+<h1>BEGIN TABLET SECTION</h1>
+
+<p>Section &#8220;InputDevice&#8221;</p>
+
+<pre><code>Driver      "wacom"
+Identifier  "stylus"
+Option      "Device"    "/dev/ttyS0"    # serial ONLY
+Option      "Type"      "stylus"
+Option      "ForceDevice"   "ISDV4"     # Tablet PC ONLY
+Option      "Button2"   "3"
+</code></pre>
+
+<p>EndSection</p>
+
+<p>Section &#8220;InputDevice&#8221;</p>
+
+<pre><code>Driver      "wacom"
+Identifier  "eraser"
+Option      "Device"    "/dev/ttyS0"   # serial ONLY
+Option      "Type"          "eraser"
+Option      "ForceDevice"   "ISDV4"     # Tablet PC ONLY
+Option      "Button3"   "2"
+</code></pre>
+
+<p>EndSection</p>
+
+<p>Section &#8220;InputDevice&#8221;</p>
+
+<pre><code>Driver        "wacom"
+Identifier    "cursor"
+Option        "Device"      "/dev/ttyS0"    # serial ONLY
+Option        "Type"        "cursor"
+Option        "ForceDevice" "ISDV4"     # Tablet PC ONLY
+</code></pre>
+
+<h1>Option        &#8220;Mode&#8221;            &#8220;Absolute&#8221;</h1>
+
+<p>EndSection</p>
+
+<h1>This section is for the TabletPC that supports touch</h1>
+
+<h1>Section &#8220;InputDevice&#8221;</h1>
+
+<h1>Driver        &#8220;wacom&#8221;</h1>
+
+<h1>Identifier    &#8220;touch&#8221;</h1>
+
+<h1>Option        &#8220;Device&#8221;        &#8220;/dev/input/wacom&#8221;  # USB ONLY</h1>
+
+<h1>Option        &#8220;Type&#8221;          &#8220;touch&#8221;</h1>
+
+<h1>Option        &#8220;ForceDevice&#8221;   &#8220;ISDV4&#8221;               # Tablet PC ONLY</h1>
+
+<h1>Option        &#8220;USB&#8221;           &#8220;on&#8221;                  # USB ONLY</h1>
+
+<h1>EndSection</h1>
+
+<h1>END TABLET SECTION</h1>
+
+<p>Section &#8220;ServerLayout&#8221;</p>
+
+<pre><code>Identifier  "Default Layout"
+Screen      "Default Screen"
+</code></pre>
+
+<h1>InputDevice &#8220;Synaptics Touchpad&#8221;</h1>
+
+<h1>added to get tablet working</h1>
+
+<pre><code>InputDevice     "stylus"    "SendCoreEvents"
+InputDevice     "cursor"    "SendCoreEvents"
+InputDevice     "eraser"    "SendCoreEvents"
+</code></pre>
+
+<h1>InputDevice &#8220;touch&#8221;     &#8220;SendCoreEvents&#8221;</h1>
+
+<p>EndSection
+[/cc]</p>
+
+<p>After doing that, you should be able to reboot and the pen should be working.  You can do things like configure the buttons with <code>xsetwacom</code> (and you&#8217;ll need that when it comes time to rotate the screen), but I kept getting this error when I tried to run <code>xsetwacom</code>:</p>
+
+<p>[cc lang=&#8221;bash&#8221;]
+$ xsetwacom
+xsetwacom: error while loading shared libraries: libwacomcfg.so.0: cannot open shared object file: no such file or directory.
+[/cc]</p>
+
+<p>I made a lucky guess, and fixed the problem with a quick ldconfig:</p>
+
+<p>[cc lang=&#8221;bash&#8221;]
+$ sudo ldconfig  # that was a lucky guess.
+[/cc]</p>
+
+<p><em>Update:</em> There were some issues with the wacom calibration after a sleep/resume cycle <em>if</em> the laptop screen had been rotated during that prior wake cycle (this happens a <em>lot</em> more than it seems, given how complex that description is.)  I&#8217;ve written up a workaround <a href="http://blog.ciscavate.org/2009/01/the-linux-tablet-wacom-rotations-waking-up-on-the-wrong-side.html">here</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Rogan Creswick</span></span>
+
+      
+
+
+
+
+  
+
+<time datetime="2009-01-12T00:00:00-08:00" pubdate>Jan 12<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://creswick.github.com/blog/2009/01/12/the-linux-tablet-wacom-drivers/" data-via="autoorator" data-counturl="http://creswick.github.com/blog/2009/01/12/the-linux-tablet-wacom-drivers/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2009/01/10/the-path-to-a-linux-tablet/" title="Previous Post: The path to a Linux Tablet">&laquo; The path to a Linux Tablet</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2009/01/26/the-linux-tablet-wacom-rotations-waking-up-on-the-wrong-side/" title="next Post: The Linux Tablet: Wacom rotations - waking up on the wrong side">The Linux Tablet: Wacom rotations - waking up on the wrong side &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/31/blogging-with-octopress/">Blogging with Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/">Hacking your kitchen: making a sous vide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/">cabal-dev: sandboxing your Haskell development (and now with ghci!)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/06/prezi-scalable-navigable-presentations/">Prezi: scalable, navigable presentations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/26/recovered-puzzles/">Recovered Puzzles</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("autoorator", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/autoorator" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @autoorator</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/creswick?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Rogan Creswick -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

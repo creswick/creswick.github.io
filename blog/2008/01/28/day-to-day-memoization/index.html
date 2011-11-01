@@ -1,0 +1,397 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Day to day Memoization - Bitwise Evolution</title>
+  <meta name="author" content="Rogan Creswick">
+
+  
+  <meta name="description" content="Memoization (not memorization) is the process of remembering the
+results of a computation for use later. (I think of it as &#8220;making a
+memo&#8221 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://creswick.github.com/blog/2008/01/28/day-to-day-memoization">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Bitwise Evolution" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Bitwise Evolution</a></h1>
+  
+    <h2>Musings of a Portland-area hacker bent on improving digital lifestyles.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:creswick.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Day to Day Memoization</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2008-01-28T00:00:00-08:00" pubdate>Jan 28<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Memoization (not <strong>memorization</strong>) is the process of remembering the
+results of a computation for use later.  (I think of it as &#8220;making a
+memo&#8221; to look back on later.)  Memoization is the core to any dynamic
+programming implementation, and allows many simple algorithms to run
+in linear or polynomial time when they would otherwise take an
+exponential number of operations to complete.  This is most obvious in
+the typical recursive Fibonacci example.  Consider the code:</p>
+
+<p>[cc lang=&#8221;java&#8221;]
+public class Fib{
+   public static void main(String[] args){</p>
+
+<pre><code>  System.out.println("done: fib of "+args[0]+"="+
+  fib(Integer.parseInt(args[0])));
+</code></pre>
+
+<p>   }</p>
+
+<p>   public static int fib(int n){</p>
+
+<pre><code>  int rval = 1;
+  if (n &amp;gt;= 2){
+     rval = fib(n - 1) + fib(n - 2);
+  }
+  System.out.println("fib("+n+") = "+rval);
+  return rval;
+</code></pre>
+
+<p>   }
+}[/cc]
+This is a straight-forward recursive implementation of fib.  When run
+with <code>n=4</code>, we see this:
+[cc lang=&#8221;bash&#8221;]
+$ javac Fib.java &amp;&amp; java Fib 4
+fib(1) = 1
+fib(0) = 1
+fib(2) = 2
+fib(1) = 1
+fib(3) = 3
+fib(1) = 1
+fib(0) = 1
+fib(2) = 2
+fib(4) = 5
+done: fib of 4=5
+[/cc]</p>
+
+<p><strong>9</strong> invocations of <code>fib(n)</code>, but only 5 <strong>unique</strong> invocations.  Lets
+memoize the results, and try this again:</p>
+
+<p>[cc lang=&#8221;bash&#8221;]
+$ javac Fib.java &amp;&amp; java Fib 4
+fib(1) = 1
+fib(0) = 1
+fib(2) = 2
+fib(3) = 3
+fib(4) = 5
+done: fib of 4=5
+[/cc]</p>
+
+<p><strong>Much</strong> better &#8211; 5 invocations, 5 unique sets of parameters.</p>
+
+<p>Here&#8217;s the source with memoization:
+[cc lang=&#8221;java&#8221;]
+public class Fib{
+   static Map&lt;Integer, Integer&gt; memos = new HashMap(); // new</p>
+
+<p>   public static void main(String[] args){</p>
+
+<pre><code>  System.out.println("done: fib of "+args[0]+"="+
+  fib(Integer.parseInt(args[0])));
+</code></pre>
+
+<p>   }</p>
+
+<p>   public static int fib(int n){</p>
+
+<pre><code>  if (memos.containsKey(n)) // new
+     return memos.get(n);  // new
+
+  int rval = 1;
+  if (n &amp;gt;= 2) {
+     rval = fib(n - 1) + fib(n - 2);
+  }
+  System.out.println("fib("+n+") = "+rval);
+  memos.put(n, rval);       // new
+  return rval;
+</code></pre>
+
+<p>   }
+}[/cc]
+Notice that we only needed to add 4 new lines of code in order to
+memoize the results.  When <code>fib(n)</code> is called, it simply checks to see
+if it has previously been called with n, and if so, that result is
+used again.  If the parameter has never been seen before, the method
+continues as normal, storing the computed result before returning.
+Memoization turns this naive (and exponential) implementation of <code>fib(n)</code>
+into an efficient (linear) operation.</p>
+
+<h2>Memoization in the real world</h2>
+
+<p>So, (un?)fortunately we don&#8217;t spend all day implementing cool new ways
+of computing ever increasing entries of the fibinocci sequence &#8211; how
+can memoization be put to use? After all, many algorithms are already
+implemented in some fairly optimal fashion by the language APIs, and
+you&#8217;d be a fool not to use those implementations.  What opportunity
+will you have to memoize functions?</p>
+
+<p>It turns out that you can memoize <em>anything</em>, as long as the function
+is <em>pure</em> with respect to the memos (meaning: the function doesn&#8217;t depend on any thing that is not used to key the hash of memos).  If the function is not pure, then you can still use memoization, but either the memo hash must key on all the state and parameters that can affect the results of the function.  On the other hand, if f depends on some state that changes very rarely, then it may make more sense to simply discard all the stored memos each time that aspect of state is altered.</p>
+
+<p>Memoization is extremely handy when you have very common operations that are
+fairly expensive.  I recently needed to optimize some code that
+compares strings based on the case-insensitive stems of the words,
+with stopwords removed.  So the strings &#8220;he wanted an apple&#8221; and &#8220;he
+wants apples&#8221; should be equal. (&#8220;an&#8221; is a stopword, and ignored)</p>
+
+<p>This meant doing many, many calls to a string stemmer, each of which
+is a fairly expensive operation.  Fortunately, hashing strings as
+extremely cheap (on the order of 1/4th the time it took to stem a
+string of the same length), and I had plenty of memory to store the
+parameters and the results in a <code>Map</code>.  Adding memos to
+the two primary time-hoggers (the stemmer and a tokenizer) cut the
+execution time of the application down from 2 hours to just over 7
+minutes.</p>
+
+<h2>Summary</h2>
+
+<p>You can memoize any function that only depends on it&#8217;s parameters and
+constant state (or near-constant state &#8211; just don&#8217;t forget to discard your
+memos when the state changes!).  If the function is invoked multiple
+times you will probably see a performance improvement.</p>
+
+<p>If you need to memoize a function with multiple arguments, then you
+just need to nest Maps, or create a unique key by combining the
+parameters in some way.</p>
+
+<p>Memoization is an extremely easy way to improve performance under
+certain circumstances, particularly if you have a solid grasp on when
+state changes outside of your methods / functions, or program in a
+functional style.  It can be memory intensive, however.  If the
+results of your functions are large, or maintain references to large
+objects, then memoization may <strong>penalize</strong> performance if you run out of
+memory and have to make use of swap space.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Rogan Creswick</span></span>
+
+      
+
+
+
+
+  
+
+<time datetime="2008-01-28T00:00:00-08:00" pubdate>Jan 28<span>th</span>, 2008</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/java/'>java</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://creswick.github.com/blog/2008/01/28/day-to-day-memoization/" data-via="autoorator" data-counturl="http://creswick.github.com/blog/2008/01/28/day-to-day-memoization/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2007/09/28/creating-a-secure-webauth-system-part-1-hmac/" title="Previous Post: Creating a secure webauth system: Part 1 -- HMAC">&laquo; Creating a secure webauth system: Part 1 -- HMAC</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2008/07/02/creating-wizards-in-java/" title="next Post: Creating Wizards in Java">Creating Wizards in Java &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/31/blogging-with-octopress/">Blogging with Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/">Hacking your kitchen: making a sous vide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/">cabal-dev: sandboxing your Haskell development (and now with ghci!)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/06/prezi-scalable-navigable-presentations/">Prezi: scalable, navigable presentations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/26/recovered-puzzles/">Recovered Puzzles</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("autoorator", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/autoorator" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @autoorator</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/creswick?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Rogan Creswick -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

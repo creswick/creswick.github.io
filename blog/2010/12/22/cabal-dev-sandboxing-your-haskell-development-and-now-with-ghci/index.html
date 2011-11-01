@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>cabal-dev: sandboxing your Haskell development (and now with ghci!) - Bitwise Evolution</title>
+  <meta name="author" content="Rogan Creswick">
+
+  
+  <meta name="description" content="Reproducing builds is pretty much essential if you intend to do sustainable software development, and while it&#8217;s generally possible, it&#8217;s &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://creswick.github.com/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Bitwise Evolution" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Bitwise Evolution</a></h1>
+  
+    <h2>Musings of a Portland-area hacker bent on improving digital lifestyles.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:creswick.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Cabal-dev: Sandboxing Your Haskell Development (and Now With Ghci!)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2010-12-22T00:00:00-08:00" pubdate>Dec 22<span>nd</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Reproducing builds is pretty much essential if you intend to do sustainable software development, and while it&#8217;s generally possible, it&#8217;s been fairly difficult to do so with Haskell.  One of the challenges has been that there are only generally two local databases of installed packages for any given (user, ghc-version) pair.  Each ghc install has a global package database, and each user has a user package database for each version of ghc.  This is perfectly suitable in most situations, but it becomes problematic when you need conflicting packages to be installed for disparate development projects.  <a href="http://hackage.haskell.org/package/cabal-dev">Cabal-dev</a> removes the user package database from the picture, and it is relatively simple (with some self-control :) to maintain a minimal global package database: just don&#8217;t install anything system-wide with cabal.</p>
+
+<p>Cabal-dev does this by creating a per-project sandbox that contains a package database of all the dependencies as well as the project under development.  Therefore, it was simple to add support for launching ghci with this package database in place of the user package database.  That&#8217;s been added in cabal-dev-0.7.3.1, which is available on hackage now, allowing you to do things like this (using my <a href="http://code.google.com/p/havsa/">Haskell Version Space Algebra</a> library as an example):</p>
+
+<p><code lang="bash">
+$ cd havsa
+$ ls
+LICENSE  Setup.hs  src/  versionspaces.cabal
+$ cabal-dev install
+Resolving dependencies...
+Configuring mtl-1.1.1.1...
+Preprocessing library mtl-1.1.1.1...
+Building mtl-1.1.1.1...
+[ 1 of 21] Compiling Control.Monad.Identity ( Control/Monad/Identity.hs, dist/build/Control/Monad/Identity.o )
+....
+Registering VersionSpaces-0.0...
+Installing library in
+/home/creswick/development/havsa/cabal-dev//lib/VersionSpaces-0.0/ghc-6.12.3
+Registering VersionSpaces-0.0...
+$ cabal-dev ghci
+GHCi, version 6.12.3: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+Loading package ffi-1.0 ... linking ... done.
+Prelude> :m + AI.VersionSpaces
+Prelude AI.VersionSpaces> showBSR EmptyBSR
+Loading package syb-0.1.0.2 ... linking ... done.
+Loading package base-3.0.3.2 ... linking ... done.
+Loading package mtl-1.1.1.1 ... linking ... done.
+Loading package logict-0.4.1 ... linking ... done.
+Loading package VersionSpaces-0.0 ... linking ... done.
+"Empty"
+Prelude AI.VersionSpaces>
+</code></p>
+
+<p>This is still far from perfect: you can&#8217;t easily load code into the ghci session without exiting, re-running cabal-dev install and cabal-dev ghci, but it&#8217;s a good start.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Rogan Creswick</span></span>
+
+      
+
+
+
+
+  
+
+<time datetime="2010-12-22T00:00:00-08:00" pubdate>Dec 22<span>nd</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/haskell/'>haskell</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://creswick.github.com/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/" data-via="autoorator" data-counturl="http://creswick.github.com/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/10/06/prezi-scalable-navigable-presentations/" title="Previous Post: Prezi: scalable, navigable presentations">&laquo; Prezi: scalable, navigable presentations</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/" title="next Post: Hacking your kitchen: making a sous vide">Hacking your kitchen: making a sous vide &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/31/blogging-with-octopress/">Blogging with Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/">Hacking your kitchen: making a sous vide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/">cabal-dev: sandboxing your Haskell development (and now with ghci!)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/06/prezi-scalable-navigable-presentations/">Prezi: scalable, navigable presentations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/07/26/recovered-puzzles/">Recovered Puzzles</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("autoorator", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/autoorator" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @autoorator</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/creswick?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Rogan Creswick -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
