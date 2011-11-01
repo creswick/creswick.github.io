@@ -1,0 +1,564 @@
+/*  
+Theme Name: Simplifisticate
+Theme URI: http://www.damn.be/weblog/index.php/2006/05/18/wordpress-theme-simplifisticate/
+Description: Simplifisticate Visual Style
+Version: 1.65
+Author: selder
+Author URI: http://www.damn.be
+*/
+
+/* Begin Typography & Colors */
+body {
+	font-size: 11px;
+	font-family: Verdana, 'Lucida Grande', Arial, Sans-Serif;
+	background-color: #404040;
+	color: black;
+	text-align: center;
+	}
+
+.google { text-align: center; }
+
+#page {
+	background-color: white;
+	text-align: left;
+	z-index:4;
+	}
+
+#content {
+	font-size: 1em;
+	z-index:4;
+	}
+	
+.alt {
+	background-color: #f6f7f4;
+	border: 1px solid #959596;
+	}
+
+.arch-left {
+	background-color: #f6f7f4;
+	border: 1px solid #959596;
+	width: 220px;
+  padding: 0 5px 0 0;
+  text-align: right;
+	margin: 0 0 20px 0;
+  }
+
+.arch-right {
+	background-color: #f6f7f4;
+	border: 1px solid #959596;
+	width: 220px;
+  padding: 0 0 0 5px;
+	margin: 0 0 20px 0;
+	float: right;
+	clear: right;
+  }
+  
+#container {
+ font-size: 8px;
+ }
+
+.headerlinks {  
+	margin: 0;
+	padding: 5px 10px 5px 10px;
+	background-color: #f6f7f4;
+	color: #959596;
+	z-index:3;
+	text-align: right;
+	}
+	
+.spacer {
+	margin: 20px 0;
+	clear: both;
+	}
+
+small {
+	font-family: Verdana, Arial, Helvetica, Sans-Serif;
+	font-size: 10px;
+	line-height: 1.2em;
+	}
+
+h1 {
+	font-size: 3em;
+	text-align: right;
+	}
+
+.description {
+	font-size: 10px;
+	text-align: center;
+	}
+
+h2 {
+	font-size: 1em;
+	}
+
+h2.pagetitle {
+	font-size: 10px;
+	}
+
+h3 {
+	font-size: 10px;
+	}
+
+h1, h1 a, h1 a:hover, h1 a:visited, .description {
+	text-decoration: none;
+	color: #bec1d6;
+	}
+
+h2, h2 a, h2 a:visited, h3, h3 a, h3 a:visited {
+	color: #333;
+	}
+	
+h2, h2 a, h2 a:hover, h2 a:visited, h3, h3 a, h3 a:hover, h3 a:visited, #sidebar h2, #wp-calendar caption, cite {
+	text-decoration: none;
+	}
+
+.entry p a:visited {
+	color: #a2a2a2;
+	}
+
+.commentlist li, #commentform input, #commentform textarea {
+	font: 10px Verdana;
+	}
+	
+.commentlist li {
+	font-weight: bold;
+	}
+
+.commentlist cite, .commentlist cite a {
+	
+	font-style: normal;
+	font-size: 10px;
+	}
+
+.commentlist p {
+	font-weight: normal;
+	line-height: 1.2em;
+	text-transform: none;
+	}
+
+#commentform p {
+	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	}
+
+.commentmetadata {
+	font-weight: normal;
+	}
+
+#sidebar {
+	font: 10px Verdana, 'Lucida Grande', Arial, Sans-Serif;
+	}
+
+small, #sidebar ul ul li, #sidebar ul ol li, .nocomments, .postmetadata, blockquote, strike {
+	color: #777;
+		}
+	
+code {
+	font: 10px 'Courier New', Courier, Fixed;
+	}
+
+acronym, abbr, span.caps
+{
+	font-size: 0.9em;
+	letter-spacing: .07em;
+	}
+
+a, h2 a:hover, h3 a:hover {
+	color: #a2a2a2;
+	text-decoration: none;
+	}
+
+#footer a {
+	text-decoration: underline;
+	}
+
+#footer a:hover {
+	text-decoration: none;
+	}
+
+a:hover {
+	color: #a2a2a2;
+	text-decoration: underline;
+	}
+
+#redd {
+	color: red;
+	}
+	
+/* End Typography & Colors */
+
+
+
+/* Begin Structure */
+body {
+	margin: 0;
+	padding: 0;
+	}
+
+#page {
+	background-color: white;
+	margin: 20px auto;
+	padding: 0;
+	width: 500px;
+	}
+	
+#header {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	z-index:1;
+	background-color: #f6f7f4;
+	position: relative;
+	}
+
+.narrowcolumn {
+	padding: 2px 10px 2px 10px;
+	margin: 0;
+	width: auto;
+	}
+	
+.post {
+	margin: 5px 0 5px 0;
+	padding: 5px;
+	text-align: justify;	
+	}
+
+.metadata {
+	font-size: 0.8em;
+	color: #A2A2A2;
+	}
+
+.narrowcolumn .postmetadata {
+	margin: 5px 0;
+	}
+	
+#footer {
+	padding: 0 0 0 0px;
+	margin: 0 auto;
+	clear: both;
+	background-repeat: repeat-x;
+	background-color: #f6f7f4;
+	color: #959596;
+	}
+
+#footer p {
+	margin: 0;
+	padding: 20px 0;
+	text-align: center;
+	}
+	
+#capitalH {
+    font-size: 300px;
+    font-weight: bold;
+    height: 150px;
+    line-height: 215px;
+    letter-spacing: -25px;
+    text-align: right;
+    overflow: hidden;
+		color: white;
+		filter: alpha(opacity=30);
+		-moz-opacity: 0.3;
+
+    }
+
+/* End Structure */
+
+
+
+/*	Begin Headers */
+
+
+h1#blogTitle a {
+	color: black !important;
+	text-align: left;
+	font-family: courier;
+	width: 100%;
+}
+
+h1 {
+	margin: 0;
+	color: black;
+	text-align: center;
+	position: absoulte;
+	top: 0px;
+	}
+
+.description {
+	text-align: right;
+	color: #bec1d6;
+	padding: 0 25px 0 0;
+	display: none;
+	z-index;4;
+	}
+
+h2 {
+	margin: 5px 0 0 0;
+	}
+	
+.capital {
+	font-size: 50px;
+	font-weight: bold;
+	text-align: right;
+	}
+
+h2.archivelist {
+  margin: 0px 0 0;
+	font-size: 1em;
+  }
+
+h2.pagetitle {
+	margin: 10px 0 5px 0;
+	text-align: left;
+}
+
+#sidebar h2 {
+	margin: 5px 0 0;
+	padding: 0;
+	}
+
+h3 {
+	padding: 0;
+	margin: 30px 0 0;
+	}
+
+h3.comments {
+	padding: 0;
+	margin: 40px auto 20px ;
+	}
+/* End Headers */
+
+
+
+/* Begin Images */
+p img {
+	padding: 0;
+	max-width: 100%;
+	}
+
+/*	Using 'class="alignright"' on an image will (who would've
+	thought?!) align the image to the right. And using 'class="centered',
+	will of course center the image. This is much better than using
+	align="center", being much more futureproof (and valid) */
+	
+img.centered {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	}
+	
+img.alignright {
+	padding: 4px;
+	margin: 0 0 2px 7px;
+	display: inline;
+	}
+
+img.alignleft {
+	padding: 4px;
+	margin: 0 7px 2px 0;
+	display: inline;
+	}
+
+.alignright {
+	float: right;
+	}
+	
+.alignleft {
+	float: left
+	}
+/* End Images */
+
+/* Begin Lists */
+
+.arch-right li h2 {
+text-indent: 0px;
+}
+
+.arch-right li, .arch-left li {
+	list-style: none;
+	list-style-type: none;
+	list-style-image: none;
+	text-indent: -30px;
+	}
+
+.arch-right ul li:before {
+	content: "\00BB \0020";
+}
+
+.arch-left ul li:after {
+	content: "\0020 \00AB";
+}
+
+.arch-left ul li {
+	margin-right: 10px;
+	}
+
+.arch-right ul li ul li {
+	text-indent: -60px;
+  font-style: italic;
+}
+
+
+/* End Lists */
+
+
+
+/* Begin Form Elements */
+#searchform {
+	margin: 5px 0 5px 0;
+	padding: 5px; 
+	text-align: center;
+	}
+
+#searchform #s {
+	width: 150px;
+	padding: 2px;
+	}
+
+#sidebar #searchsubmit {
+	padding: 1px;
+	}
+
+.entry form { /* This is mainly for password protected posts, makes them look better. */
+	text-align:center;
+	}
+
+select {
+	width: 130px;
+	}
+
+#commentform input {
+	width: 112px;
+	padding: 1px;
+	/*margin-left: 0;*/
+	}
+
+#commentform textarea {
+	width: 472px;
+	margin: 0;
+	padding: 2px;
+	}
+
+#commentform #submit {
+	margin-left: 2px;
+	}
+/* End Form Elements */
+
+
+
+/* Begin Comments*/
+.alt {
+	margin: 0;
+	padding: 5px;
+	}
+
+.commentlist {
+	padding: 0;
+	text-align: justify;
+	margin: 0;
+	}
+
+.commentlist li {
+	margin: 15px 0 3px;
+	padding: 5px 10px 3px;
+	list-style: none;
+	}
+
+.commentlist p {
+	margin: 10px 5px 10px 0;
+	}
+
+#commentform p {
+	margin: 5px 0 0 0;
+	width: 100%;
+	}
+
+.nocomments {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	}
+
+.commentmetadata {
+	margin: 0;
+	display: block;
+	text-align: right;
+	}
+	
+/* End Comments */
+
+
+/* Begin Various Tags & Classes */
+acronym, abbr, span.caps {
+	cursor: help;
+	}
+
+acronym, abbr {
+	border-bottom: 1px dashed #999;
+	}
+
+blockquote {
+	margin: 15px 30px 0 10px;
+	padding: 2px 0 2px 20px;
+	border-left: 5px solid #959596;
+	background-color: #f6f7f4;
+	}
+
+blockquote cite {
+	margin: 5px 0 0;
+	display: block;
+	}
+
+.center {
+	text-align: center;
+	}
+
+hr {
+	display: none;
+	}
+
+a img {
+	border: none;
+	}
+
+.navigation {
+	display: block;
+	Text-align: center;
+	margin-top: 5px;
+	margin-bottom: 30px;
+	}
+
+/* End Various Tags & Classes*/
+
+/* Codehighlight CSS */
+
+.hl-surround {
+    background-color: #f6f7f4;
+    padding: 10px;
+    margin-bottom: 5px;
+    overflow: auto;
+    text-align: left;    font-size: 0.9em;
+    margin: 0;
+    border-left: 5px solid #959596;
+    }
+
+.hl-surround, .hl-surround pre, .hl-surround span { font: normal 9pt 'Courier New', monospace;}
+
+.hl-default     { color: Black; }
+.hl-code        { color: Gray; }
+.hl-brackets    { color: Olive; }
+.hl-comment     { color: #ffa500; } /* Orange */
+.hl-quotes      { color: #8b0000; } /* Dark red */
+.hl-string      { color: Red; }
+.hl-identifier  { color: Blue; }
+.hl-builtin     { color: Teal; }
+.hl-reserved    { color: Green; }
+.hl-inlinedoc   { color: Blue; }
+.hl-var         { color: #00008b; } /* Dark blue */
+.hl-url         { color: Blue; }
+.hl-special     { color: Navy; }
+.hl-number      { color: Maroon; }
+.hl-inlinetags  { color: Blue; }
+.hl-main        { background-color: transparent; }
+
+.hl-main pre { margin: 0; padding: 0; }
+
+/* End Codehighlight CSS */
