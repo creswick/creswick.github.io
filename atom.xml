@@ -4,7 +4,7 @@
   <title><![CDATA[Bitwise Evolution]]></title>
   <link href="http://creswick.github.com/atom.xml" rel="self"/>
   <link href="http://creswick.github.com/"/>
-  <updated>2011-11-01T08:42:50-07:00</updated>
+  <updated>2011-11-08T12:01:46-08:00</updated>
   <id>http://creswick.github.com/</id>
   <author>
     <name><![CDATA[Rogan Creswick]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Installing custom XSessions in Fedora 15]]></title>
+    <link href="http://creswick.github.com/blog/2011/11/07/xmonad-in-fedora-15/"/>
+    <updated>2011-11-07T17:19:00-08:00</updated>
+    <id>http://creswick.github.com/blog/2011/11/07/xmonad-in-fedora-15</id>
+    <content type="html"><![CDATA[<p>I realized today that Fedora 15 doesn&#8217;t expose a UI for selecting
+another xsession by default &#8211; you can only log into Gnome 3.
+Thankfully, once you install another window manager, then the
+selection widget does appear; however, it was not clear how to add a
+WM that wasn&#8217;t packaged with Fedora.</p>
+
+<p>In my case, I wanted to run the latest development version of
+<a href="http://xmonad.org">xmonad</a>.  (Queue about an hour of fruitless
+Googling.)</p>
+
+<p>Eventually, I broke down and <code>yum install fluxbox</code>&#8216;d to get an
+example.  After that, a <code>repoquery --list fluxbox</code> gave a list of the
+files installed, and pointed me to <code>/usr/share/xsessions</code>, which
+contains the list of WMs that the Fedora greeter uses to present
+options.</p>
+
+<p>Adding a new option is as simple as creating a new desktop file in
+that directory, and pointing the <code>Exec</code> field to the binary of your
+WM.</p>
+
+<p>eg:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> /usr/share/xsessions/
+</span><span class='line'><span class="nv">$ </span>cat xmonad.desktop
+</span><span class='line'><span class="o">[</span>Desktop Entry<span class="o">]</span>
+</span><span class='line'><span class="nv">Name</span><span class="o">=</span>XMonad
+</span><span class='line'><span class="nv">Comment</span><span class="o">=</span>Tiling window manager
+</span><span class='line'><span class="nv">Exec</span><span class="o">=</span>/home/creswick/development/xmonad/cabal-dev/bin/xmonad
+</span><span class='line'><span class="nv">Type</span><span class="o">=</span>Application
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Blogging with Octopress]]></title>
@@ -1307,26 +1353,6 @@ subsequent calls to <code>getHelp()</code> use a cached copy of the documentatio
 
 
 <p>He links to a device that does some of this, and runs ~$150/device.  At that price, I think a better solution is a docking station&#8211;when you get down to it, I don&#8217;t want to plug in 4 things every time I sit down even if it doesn&#8217;t involve crawling under the desk (power, video, usb, ethernet and possibly audio).  I think it&#8217;s unlikely that all the features needed above are really necessary when you just show up for a meeting, or hop over to your coworker&#8217;s office for a short hacking session.  Many conference rooms these days already have tables wired for ethernet / power and svga video to a projector.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[StackOverflow: Endorsing(?) content theft from day one]]></title>
-    <link href="http://creswick.github.com/blog/2008/09/16/stackoverflow-endorsing-content-theft-from-day-one/"/>
-    <updated>2008-09-16T00:00:00-07:00</updated>
-    <id>http://creswick.github.com/blog/2008/09/16/stackoverflow-endorsing-content-theft-from-day-one</id>
-    <content type="html"><![CDATA[<p><a href="http://www.joelonsoftware.com">Joel Spolsky</a> and <a href="http://www.codinghorror.com">Jeff Atwood</a> just launched the public beta of <a href="http://www.stackoverflow.com">Stackoverflow</a> today, with the intent of building a community for high-quality technical questions and answers.  I&#8217;ve been using the site for about three weeks now, during the closed beta, and I&#8217;ve noticed a disturbing trend that was outlined in Joel&#8217;s <a href="http://www.joelonsoftware.com/items/2008/09/15.html">announcement post</a> today:</p>
-
-<blockquote>
-Want to know an easy way to earn reputation? Find a question somewhere with several good, but incomplete, answers. Steal all the answers and write one long, complete, detailed answer which is better than the incomplete ones.
-</blockquote>
-
-
-<p>The site presents an interface where much of the functionality is hidden from new users.  You can&#8217;t comment on posts, for example, until you&#8217;ve earned 50 &#8220;rep&#8221;.  Voting up takes 15 rep, voting down takes 100 rep, and each downvote you place will cost you one rep.  You gain rep by posting questions and answers that other users vote up, or accept.  The result is an addictive system that, in theory, prevents <a href="http://en.wikipedia.org/wiki/Griefer">&#8220;Griefing&#8221;</a> (the system does <em>NOT</em> prevent griefing, by the way.  It is extremely easy to game.)</p>
-
-<p>Because of this, it is tempting to re-post successful content from other sources, and nothing the creators (Atwood and Spolsky) have incorporated into the site, or the recent announcements, has indicated that this is objectionable.  Afterall, good content on Stackoverflow will improve their service, regardless of where it came from, and regardless of whether it is properly credited.</p>
-
-<p>After using stackoverflow for a couple weeks, I think that they have created a useful service, but I also want to call them out for providing an environment that is encouraging plagiarism.  Duplication/copying of content <em>within</em> stackoverflow does not set easy with me, but I&#8217;m willing to accept that the content I create for stackoverflow is public domain, and is free to be copied at will.  <strong>However</strong> <a href="http://stackoverflow.com/questions/17512/computer-language-puns-and-jokes#47867">these</a> <a href="http://stackoverflow.com/questions/17512/computer-language-puns-and-jokes#45355">posts</a> <a href="http://stackoverflow.com/questions/17512/computer-language-puns-and-jokes#48783">are</a> <a href="http://stackoverflow.com/questions/35809/why-are-vi-and-emacs-popular#36007">not</a>.</p>
 ]]></content>
   </entry>
   

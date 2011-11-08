@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: xmonad | Bitwise Evolution]]></title>
+  <link href="http://creswick.github.com/blog/categories/xmonad/atom.xml" rel="self"/>
+  <link href="http://creswick.github.com/"/>
+  <updated>2011-11-08T12:01:46-08:00</updated>
+  <id>http://creswick.github.com/</id>
+  <author>
+    <name><![CDATA[Rogan Creswick]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Installing custom XSessions in Fedora 15]]></title>
+    <link href="http://creswick.github.com/blog/2011/11/07/xmonad-in-fedora-15/"/>
+    <updated>2011-11-07T17:19:00-08:00</updated>
+    <id>http://creswick.github.com/blog/2011/11/07/xmonad-in-fedora-15</id>
+    <content type="html"><![CDATA[<p>I realized today that Fedora 15 doesn't expose a UI for selecting
+another xsession by default -- you can only log into Gnome 3.
+Thankfully, once you install another window manager, then the
+selection widget does appear; however, it was not clear how to add a
+WM that wasn't packaged with Fedora.</p>
+
+<p>In my case, I wanted to run the latest development version of
+<a href="http://xmonad.org">xmonad</a>.  (Queue about an hour of fruitless
+Googling.)</p>
+
+<p>Eventually, I broke down and <code>yum install fluxbox</code>'d to get an
+example.  After that, a <code>repoquery --list fluxbox</code> gave a list of the
+files installed, and pointed me to <code>/usr/share/xsessions</code>, which
+contains the list of WMs that the Fedora greeter uses to present
+options.</p>
+
+<p>Adding a new option is as simple as creating a new desktop file in
+that directory, and pointing the <code>Exec</code> field to the binary of your
+WM.</p>
+
+<p>eg:</p>
+
+<p><code>bash
+$ cd /usr/share/xsessions/
+$ cat xmonad.desktop
+[Desktop Entry]
+Name=XMonad
+Comment=Tiling window manager
+Exec=/home/creswick/development/xmonad/cabal-dev/bin/xmonad
+Type=Application
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

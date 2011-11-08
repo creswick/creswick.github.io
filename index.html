@@ -9,8 +9,9 @@
   <meta name="author" content="Rogan Creswick">
 
   
-  <meta name="description" content="I heard about Octopress today, so I&#8217;m giving it a
-shot. It uses github pages to provide a blogging platform, which I&#8217;ve wanted for a &hellip;">
+  <meta name="description" content="I realized today that Fedora 15 doesn&#8217;t expose a UI for selecting
+another xsession by default &#8211; you can only log into Gnome 3.
+Thankfully &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -63,6 +64,74 @@ shot. It uses github pages to provide a blogging platform, which I&#8217;ve want
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/07/xmonad-in-fedora-15/">Installing Custom XSessions in Fedora 15</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2011-11-07T17:19:00-08:00" pubdate>Nov 7<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I realized today that Fedora 15 doesn&#8217;t expose a UI for selecting
+another xsession by default &#8211; you can only log into Gnome 3.
+Thankfully, once you install another window manager, then the
+selection widget does appear; however, it was not clear how to add a
+WM that wasn&#8217;t packaged with Fedora.</p>
+
+<p>In my case, I wanted to run the latest development version of
+<a href="http://xmonad.org">xmonad</a>.  (Queue about an hour of fruitless
+Googling.)</p>
+
+<p>Eventually, I broke down and <code>yum install fluxbox</code>&#8216;d to get an
+example.  After that, a <code>repoquery --list fluxbox</code> gave a list of the
+files installed, and pointed me to <code>/usr/share/xsessions</code>, which
+contains the list of WMs that the Fedora greeter uses to present
+options.</p>
+
+<p>Adding a new option is as simple as creating a new desktop file in
+that directory, and pointing the <code>Exec</code> field to the binary of your
+WM.</p>
+
+<p>eg:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> /usr/share/xsessions/
+</span><span class='line'><span class="nv">$ </span>cat xmonad.desktop
+</span><span class='line'><span class="o">[</span>Desktop Entry<span class="o">]</span>
+</span><span class='line'><span class="nv">Name</span><span class="o">=</span>XMonad
+</span><span class='line'><span class="nv">Comment</span><span class="o">=</span>Tiling window manager
+</span><span class='line'><span class="nv">Exec</span><span class="o">=</span>/home/creswick/development/xmonad/cabal-dev/bin/xmonad
+</span><span class='line'><span class="nv">Type</span><span class="o">=</span>Application
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -819,93 +888,6 @@ Are you sure you want to continue connecting (yes/no)?
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/05/23/bitten-by-dependency-management/">Bitten by Dependency Management</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-  
-
-<time datetime="2009-05-23T00:00:00-07:00" pubdate>May 23<span>rd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://blog.ciscavate.org/wp-content/2009/05/dependencies.png"><img src="http://blog.ciscavate.org/wp-content/2009/05/dependencies-small.png" alt="dependencies-small" title="dependencies-small" width="145" height="200" class="alignright size-full wp-image-106" /></a>I&#8217;ve started using Maven to manage my java projects, and overall I&#8217;m very happy with it.  It seems to be more mature than ivy, with better documentation, and the vast majority of tasks that I need &#8220;just work&#8221; (just don&#8217;t ask me about jni&#8211;that&#8217;s another post).</p>
-
-<p>Today, (and yesterday, and a good portion of the night in-between) I ran into a nasty bug in a library that I didn&#8217;t know my code depended on.  It isn&#8217;t particularly important <em>what</em> I was working on, but just for context: I needed to strip a lot of text content out of nodes in the complete wikipedia revision history dump, so I was using Sax to parse the xml stream, filter out the stuff I wanted filtered out, and save the stuff that, well, I wanted saved.  Being that the input was all of wikipedia, there were a fair number of unicode characters in there.  As it turns out, the 2.6.2 xercesImpl has some sort of bug that allows xml with certain characters to be read without throwing exceptions, but when you try to write the chars that were actually read, you end up trying to write characters that aren&#8217;t valid in xml.  Even if I&#8217;d known that in advance, my response would have been something like &#8220;ok, so what? I&#8217;m not using xercesImpl, and certainly not a version <em>that</em> old&#8221;.</p>
-
-<p>Well.</p>
-
-<p>You see, in addition to using Maven, I&#8217;ve also been using the <a href="http://code.google.com/p/google-collections/">Google Collections</a> and <a href="http://code.google.com/p/jsr-305/">JSR305</a> libraries, so I just drop those <code>&lt;dependency&gt;</code> entries into the pom for all my new projects&#8211;I just assume that I&#8217;ll need them, and I usually do.</p>
-
-<p>Unfortunately, JSR305 1.3.8 depends on jaxen 1.1.1, which depends on xercesImpl 2.6.2 (jaxen also needs this dependency via xom 1.0, for what that&#8217;s worth).</p>
-
-<p>Because that dependency was already present in my build path (via <code>mvn eclipse:eclipse</code>) and in the generated jar (via <code>&lt;addClasspath&gt;</code> and <code>&lt;classpathPrefix&gt;</code> in the <code>maven-jar-plugin</code>  configuration section), I never realized that my sax code actually had a <em>direct</em> dependency on xerces as well.  This all came to a head when, 3.53gb into my 2.8tb run, these rather unhelpful exceptions started popping up:</p>
-
-<p>[cc lang=&#8221;bash&#8221;]
-java.io.IOException: The character &#8216;?&#8217; is an invalid XML character</p>
-
-<pre><code>   at org.apache.xml.serialize.BaseMarkupSerializer.characters(Unknown
-</code></pre>
-
-<p>Source)</p>
-
-<pre><code>   at com.stottlerhenke.tools.wikiparse.ContentStripper.characters(ContentStripper.java:195)
-   at org.apache.xerces.parsers.AbstractSAXParser.characters(Unknown
-</code></pre>
-
-<p>Source)</p>
-
-<pre><code>   at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl$FragmentContentDispatcher.dispatch(Unknown
-</code></pre>
-
-<p>Source)</p>
-
-<pre><code>   at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown
-</code></pre>
-
-<p>Source)</p>
-
-<pre><code>   at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
-   at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
-   at org.apache.xerces.parsers.XMLParser.parse(Unknown Source)
-   at org.apache.xerces.parsers.AbstractSAXParser.parse(Unknown Source)
-   at com.stottlerhenke.tools.wikiparse.ContentStripper.parse(ContentStripper.java:96)
-   at com.stottlerhenke.tools.wikiparse.ContentStripper.main(ContentStripper.java:379)
-</code></pre>
-
-<p>[/cc]</p>
-
-<p><code>&lt;rant&gt;</code> &#8220;?&#8221; is not unicode &#8211; it fits just fine in asci tables everywhere &#8211; so please don&#8217;t tell me that it&#8217;s an invalid unicode character :) (0xd800 <em>is</em> an invalid unicode character, and that would have been <em>much</em> more helpful) <code>&lt;/rant&gt;</code></p>
-
-<p>Many hours later I was able to find a sample of the actual input that was causing these problems, and I was able to reproduce the issue with an input slightly smaller than 2.8tb.  Once that was done, I set out to make a minimal test case.  Rather than bother with a new maven project, I just hacked it out in emacs (not using google collections, etc. because, clearly, I wanted it minimal).  To my surprise, everything worked, and worked fantastically! But how? I didn&#8217;t even supply an xml api on the classpath, yet it ran just fine!</p>
-
-<p>In truth, I <em>did</em> supply an xml api &#8211; xercesImpl.jar, and many other libraries &#8211; via my environment&#8217;s <code>$CLASSPATH</code>.  (Figuring that out was another adventure, but I digress.)  Once it became clear that I was indeed using a broken library it was simply a matter of explicitly specifying the dependency on a new version of xercesImpl, and rebuilding.</p>
-
-<p>The moral?</p>
-
-<p>Know your dependencies!  This should come along with knowing your language&#8217;s built-in APIs well.  It wasn&#8217;t clear to me that the SAX packages I was using were not part of the core java API, so it didn&#8217;t strike me as odd that I didn&#8217;t need to specify a classpath entry or a pom dependency before I could use sax.</p>
-
-<p>If you suspect something strange, you can see the dependency tree in the generated html documentation you get when running <code>mvn site</code>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -921,6 +903,10 @@ java.io.IOException: The character &#8216;?&#8217; is an invalid XML character</
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2011/11/07/xmonad-in-fedora-15/">Installing custom XSessions in Fedora 15</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2011/10/31/blogging-with-octopress/">Blogging with Octopress</a>
       </li>
     
@@ -934,10 +920,6 @@ java.io.IOException: The character &#8216;?&#8217; is an invalid XML character</
     
       <li class="post">
         <a href="/blog/2010/10/06/prezi-scalable-navigable-presentations/">Prezi: scalable, navigable presentations</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2010/07/26/recovered-puzzles/">Recovered Puzzles</a>
       </li>
     
   </ul>

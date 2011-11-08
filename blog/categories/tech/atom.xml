@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Bitwise Evolution]]></title>
   <link href="http://creswick.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://creswick.github.com/"/>
-  <updated>2011-11-01T08:42:50-07:00</updated>
+  <updated>2011-11-08T12:01:46-08:00</updated>
   <id>http://creswick.github.com/</id>
   <author>
     <name><![CDATA[Rogan Creswick]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Installing custom XSessions in Fedora 15]]></title>
+    <link href="http://creswick.github.com/blog/2011/11/07/xmonad-in-fedora-15/"/>
+    <updated>2011-11-07T17:19:00-08:00</updated>
+    <id>http://creswick.github.com/blog/2011/11/07/xmonad-in-fedora-15</id>
+    <content type="html"><![CDATA[<p>I realized today that Fedora 15 doesn't expose a UI for selecting
+another xsession by default -- you can only log into Gnome 3.
+Thankfully, once you install another window manager, then the
+selection widget does appear; however, it was not clear how to add a
+WM that wasn't packaged with Fedora.</p>
+
+<p>In my case, I wanted to run the latest development version of
+<a href="http://xmonad.org">xmonad</a>.  (Queue about an hour of fruitless
+Googling.)</p>
+
+<p>Eventually, I broke down and <code>yum install fluxbox</code>'d to get an
+example.  After that, a <code>repoquery --list fluxbox</code> gave a list of the
+files installed, and pointed me to <code>/usr/share/xsessions</code>, which
+contains the list of WMs that the Fedora greeter uses to present
+options.</p>
+
+<p>Adding a new option is as simple as creating a new desktop file in
+that directory, and pointing the <code>Exec</code> field to the binary of your
+WM.</p>
+
+<p>eg:</p>
+
+<p><code>bash
+$ cd /usr/share/xsessions/
+$ cat xmonad.desktop
+[Desktop Entry]
+Name=XMonad
+Comment=Tiling window manager
+Exec=/home/creswick/development/xmonad/cabal-dev/bin/xmonad
+Type=Application
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Blogging with Octopress]]></title>
@@ -263,118 +302,6 @@ XSD=foo.xsd</p>
 <p>[/cc]</p>
 
 <p>Now, run make, and if anything fails you can manually run <code>xmlstarlet val -e --xsd foo.xsh [failing file.xml]</code> to see the details.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Implications: Coding for Homomorphicly Encrypted Input]]></title>
-    <link href="http://creswick.github.com/blog/2009/07/17/implications-coding-for-homomorphicly-encrypted-input/"/>
-    <updated>2009-07-17T00:00:00-07:00</updated>
-    <id>http://creswick.github.com/blog/2009/07/17/implications-coding-for-homomorphicly-encrypted-input</id>
-    <content type="html"><![CDATA[<p>Craig Gentry (Stanford / IBM) recently published a <a href="http://portal.acm.org/citation.cfm?id=1536414.1536440">paper</a> that proves the existence of fully homomorphic crypto systems.  This has caused quite a stir, since such a system would allow an untrusted party to perform computations on encrypted data, returning an encrypted result, without ever knowing anything about the input or output.  I'm not going to explain what homomorphic encryption is (at least, not in great detail).  Bruce Schneier's blog has a <a href="http://www.schneier.com/blog/archives/2009/07/homomorphic_enc.html">great post</a> about it, and the comments there are extremely helpful in understanding how it works, and what this means for cloud computing.</p>
-
-<p>I make no claims to being a cryptographer, but I did have a number of questions about the practical viability of this approach.  Now, there are many questions in that vein that are directed at the performance characteristics of Gentry's approach (which are abysmal, but not asymptotically so).  I was curious about The use of side effects to discern information about the encrypted content.</p>
-
-<p>For example, anyone who has used a debugger knows that you can monitor the flow of a program that has been instrumented with debugging symbols, and you can learn a great deal about the input even without examining the content of variables.  If a given conditional branch directs execution one way, then you know the predicate evaluated to a specific value.  I set out to determine why this sort of attack is not a problem, and I ended up learning a lot about the way programs that run on encrypted data must operate.</p>
-
-<h3>Homomorphisms</h3>
-
-<p>Let's take a moment to quickly discuss homomorphisms, and homomorphic encryption.</p>
-
-<blockquote>a homomorphism is a structure-preserving map between two algebraic structures --<a href="http://en.wikipedia.org/wiki/Homomorphism">Wikipedia</a></blockquote>
-
-
-<p>In this case (encryption) the homomorphism is a mapping from the clear text and the cypher-text.  Fully homomorphic encryption, as Gentry discovered, preserves addition and multiplication--meaning that you can add and multiply cyphertext, and the result can be decrypted to reveal clear text that has been added and multiplied in the same way.  Addition and Multiplication provide the operations necessary to implement boolean logic, and therefore, are sufficient to program very complex transformations (I'm not certain that it is safe to say "arbitrarily complex").</p>
-
-<p>It's important to realize that <em>every</em> addition or multiplication operation results in a value that is encrypted.  The running program can not know the intermediate results, and indeed it does not.</p>
-
-<h3>So, how do conditionals work?</h3>
-
-<p>Edward Kmett <a href="http://www.schneier.com/blog/archives/2009/07/homomorphic_enc.html#c383405">posted</a> the conversion from if/then/else to addition/multiplication on Schneier's blog:</p>
-
-<p>[cc lang="java"]
-if (condition) {
-   return then_clause;
-} else {
-   return else_clause;
-}
-[/cc]</p>
-
-<p>becomes:</p>
-
-<p>[cc lang="java"]
-return condition * then_clause + (1-condition) * else_clause;
-[/cc]</p>
-
-<p>Here's a "real" example (it compiles, at least) using both approaches.  This is just meant to be used for explanation -- compilers could easily do the translation from the code in is0_clear() to is0_enc().  I've written them out separately here so we can look at the generated bytecode.
-[cc lang="java"]
-public class Test {
-   public int is0_clear(int input) {</p>
-
-<pre><code>  if (0==input){
-     return 2;
-  } else {
-     return 3;
-  }
-</code></pre>
-
-<p>   }</p>
-
-<p>   public int is0_enc(int input) {</p>
-
-<pre><code>  // I'm cheating a bit to keep this simple -- calculate
-  // the conditional to be either 0 or 1:
-  int cond = 0==input ? 1 : 0;
-  return cond * 2 + (1-cond) * 3;
-</code></pre>
-
-<p>   }
-}
-[/cc]</p>
-
-<p>And here's the bytecode (generated by sun-java-6, and output with javap -verbose).</p>
-
-<p>[cc lang="asm"]
-public int is0_clear(int);
-  Code:
-   Stack=2, Locals=2, Args_size=2
-   0:   iconst_0
-   1:   iload_1
-   2:   if_icmpne   7  // Conditional Jump!!
-   5:   iconst_2
-   6:   ireturn        // return a constant 2
-   7:   iconst_3
-   8:   ireturn        // return a constant 3</p>
-
-<p>public int is0_enc(int);
-  Code:
-   Stack=3, Locals=3, Args_size=2
-   0:   iconst_0      // lines 0-9 here are for the "cheating" part
-   1:   iload_1        // just ignore them -- the arithmetic to accomplish
-   2:   if_icmpne   9   // the same thing is complex, and not important.
-   5:   iconst_1
-   6:   goto    10
-   9:   iconst_0
-   10:  istore_2   // note that there are no conditional jumps below here:
-   11:  iload_2 <br/>
-   12:  iconst_2
-   13:  imul
-   14:  iconst_1
-   15:  iload_2
-   16:  isub
-   17:  iconst_3
-   18:  imul
-   19:  iadd
-   20:  ireturn   // return the result of the calculated expression.
-[/cc]</p>
-
-<p>Since every operation results in an unknown value, <em>no conditional branches</em> can be taken!  Every branch has to be evaluated, and the correct result of the 'correct' branch is selected by multiplying by a binary value, that is itself, encrypted!  This means that things like run-time short-circuit evaluation are not possible, monitoring progam flow is meaningless,  (possibly?) every input will result in the same run-time, and all side-effects will happen regardless of the input.</p>
-
-<h3>Implications?</h3>
-
-<p>Going further down this rabbit hole, caching is impossible, and global state (if even posible) is likely to be extremely dangerous.  I shudder to think of how Python's concept of scoping would interact with a compiler that generates code for homomorphicly encrypted input.</p>
-
-<p>Aside from the pure overhead of dealing with encrypted data, and the "refreshing" required with Gentry's algorithm, I think that there are going to be some serious performance and development concerns once homomorphic encryption becomes a reality.  The programming practices that are common in languages like Java and Python now are not likely to hold up.  I expect that the APIs that enable operation on encrypted data will be based on <a href="http://en.wikipedia.org/wiki/Total_function">total functions</a>, and I have only begun to think about the implications for testing, code coverage, and quality assurance.</p>
 ]]></content>
   </entry>
   

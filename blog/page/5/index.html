@@ -9,7 +9,7 @@
   <meta name="author" content="Rogan Creswick">
 
   
-  <meta name="description" content="I finally found a way to quickly navigate to my home directory in windows today. Being a long-time (well, 8-10 years) Linux user, when I started &hellip;">
+  <meta name="description" content="I ran across Deepest Sender, a firefox extension used for posting to a blog, today and thought I&#8217;d give it a shot. It supports a small, but &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -62,6 +62,73 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2006/08/29/playing-with-deepest-sender/">Playing With Deepest Sender</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2006-08-29T00:00:00-07:00" pubdate>Aug 29<span>th</span>, 2006</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I ran across <a href="https://addons.mozilla.org/firefox/1811/">Deepest Sender</a>, a firefox extension used for posting to a blog, today and thought I&#8217;d give it a shot.  It supports a small, but reasonable set of blog apps (Wordpress, LJ, &#8230; two or three others that escape me at the moment, and I can&#8217;t find the list right now..)   Setup was easy, and it wasn&#8217;t difficult to connect to my wordpress install , but I don&#8217;t see how to add multiple blogs, or choose a blog to post to that isn&#8217;t the default.  I&#8217;m also a bit mystified at how it manages drafts (you can save to a local file, but that doesn&#8217;t quite cut it &#8211; I want to take advantage of the draft capabilities of the blog app, so I&#8217;m not tied to one machine).</p>
+
+<p>I wonder if it will let me use code tags in the rich editor..</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> 
+</span><span class='line'>-- haskell?
+</span><span class='line'>foo :: Int -&gt; Int
+</span><span class='line'>foo x = x * x
+</span><span class='line'> </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> 
+</span><span class='line'>// Java test
+</span><span class='line'>public static int foo(int x){
+</span><span class='line'>    return x * x;
+</span><span class='line'>}
+</span><span class='line'> </span></code></pre></td></tr></table></div></figure>
+
+
+<p>&#8230;not really&#8230; (although, there is a source view, and it&#8217;s just a click of a tab to switch back and forth, which is how I entered the c# sample below, although it look horrible in the rich editor.) There are some interesting fields under the options menu, including a text area to enter a stylesheet, but no indication of what it does.  I may need to dig into the help docs later, but I&#8217;ll probably look into emacs extensions first.  For now, the jury is out.  <code>
+  ///  /// Sample c# ///  public static int Foo(int x){   return x * x; }  
+</code></p>
+
+<p>Ah, when posting, I discovered how the draft works.  There is a checkbox marked &#8220;draft&#8221; which publishes content as a draft, rather than to the site.  It would be much clearer to just have two buttons:  &#8220;Publish&#8221; and &#8220;Save as draft&#8221;, it would take up the same amount of space, and require fewer clicks, but I suppose you could accidentally publish to the main site when you really wanted to click on draft.  In any case, it ruined the formatting on the code snippet, so for my purposes it will not work.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -532,44 +599,9 @@ privacy / legal implications aren&#8217;t clear-cut. Ideally, intern marks would
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2005/08/04/distributed-communication/">Distributed Communication</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-  
-
-<time datetime="2005-08-04T00:00:00-07:00" pubdate>Aug 4<span>th</span>, 2005</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Over the past year, the people I know well have become quite scattered across the nation, if not the globe. As a result, I&#8217;m left wanting to keep up to date with friends in Southern California, Oregon, New York, Boston, Nebraska, Britain (for a while), Seattle, and at the moment, a body of water in southwest-ish Alaska. I&#8217;m sure there are others, but you people are hard to keep tabs on!</p>
-
-<p>This has led me to try blogging &#8211; somehow there&#8217;s a connection there that makes sense, but I doubt I can explain it modestly. Because of that, I&#8217;m going to claim this is a personal record for my own use.</p>
-
-<p>And with that,</p>
-
-<p>Good night!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/6/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -582,6 +614,10 @@ privacy / legal implications aren&#8217;t clear-cut. Ideally, intern marks would
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/11/07/xmonad-in-fedora-15/">Installing custom XSessions in Fedora 15</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2011/10/31/blogging-with-octopress/">Blogging with Octopress</a>
@@ -597,10 +633,6 @@ privacy / legal implications aren&#8217;t clear-cut. Ideally, intern marks would
     
       <li class="post">
         <a href="/blog/2010/10/06/prezi-scalable-navigable-presentations/">Prezi: scalable, navigable presentations</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2010/07/26/recovered-puzzles/">Recovered Puzzles</a>
       </li>
     
   </ul>

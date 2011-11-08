@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>The US in Pictures - Bitwise Evolution</title>
+  <title>Installing custom XSessions in Fedora 15 - Bitwise Evolution</title>
   <meta name="author" content="Rogan Creswick">
 
   
-  <meta name="description" content="I&#8217;ve posted photos from my drive across the US this spring, along with a host of other shots that I&#8217;ve been meaning to share for ages. I &hellip;">
+  <meta name="description" content="I realized today that Fedora 15 doesn&#8217;t expose a UI for selecting
+another xsession by default &#8211; you can only log into Gnome 3.
+Thankfully &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://creswick.github.com/blog/2005/08/15/the-us-in-pictures">
+  <link rel="canonical" href="http://creswick.github.com/blog/2011/11/07/xmonad-in-fedora-15">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -65,7 +67,7 @@
   
   <header>
     
-      <h1 class="entry-title">The US in Pictures</h1>
+      <h1 class="entry-title">Installing Custom XSessions in Fedora 15</h1>
     
     
       <p class="meta">
@@ -76,16 +78,51 @@
 
   
 
-<time datetime="2005-08-15T00:00:00-07:00" pubdate>Aug 15<span>th</span>, 2005</time>
+<time datetime="2011-11-07T17:19:00-08:00" pubdate>Nov 7<span>th</span>, 2011</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>I&#8217;ve posted photos from my drive across the US this spring, along with a host of other shots that I&#8217;ve been meaning to share for ages. I realized the other day that when driving through the midwest, despite being in awe of the scenery, and miles upon miles of picturesque fields, I never took any pictures. I do believe I was waiting for a high point to take them from, to get a full sweeping view of the surrounding area, but alas, I was in the Midwest.</p>
+<div class="entry-content"><p>I realized today that Fedora 15 doesn&#8217;t expose a UI for selecting
+another xsession by default &#8211; you can only log into Gnome 3.
+Thankfully, once you install another window manager, then the
+selection widget does appear; however, it was not clear how to add a
+WM that wasn&#8217;t packaged with Fedora.</p>
 
-<p><a href="http://www.minnen.org/rogan/photos/">http://www.minnen.org/rogan/photos/</a></p>
+<p>In my case, I wanted to run the latest development version of
+<a href="http://xmonad.org">xmonad</a>.  (Queue about an hour of fruitless
+Googling.)</p>
+
+<p>Eventually, I broke down and <code>yum install fluxbox</code>&#8216;d to get an
+example.  After that, a <code>repoquery --list fluxbox</code> gave a list of the
+files installed, and pointed me to <code>/usr/share/xsessions</code>, which
+contains the list of WMs that the Fedora greeter uses to present
+options.</p>
+
+<p>Adding a new option is as simple as creating a new desktop file in
+that directory, and pointing the <code>Exec</code> field to the binary of your
+WM.</p>
+
+<p>eg:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> /usr/share/xsessions/
+</span><span class='line'><span class="nv">$ </span>cat xmonad.desktop
+</span><span class='line'><span class="o">[</span>Desktop Entry<span class="o">]</span>
+</span><span class='line'><span class="nv">Name</span><span class="o">=</span>XMonad
+</span><span class='line'><span class="nv">Comment</span><span class="o">=</span>Tiling window manager
+</span><span class='line'><span class="nv">Exec</span><span class="o">=</span>/home/creswick/development/xmonad/cabal-dev/bin/xmonad
+</span><span class='line'><span class="nv">Type</span><span class="o">=</span>Application
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -103,12 +140,12 @@
 
   
 
-<time datetime="2005-08-15T00:00:00-07:00" pubdate>Aug 15<span>th</span>, 2005</time>
+<time datetime="2011-11-07T17:19:00-08:00" pubdate>Nov 7<span>th</span>, 2011</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/photography/'>photography</a>
+    <a class='category' href='/blog/categories/tech/'>tech</a>, <a class='category' href='/blog/categories/xmonad/'>xmonad</a>
   
 </span>
 
@@ -117,7 +154,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://creswick.github.com/blog/2005/08/15/the-us-in-pictures/" data-via="autoorator" data-counturl="http://creswick.github.com/blog/2005/08/15/the-us-in-pictures/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://creswick.github.com/blog/2011/11/07/xmonad-in-fedora-15/" data-via="autoorator" data-counturl="http://creswick.github.com/blog/2011/11/07/xmonad-in-fedora-15/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -130,10 +167,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2005/08/10/playing-it-by-ear/" title="Previous Post: Playing it by Ear...">&laquo; Playing it by Ear...</a>
+        <a class="basic-alignment left" href="/blog/2011/10/31/blogging-with-octopress/" title="Previous Post: Blogging with Octopress">&laquo; Blogging with Octopress</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2005/08/17/mapping-the-intern/" title="next Post: Mapping the Intern">Mapping the Intern &raquo;</a>
       
     </p>
   </footer>
