@@ -9,12 +9,12 @@
 
 
 \pdfinfo{
-  /Title (example.pdf)
-  /Creator (TeX)
+  /Title (Octopress Cheat Sheat)
+  /Creator (pdflatex)
   /Producer (pdfTeX 1.40.0)
-  /Author (Seamus)
+  /Author (Rogan Creswick)
   /Subject (Example)
-  /Keywords (pdflatex, latex,pdftex,tex)}
+  /Keywords (octopress, cheatsheet, quickreference, quickref)}
 
 % This sets page margins to .5 inch if using letter paper, and to 1cm
 % if using A4 paper. (This probably isn't strictly necessary.)
@@ -75,24 +75,61 @@
 \setlength{\columnsep}{2pt}
 
 \begin{center}
-     \Large{\underline{Title}} \\
+     \Large{\underline{Octopress}} \\
 \end{center}
 
-\section{Section 1}
-Text
-\subsection{xCode}
-Subsetction text
+\section{Rake Commands}
+\subsection{New Post}
+Create a post in \verb+source/_posts/post-title....+
+\verb+$ rake new_page["Post Title"]+
 
-\section{Section 2}
-Text 2
+\subsection{Create Site}
+Generates posts and pages into the public directory
+\verb+$ rake generate+
 
-\section{Section 3}
-Etc.
+\subsection{Watch for Changes}
+Watches source/ and sass/ for changes and regenerates
+\verb+$ rake watch +
 
-% You can even have references
-\rule{0.3\linewidth}{0.25pt}
-\scriptsize
-\bibliographystyle{abstract}
-\bibliography{refFile}
+\subsection{Preview Site}
+Watches, and mounts a webserver at http://localhost:4000
+\verb+$ rake preview+
+
+\subsection{Deploy to GitHub Pages}
+Create site:
+
+\verb+$ rake generate+
+
+Upload site:
+
+\verb+$ rake deploy+
+
+\section{Yaml metadata}
+\begin{verbatim}
+---
+layout: post
+title: "Octopress Quick Reference"
+date: 2011-07-03 5:59
+comments: true
+categories: [quickref, octopress]
+---
+
+<post content>
+\end{verbatim}
+\subsection{Categories}
+\begin{verbatim}
+# One category
+categories: Sass
+
+# Multiple categories example 1
+categories: [CSS3, Sass, Media Queries]
+
+# Multiple categories example 2
+categories:
+- CSS3
+- Sass
+- Media Queries
+\end{verbatim}
+
 \end{multicols}
 \end{document}
