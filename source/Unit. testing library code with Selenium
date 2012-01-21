@@ -1,0 +1,133 @@
+---
+layout: page
+title: "Unit testing library code with Selenium"
+date: 2012-01-20 20:04
+comments: true
+sharing: true
+footer: true
+---
+
+There are a plethora of JavaScript testing frameworks out there (too
+many, really) and there doesn't seem to be much concensus.  (c.f. John
+Resig's poll and subsequent results discussion from TODO**)
+
+I've been digging into JavaScript more extensively at work, and
+testing has obviously been at the top of my mind.  We've settled on
+using the Google closure framework, which includes a jsunit-like test
+framework and test runner.  This works to a degree; however, the tests
+still require a web browser, and display the results in an
+unstructured list of `div`s---somewhat sub-optimal for headless
+regression testing.  I needed three things above all else, these were
+my disiderata:
+
+ * Fully autonomous, headless testing.
+ * Cross-browser support.
+ * Individually differentiable results.
+
+In addition, I /wanted/ integration with Jenkins (or Hudson, depending
+on the era of the build farm).  Since we were generally happy with the
+google tools, it would be nice to stick with that library and
+associated tooling.
+
+[jsTestDriver](http://code.google.com/p/js-test-driver/) does
+accomplish some of my disiderata, but it wasn't clear that I could
+easily make it do the rest, nor was it clear how to integrate with the
+`goog.testing.TestCase` system.  Furthermore,
+[Selenium](http://seleniumhq.org) looked like the best option from the
+start.
+
+[Selenium](http://seleniumhq.org), if you aren't familiar with it, is
+a browser automation tool that you can controll via Java.  It also
+works well with Maven projects, it can automate most browsers, and
+Junit + Maven can be used to integrate easily with hudson. The Google
+closure source also makes a number of [mentions of
+Selenium](http://closure-library.googlecode.com/svn/docs/class_goog_testing_TestRunner.html),
+eg:
+
+> This is currently pretty weird, I'm essentially trying to create a
+> wrapper that the Selenium test can hook into to query the state of
+> the running test case, while making goog.testing.TestCase general.
+
+Despite this, using selenium to run closure test isn't documented
+anywhere that I could find.  I'd love to know how, if anyone finds it
+;).
+
+So, Selenium it is.  There were just a few problems:
+
+ * There was no structure in the test results
+ * Creating JUnit tests *at runtime* is not exactly in the FAQ.
+
+** Structuring test results
+
+The closure tests generate a list of divs like this (taken from the
+closure testsuite):
+
+``` html
+<div style="color: rgb(51, 51, 51); font: normal normal normal 100%/normal monospace; white-space: pre-wrap; ">20:25:47.175  Start</div>
+<div style="color: rgb(0, 100, 0); font: normal normal normal 100%/normal monospace; white-space: pre-wrap; ">20:25:47.178  testAnyTimes : PASSED</div>
+<div style="color: rgb(139, 0, 0); font: normal normal normal 100%/normal monospace; white-space: pre-wrap; ">20:25:47.183  ERROR in testArgumentMatching</div>
+```
+
+Note that it starts with a `div` that reads, simply "Start".  The list
+ends with another `div` with the word "end".  As you dig into the code
+it becomes clear that this is really just a log of messages.
+Subsequent runs, possibly with asynchronous tests can cause other
+messages to pop up in any order.
+
+Augmenting two functions to record structured data took care of this issue:
+
+``` javascript
+var addRecording = function () {
+  var report  = this.report = [];
+  var tcproto = goog.testing.TestCase.prototype;
+  var oldSucc = tcproto.doSuccess;
+  tcproto.doSuccess = function(test) {
+    report.push({'name': test.name, 'result': 'PASSED'});
+    oldSucc.call(this, test);
+  };
+
+  var oldErr = tcproto.doError;
+  tcproto.doError = function(test, opt_e) {
+    report.push({'name': test.name, 'result': 'FAILED', 'err': opt_e});
+    oldErr.call(this, test, opt_e);
+  };
+};
+```
+
+The `report`, stored in the context of `addRecording`, is stuffed into
+`document.report` externally so selenium can retrieve it at leisure.
+
+** Creating JUnit tests at runtime
+
+Let's skip ahead for a moment, and assume that we can run the tests in
+a web server that is started / stopped during test `setUp` and
+`tearDown` (this is not too hard, we used an embedded Jetty instance
+to run a trivial fileserver).
+
+Selenium retrieves the list of test results from `document.report`,
+and morphs it into a POJO containing the fields mentioned above (as
+strings).  Essentially, we have a list of Java Objects that look roughly like:
+
+``` java
+/**
+ * Pretend this is an immutable object,
+ * because in real life, it is.
+ */
+class Result {
+  String name;
+  boolean success;
+  String err;
+}
+```
+
+How do you turn this `List<Result>` into a list of JUnit test
+success/failure messages in your IDE, hudson instance, or showing up
+on your terminal in response to a `mvn test`?
+
+You start by realizing that the only obvious way to create test
+success / failures for JUnit is by writing a TestRunner.  This is what
+I ended up with:
+
+``` java
+
+```
