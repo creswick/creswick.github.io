@@ -3,7 +3,7 @@ layout: post
 title: "Hacking your kitchen: making a sous vide"
 categories: cooking
 ---
-<a href="http://blog.ciscavate.org/wp-content/2010/12/crockpot.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/crockpot.jpg" alt="The sous vide." title="crockpot" width="200" class="size-full wp-image-170" /></a>
+<a href="http://creswick.github.com/images/2010/12/crockpot.jpg"><img src="http://creswick.github.com/images/2010/12/crockpot.jpg" alt="The sous vide." title="crockpot" width="200" class="size-full wp-image-170" /></a>
 
 I recently found the cookbook ["Cooking for Geeks"](http://www.cookingforgeeks.com) , and it inspired me to build a [sous vide](http://en.wikipedia.org/wiki/Sous-vide) (the section on making a sous vide at home is also covered in a blog post by the author [here](http://www.cookingforgeeks.com/blog/posts/diy-sous-vide/)).  If you're not familiar with the term, sous vide lets you very carefully control the temperature you're cooking at, so you *can't* over heat foods.
 
@@ -15,7 +15,7 @@ The biggest problem I have with Jeff's suggestions is that the book and blog sho
 
 # Parts
 
-<a href="http://blog.ciscavate.org/wp-content/2010/12/L1020357.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020357.jpg" alt="Sous vide controller - top" title="Sous vide controller - top" width="200" class="size-full wp-image-175" /></a>
+<a href="http://creswick.github.com/images/2010/12/L1020357.jpg"><img src="http://creswick.github.com/images/2010/12/L1020357.jpg" alt="Sous vide controller - top" title="Sous vide controller - top" width="200" class="size-full wp-image-175" /></a>
 
 Given that I don't have access to a fab. plant (or a maker bot!) I opted to go with a simple locking tupperware container for a housing.  They lock shut, have a gasket for a tight seal, and the plastic is very easy to modify to hold all the ports that the sous vide control needs.
 
@@ -30,7 +30,7 @@ The pictures show the housing fairly well.  We started by cutting out holes for 
  - thermocouple jack: just drilled it out with a drill.
  - AC input: traced around a pc-style power cord, then cut to the outside of the sharpie line, then drilled out the screw holes (marked after we had the main hole in, and could test-fit the plug).
 
-<a href="http://blog.ciscavate.org/wp-content/2010/12/L1020355.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020355.jpg" alt="Digital temperature display." title="Font view" width="500" class="size-full wp-image-182" /></a>
+<a href="http://creswick.github.com/images/2010/12/L1020355.jpg"><img src="http://creswick.github.com/images/2010/12/L1020355.jpg" alt="Digital temperature display." title="Font view" width="500" class="size-full wp-image-182" /></a>
 <br/>
 
 ## Thermocouple connections ##
@@ -39,7 +39,7 @@ The temp probe arrived with a bare pair of wires on one end, which wasn't going 
 ## AC input ##
 I was initially going to use a standard pigtail power cable to hook this up to the wall, but when shopping for parts I found a PC-style (D-shaped) power plug, which works beautifully, and it was cheap!
 
-<a href="http://blog.ciscavate.org/wp-content/2010/12/L1020360.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020360.jpg" alt="the rear view of the controller" title="random-tomato" width="500" class="size-full wp-image-176" /></a>
+<a href="http://creswick.github.com/images/2010/12/L1020360.jpg"><img src="http://creswick.github.com/images/2010/12/L1020360.jpg" alt="the rear view of the controller" title="random-tomato" width="500" class="size-full wp-image-176" /></a>
 <br/>
 
 ## Power outlet ##
@@ -50,7 +50,7 @@ I went with 12-gauge solid copper, in three colors, for the internal wiring.  It
 
 We were able to heat-shrink most of the connections, however, and everything is soldered in place, so I think it will hold up :).
 
-<a href="http://blog.ciscavate.org/wp-content/2010/12/L1020356.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020356.jpg" alt="showing the AC-output" title="side view" width="500" class="size-full wp-image-183" /></a>
+<a href="http://creswick.github.com/images/2010/12/L1020356.jpg"><img src="http://creswick.github.com/images/2010/12/L1020356.jpg" alt="showing the AC-output" title="side view" width="500" class="size-full wp-image-183" /></a>
 <br/>
 
 ## Calibration
