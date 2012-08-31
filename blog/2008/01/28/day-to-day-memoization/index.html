@@ -20,7 +20,7 @@ memo&#8221 &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://creswick.github.com/blog/2008/01/28/day-to-day-memoization">
+  <link rel="canonical" href="http://creswick.github.com/blog/2008/01/28/day-to-day-memoization/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -48,12 +48,14 @@ memo&#8221 &hellip;">
   <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
+  
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
     <input type="hidden" name="q" value="site:creswick.github.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
+  
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
@@ -76,9 +78,14 @@ memo&#8221 &hellip;">
 
 
 
+
+
+
+
   
 
-<time datetime="2008-01-28T00:00:00-08:00" pubdate>Jan 28<span>th</span>, 2008</time>
+
+<time datetime="2008-01-28T00:00:00-08:00" pubdate data-updated="true">Jan 28<span>th</span>, 2008</time>
         
       </p>
     
@@ -243,9 +250,14 @@ memory and have to make use of swap space.</p>
 
 
 
+
+
+
+
   
 
-<time datetime="2008-01-28T00:00:00-08:00" pubdate>Jan 28<span>th</span>, 2008</time>
+
+<time datetime="2008-01-28T00:00:00-08:00" pubdate data-updated="true">Jan 28<span>th</span>, 2008</time>
       
 
 <span class="categories">
@@ -262,10 +274,6 @@ memory and have to make use of swap space.</p>
   <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://creswick.github.com/blog/2008/01/28/day-to-day-memoization/" data-via="autoorator" data-counturl="http://creswick.github.com/blog/2008/01/28/day-to-day-memoization/" >Tweet</a>
   
   
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
   
 </div>
 
@@ -275,7 +283,7 @@ memory and have to make use of swap space.</p>
         <a class="basic-alignment left" href="/blog/2007/09/28/creating-a-secure-webauth-system-part-1-hmac/" title="Previous Post: Creating a secure webauth system: Part 1 -- HMAC">&laquo; Creating a secure webauth system: Part 1 -- HMAC</a>
       
       
-        <a class="basic-alignment right" href="/blog/2008/07/02/creating-wizards-in-java/" title="next Post: Creating Wizards in Java">Creating Wizards in Java &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2008/07/02/creating-wizards-in-java/" title="Next Post: Creating Wizards in Java">Creating Wizards in Java &raquo;</a>
       
     </p>
   </footer>
@@ -312,6 +320,35 @@ memory and have to make use of swap space.</p>
   </ul>
 </section>
 
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/creswick">@creswick</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'creswick',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
 
 <section>
   <h1>Latest Tweets</h1>
@@ -325,7 +362,7 @@ memory and have to make use of swap space.</p>
   </script>
   <script src="/javascripts/twitter.js" type="text/javascript"> </script>
   
-    <a href="http://twitter.com/autoorator" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @autoorator</a>
+    <a href="http://twitter.com/autoorator" class="twitter-follow-button" data-show-count="false">Follow @autoorator</a>
   
 </section>
 
@@ -349,7 +386,7 @@ memory and have to make use of swap space.</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Rogan Creswick -
+  Copyright &copy; 2012 - Rogan Creswick -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
@@ -358,24 +395,7 @@ memory and have to make use of swap space.</p>
 
 
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
-
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
 
 
 

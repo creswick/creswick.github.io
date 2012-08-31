@@ -4,7 +4,7 @@
   <title><![CDATA[Bitwise Evolution]]></title>
   <link href="http://creswick.github.com/atom.xml" rel="self"/>
   <link href="http://creswick.github.com/"/>
-  <updated>2011-11-09T16:19:24-08:00</updated>
+  <updated>2012-08-30T17:53:11-07:00</updated>
   <id>http://creswick.github.com/</id>
   <author>
     <name><![CDATA[Rogan Creswick]]></name>
@@ -140,7 +140,7 @@ shot.  It uses github pages to provide a blogging platform, which I&#8217;ve wan
     <link href="http://creswick.github.com/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/"/>
     <updated>2010-12-24T00:00:00-08:00</updated>
     <id>http://creswick.github.com/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide</id>
-    <content type="html"><![CDATA[<p><a href="http://blog.ciscavate.org/wp-content/2010/12/crockpot.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/crockpot.jpg" alt="The sous vide." title="crockpot" width="200" class="size-full wp-image-170" /></a></p>
+    <content type="html"><![CDATA[<p><a href="http://creswick.github.com/images/2010/12/crockpot.jpg"><img src="http://creswick.github.com/images/2010/12/crockpot.jpg" alt="The sous vide." title="crockpot" width="200" class="size-full wp-image-170" /></a></p>
 
 <p>I recently found the cookbook <a href="http://www.cookingforgeeks.com">&#8220;Cooking for Geeks&#8221;</a> , and it inspired me to build a <a href="http://en.wikipedia.org/wiki/Sous-vide">sous vide</a> (the section on making a sous vide at home is also covered in a blog post by the author <a href="http://www.cookingforgeeks.com/blog/posts/diy-sous-vide/">here</a>).  If you&#8217;re not familiar with the term, sous vide lets you very carefully control the temperature you&#8217;re cooking at, so you <em>can&#8217;t</em> over heat foods.</p>
 
@@ -152,7 +152,7 @@ shot.  It uses github pages to provide a blogging platform, which I&#8217;ve wan
 
 <h1>Parts</h1>
 
-<p><a href="http://blog.ciscavate.org/wp-content/2010/12/L1020357.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020357.jpg" alt="Sous vide controller - top" title="Sous vide controller - top" width="200" class="size-full wp-image-175" /></a></p>
+<p><a href="http://creswick.github.com/images/2010/12/L1020357.jpg"><img src="http://creswick.github.com/images/2010/12/L1020357.jpg" alt="Sous vide controller - top" title="Sous vide controller - top" width="200" class="size-full wp-image-175" /></a></p>
 
 <p>Given that I don&#8217;t have access to a fab. plant (or a maker bot!) I opted to go with a simple locking tupperware container for a housing.  They lock shut, have a gasket for a tight seal, and the plastic is very easy to modify to hold all the ports that the sous vide control needs.</p>
 
@@ -168,7 +168,7 @@ shot.  It uses github pages to provide a blogging platform, which I&#8217;ve wan
  - thermocouple jack: just drilled it out with a drill.
  - AC input: traced around a pc-style power cord, then cut to the outside of the sharpie line, then drilled out the screw holes (marked after we had the main hole in, and could test-fit the plug).</p>
 
-<p><a href="http://blog.ciscavate.org/wp-content/2010/12/L1020355.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020355.jpg" alt="Digital temperature display." title="Font view" width="500" class="size-full wp-image-182" /></a></p>
+<p><a href="http://creswick.github.com/images/2010/12/L1020355.jpg"><img src="http://creswick.github.com/images/2010/12/L1020355.jpg" alt="Digital temperature display." title="Font view" width="500" class="size-full wp-image-182" /></a></p>
 
 <br/>
 
@@ -181,7 +181,7 @@ shot.  It uses github pages to provide a blogging platform, which I&#8217;ve wan
 
 <p>I was initially going to use a standard pigtail power cable to hook this up to the wall, but when shopping for parts I found a PC-style (D-shaped) power plug, which works beautifully, and it was cheap!</p>
 
-<p><a href="http://blog.ciscavate.org/wp-content/2010/12/L1020360.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020360.jpg" alt="the rear view of the controller" title="random-tomato" width="500" class="size-full wp-image-176" /></a></p>
+<p><a href="http://creswick.github.com/images/2010/12/L1020360.jpg"><img src="http://creswick.github.com/images/2010/12/L1020360.jpg" alt="the rear view of the controller" title="random-tomato" width="500" class="size-full wp-image-176" /></a></p>
 
 <br/>
 
@@ -196,7 +196,7 @@ shot.  It uses github pages to provide a blogging platform, which I&#8217;ve wan
 
 <p>We were able to heat-shrink most of the connections, however, and everything is soldered in place, so I think it will hold up :).</p>
 
-<p><a href="http://blog.ciscavate.org/wp-content/2010/12/L1020356.jpg"><img src="http://blog.ciscavate.org/wp-content/2010/12/L1020356.jpg" alt="showing the AC-output" title="side view" width="500" class="size-full wp-image-183" /></a></p>
+<p><a href="http://creswick.github.com/images/2010/12/L1020356.jpg"><img src="http://creswick.github.com/images/2010/12/L1020356.jpg" alt="showing the AC-output" title="side view" width="500" class="size-full wp-image-183" /></a></p>
 
 <br/>
 

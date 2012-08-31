@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Unit testing library code with Selenium - Bitwise Evolution</title>
+  <meta name="author" content="Rogan Creswick">
+
+  
+  <meta name="description" content="Unit Testing Library Code With Selenium Jan 20th, 2012 There are a plethora of JavaScript testing frameworks out there (too
+many, really) and there &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://creswick.github.com/Unit. testing library code with Selenium">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Bitwise Evolution" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Bitwise Evolution</a></h1>
+  
+    <h2>Musings of a Portland-area hacker bent on improving digital lifestyles.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:creswick.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Unit Testing Library Code With Selenium</h1>
+    <p class="meta">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-20T20:04:00-08:00" pubdate data-updated="true">Jan 20<span>th</span>, 2012</time></p>
+  </header>
+  
+  There are a plethora of JavaScript testing frameworks out there (too
+many, really) and there doesn't seem to be much concensus.  (c.f. John
+Resig's poll and subsequent results discussion from TODO**)
+
+I've been digging into JavaScript more extensively at work, and
+testing has obviously been at the top of my mind.  We've settled on
+using the Google closure framework, which includes a jsunit-like test
+framework and test runner.  This works to a degree; however, the tests
+still require a web browser, and display the results in an
+unstructured list of `div`s---somewhat sub-optimal for headless
+regression testing.  I needed three things above all else, these were
+my disiderata:
+
+ * Fully autonomous, headless testing.
+ * Cross-browser support.
+ * Individually differentiable results.
+
+In addition, I /wanted/ integration with Jenkins (or Hudson, depending
+on the era of the build farm).  Since we were generally happy with the
+google tools, it would be nice to stick with that library and
+associated tooling.
+
+[jsTestDriver](http://code.google.com/p/js-test-driver/) does
+accomplish some of my disiderata, but it wasn't clear that I could
+easily make it do the rest, nor was it clear how to integrate with the
+`goog.testing.TestCase` system.  Furthermore,
+[Selenium](http://seleniumhq.org) looked like the best option from the
+start.
+
+[Selenium](http://seleniumhq.org), if you aren't familiar with it, is
+a browser automation tool that you can controll via Java.  It also
+works well with Maven projects, it can automate most browsers, and
+Junit + Maven can be used to integrate easily with hudson. The Google
+closure source also makes a number of [mentions of
+Selenium](http://closure-library.googlecode.com/svn/docs/class_goog_testing_TestRunner.html),
+eg:
+
+> This is currently pretty weird, I'm essentially trying to create a
+> wrapper that the Selenium test can hook into to query the state of
+> the running test case, while making goog.testing.TestCase general.
+
+Despite this, using selenium to run closure test isn't documented
+anywhere that I could find.  I'd love to know how, if anyone finds it
+;).
+
+So, Selenium it is.  There were just a few problems:
+
+ * There was no structure in the test results
+ * Creating JUnit tests *at runtime* is not exactly in the FAQ.
+
+** Structuring test results
+
+The closure tests generate a list of divs like this (taken from the
+closure testsuite):
+
+``` html
+<div style="color: rgb(51, 51, 51); font: normal normal normal 100%/normal monospace; white-space: pre-wrap; ">20:25:47.175  Start</div>
+<div style="color: rgb(0, 100, 0); font: normal normal normal 100%/normal monospace; white-space: pre-wrap; ">20:25:47.178  testAnyTimes : PASSED</div>
+<div style="color: rgb(139, 0, 0); font: normal normal normal 100%/normal monospace; white-space: pre-wrap; ">20:25:47.183  ERROR in testArgumentMatching</div>
+```
+
+Note that it starts with a `div` that reads, simply "Start".  The list
+ends with another `div` with the word "end".  As you dig into the code
+it becomes clear that this is really just a log of messages.
+Subsequent runs, possibly with asynchronous tests can cause other
+messages to pop up in any order.
+
+Augmenting two functions to record structured data took care of this issue:
+
+``` javascript
+var addRecording = function () {
+  var report  = this.report = [];
+  var tcproto = goog.testing.TestCase.prototype;
+  var oldSucc = tcproto.doSuccess;
+  tcproto.doSuccess = function(test) {
+    report.push({'name': test.name, 'result': 'PASSED'});
+    oldSucc.call(this, test);
+  };
+
+  var oldErr = tcproto.doError;
+  tcproto.doError = function(test, opt_e) {
+    report.push({'name': test.name, 'result': 'FAILED', 'err': opt_e});
+    oldErr.call(this, test, opt_e);
+  };
+};
+```
+
+The `report`, stored in the context of `addRecording`, is stuffed into
+`document.report` externally so selenium can retrieve it at leisure.
+
+** Creating JUnit tests at runtime
+
+Let's skip ahead for a moment, and assume that we can run the tests in
+a web server that is started / stopped during test `setUp` and
+`tearDown` (this is not too hard, we used an embedded Jetty instance
+to run a trivial fileserver).
+
+Selenium retrieves the list of test results from `document.report`,
+and morphs it into a POJO containing the fields mentioned above (as
+strings).  Essentially, we have a list of Java Objects that look roughly like:
+
+``` java
+/**
+ * Pretend this is an immutable object,
+ * because in real life, it is.
+ */
+class Result {
+  String name;
+  boolean success;
+  String err;
+}
+```
+
+How do you turn this `List<Result>` into a list of JUnit test
+success/failure messages in your IDE, hudson instance, or showing up
+on your terminal in response to a `mvn test`?
+
+You start by realizing that the only obvious way to create test
+success / failures for JUnit is by writing a TestRunner.  This is what
+I ended up with:
+
+``` java
+
+```
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-20T20:04:00-08:00" pubdate data-updated="true">Jan 20<span>th</span>, 2012</time>
+        
+      </p>
+      
+        <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://creswick.github.com/Unit. testing library code with Selenium" data-via="autoorator" data-counturl="http://creswick.github.com/Unit. testing library code with Selenium" >Tweet</a>
+  
+  
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/11/07/xmonad-in-fedora-15/">Installing custom XSessions in Fedora 15</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/10/31/blogging-with-octopress/">Blogging with Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/24/hacking-your-kitchen-making-a-sous-vide/">Hacking your kitchen: making a sous vide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/12/22/cabal-dev-sandboxing-your-haskell-development-and-now-with-ghci/">cabal-dev: sandboxing your Haskell development (and now with ghci!)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/10/06/prezi-scalable-navigable-presentations/">Prezi: scalable, navigable presentations</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/creswick">@creswick</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'creswick',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("autoorator", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/autoorator" class="twitter-follow-button" data-show-count="false">Follow @autoorator</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/creswick?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Rogan Creswick -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
